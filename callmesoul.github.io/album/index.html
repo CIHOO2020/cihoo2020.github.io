@@ -1,0 +1,257 @@
+<html>
+    <head>
+        <link href="/css/index.css" rel="stylesheet">
+        <link rel="stylesheet" href="/lib/photoswipe/photoswipe.css">
+        <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.css">
+        <meta charset="UTF-8" />
+        <!-- Core JS file -->
+        <script src="/lib/photoswipe/photoswipe.min.js"></script>
+
+        <!-- UI JS file -->
+        <script src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+        <style>
+            html,body{
+                background-color: #161823;
+                background-image: url('/images/bg.png') !important;
+                background-repeat: repeat;
+                background-size: contain;
+            }
+            html{
+                font-size: 100px;
+            }
+            body{
+                overflow: auto !important;
+            }
+        </style>
+    <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="CallMeSoul" type="application/atom+xml">
+</head>
+
+
+    <body>
+        <div  class="album">
+            <div class="index-video">
+                <div class="mask"></div>
+                <video autoplay muted="muted" playsinline="" autoplay="" loop="" muted="" data-autoplay=""  x5-video-player-type="h5"  src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+            </div>
+            <div class="index-cont">
+                <div id="box" class="album-list"></div>
+            </div>
+        </div>
+
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <!-- Background of PhotoSwipe.
+                 It's a separate element as animating opacity is faster than rgba(). -->
+            <div class="pswp__bg"></div>
+
+            <!-- Slides wrapper with overflow:hidden. -->
+            <div class="pswp__scroll-wrap">
+
+                <!-- Container that holds slides.
+                    PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                    Don't modify these 3 pswp__item elements, data is added later on. -->
+                <div class="pswp__container">
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                </div>
+
+                <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                <div class="pswp__ui pswp__ui--hidden">
+
+                    <div class="pswp__top-bar">
+
+                        <!--  Controls are self-explanatory. Order can be changed. -->
+
+                        <div class="pswp__counter"></div>
+
+                        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                        <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                        <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                        <!-- element will get class pswp__preloader--active when preloader is running -->
+                        <div class="pswp__preloader">
+                            <div class="pswp__preloader__icn">
+                                <div class="pswp__preloader__cut">
+                                    <div class="pswp__preloader__donut"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                        <div class="pswp__share-tooltip"></div>
+                    </div>
+
+                    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                    </button>
+
+                    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                    </button>
+
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <script src="/lib/lazysizes.min.js" async=""></script>
+        <script type="text/javascript">
+            var album = []
+            function loadXMLDoc(xmlUrl)
+            {
+                try //Internet Explorer
+                {
+                    xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+                }
+                catch(e)
+                {
+                    try //Firefox, Mozilla, Opera, etc.
+                    {
+                        xmlDoc=document.implementation.createDocument("","",null);
+                    }
+                    catch(e) {alert(e.message)}
+                }
+
+                try
+                {
+                    xmlDoc.async=false;
+                    xmlDoc.load(xmlUrl);
+                }
+                catch(e) {
+                    try //Google Chrome
+                    {
+                        var chromeXml = new XMLHttpRequest();
+                        chromeXml.open("GET", xmlUrl, false);
+                        chromeXml.send(null);
+                        xmlDoc = chromeXml.responseXML.documentElement;
+                        //alert(xmlDoc.childNodes[0].nodeName);
+                        //return xmlDoc;
+                    }
+                    catch(e)
+                    {
+                        alert(e.message)
+                    }
+                }
+                return xmlDoc;
+            }
+
+            var xmllink="https://blog-album-1258296975.cos.ap-guangzhou.myqcloud.com"
+            //访问域名链接就是我上面提到的那个访问域名xml链接
+
+            xmlDoc=loadXMLDoc(xmllink);
+            var urls=xmlDoc.getElementsByTagName('Key');
+            var date=xmlDoc.getElementsByTagName('LastModified');
+            var wid=250;
+            var showNum=12; //每个相册一次展示多少照片
+            if ((window.innerWidth)>1200) {wid=(window.innerWidth*3)/18;}
+            var box=document.getElementById('box');
+            var i=0;
+
+            var content=new Array();
+            var tmp=0;
+            var kkk=-1;
+            for (var t = 0; t < urls.length ; t++) {
+                var bucket=urls[t].innerHTML;
+                var length=bucket.indexOf('/');
+                if(length===bucket.length-1){
+                    kkk++;
+                    content[kkk]=new Array();
+                    content[kkk][0]={'url':bucket,'date':date[t].innerHTML.substring(0,10)};
+                    tmp=1;
+                }
+                else {
+                    content[kkk][tmp++]={'url':bucket.substring(length+1),'date':date[t].innerHTML.substring(0,10)};
+                }
+            }
+
+            for (var i = 0; i < content.length; i++) {
+                album[i] = []
+                var albumItem=document.createElement("div");
+                albumItem.className='album-item'
+
+                var albumItemImageList=document.createElement("div");
+                albumItemImageList.className='grid'
+                var title=content[i][0].url;
+                // item.innerHTML="<button class=title style=background:url("+xmllink+'/'+title+"封面.jpg"+");><span style=display:inline;><strong style=color:#f0f3f6; >"+title.substring(0,title.length-1)+"</strong></span></button>";
+
+
+                for (var j = 1; j < content[i].length && j < showNum+1; j++) {
+
+                    var con=content[i][j].url;
+                    var src = xmllink+'/'+title+con;
+
+
+                    album[i].push({
+                        src: src,
+                    })
+                    var albumItemImageItem=document.createElement("div");
+                    albumItemImageItem.className='grid-item'
+                    albumItemImageItem.innerHTML='<a onclick="preview('+i+','+(j-1)+')"><img data-src="'+src+'" alt="'+con+'"  class="lazyload" /></a>';
+                    /*<span>"+con.substring(0,con.length-4)+"</span><p>上传于"+content[i][j].date+"</p>*/
+                    albumItemImageList.appendChild(albumItemImageItem);
+                    albumItem.appendChild(albumItemImageList);
+                    box.appendChild(albumItem);
+                }
+                if(content[i].length > showNum){
+                    var moreItem=document.createElement("button");
+                    moreItem.className="btn-more-posts";
+                    moreItem.id="more"+i;
+                    moreItem.value=showNum+1;
+                    let cur=i;
+                    moreItem.onclick= function (){
+                        moreClick(this,cur,content[cur],content[cur][0].url);
+                    }
+                    moreItem.innerHTML="<span style=display:inline;><strong style=color:#f0f3f6;>加载更多</strong></span>";
+                    conBox.appendChild(moreItem);
+                }
+            }
+
+            function moreClick(obj,cur,cont,title){
+                var parent=obj.parentNode;
+                parent.removeChild(obj);
+                var j=obj.value;
+                var begin=j;
+                for ( ; j < cont.length && j < Number(showNum) + Number(begin); j++) {
+                    console.log( Number(showNum) + Number(begin));
+                    var con=cont[j].url;
+                    var item=document.createElement("li");
+                    item.innerHTML="<div class=imgbox id=imgbox style=height:"+wid+"px;><img class=imgitem src="+xmllink+'/'+title+con+" alt="+con+"></div><span>"+con.substring(0,con.length-4)+"</span><p>上传于"+cont[j].date+"</p>";
+                    parent.appendChild(item);
+                }
+                if(cont.length > j){
+                    obj.value=j;
+                    parent.appendChild(obj);
+                }
+            }
+
+            function preview(albumIndex,imageIndex) {
+                var grids = document.querySelectorAll('.grid');
+                var grid = grids[albumIndex]
+                for(var i = 0; i < grid.children.length; i++){
+                    album[albumIndex][i].h=grid.children[i].childNodes[0].childNodes[0].naturalHeight
+                    album[albumIndex][i].w=grid.children[i].childNodes[0].childNodes[0].naturalWidth
+                }
+                var pswpElement = document.querySelectorAll('.pswp')[0];
+                var options = {
+                    // optionName: 'option value'
+                    // for example:
+                    index: imageIndex // start at first slide
+                };
+                var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, album[albumIndex], options);
+                gallery.init();
+            }
+
+        </script>
+    </body>
+
+</html>

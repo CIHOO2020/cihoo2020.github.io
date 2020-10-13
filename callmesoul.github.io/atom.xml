@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>CallMeSoul</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://callmesoul.cn/"/>
+  <updated>2020-09-02T07:24:10.385Z</updated>
+  <id>https://callmesoul.cn/</id>
+  
+  <author>
+    <name>CallMeSoul</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql Group by获取每个分组最新的记录</title>
+    <link href="https://callmesoul.cn/posts/1590/"/>
+    <id>https://callmesoul.cn/posts/1590/</id>
+    <published>2020-09-02T06:54:58.000Z</published>
+    <updated>2020-09-02T07:24:10.385Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>GROUP BY</code> 查询默认是去每个分组第一条<br>很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。</p><p>原始sql:</p><pre><code>SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC</code></pre><p>这里的<code>ORDER BY</code>是不生效的，因为<code>GROUP BY</code> 的执行会先于 <code>ORDER BY</code></p><p>于是我们可以先排序后再来<code>GROUP BY</code>：</p><pre><code>SELECT * FROM (  SELECT * FROM table ORDER BY createdAt DESC) as resultGROUP BY result.type</code></pre><p>大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，<code>GROUP BY</code> 后就出问题了。<br>后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上<code>LIMIT</code>就可以了</p><p>完整的正确写法:</p><pre><code>SELECT * FROM (  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999) as resultGROUP BY result.type</code></pre><p>Nices!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;GROUP BY&lt;/code&gt; 查询默认是去每个分组第一条&lt;br&gt;很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。&lt;/p&gt;
+&lt;p&gt;原始sql:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table  GROU
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>理财入门—懒人记账</title>
+    <link href="https://callmesoul.cn/posts/6/"/>
+    <id>https://callmesoul.cn/posts/6/</id>
+    <published>2020-06-30T08:20:29.000Z</published>
+    <updated>2020-06-30T08:30:07.126Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>为了生活更美好，最近开始学起了理财。<br>穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心啊，自己的钱次怎么花就怎么花。之前喝瓶可乐都要问老爸老妈，现在直接一箱箱买，想喝就喝，快哉快哉。<br>长期这么自由自在真的很爽，可存款却永远在原地踏步，不见增长。眼看身边的人都买车买楼了，而自己还一无所有。可见凡事都有代价的。<br>总结下原因就是不会理财、大花、月光族等等。于是痛下决心开始理财，控制自己的消费。<br>第一步就当然是记账啦。记账可以知道自己每个月的消费、收入，清晰知道自己主要消费在哪里？哪些消费过度了，应该控制下的。但这一步也是艰难的一步啊！</p><h2 id="市面上的记账软件"><a href="#市面上的记账软件" class="headerlink" title="市面上的记账软件"></a>市面上的记账软件</h2><p>说到记账，第一步就是找个好用的记账软件了。<br>市面上的记账软件很多，基本都满足需求。但！就是坚持不下去，因为每次的消费都要手工在软件上记下去，坚持了10 天坚持不了15天。换了很多了记账软件都这样，功能是满足了，但没解决我的懒惰啊。而已有时很匆忙的一笔微信转账，一下就忘了记账了。<br>于是乎我在继续寻找适合我的记账。我的设想就是有没有可以读取信息的记账软件，然后我以后的消费都走银行卡，消费了收到信息，软件自动记录，是不是很方便？<br>但在市面找了一圈后发现，有些记账软件是可以读取短信消费记录的，但它并不知道消费的分类，需要自己的手选是个大工程。然后各种卡的话也容易混淆。原本想自己找时间写一个的，读读短信信息应该没什么难度。但后来我找到了一个比较理想比较适合我的记账软件，也就省得我自己开发了。</p><h2 id="微信记账本"><a href="#微信记账本" class="headerlink" title="微信记账本"></a>微信记账本</h2><p>我的最终选择就是微信记账本。是一个小程序很方便也不用安装。他可以读取你的微信各种消费和各种收入信息，我本来的比较多的也就是微信支付，除了keep会员是华为支付，京东购物用的是京东支付外，都是走的微信支付，自动记录。现在我只要要用其他不走微信支付的支付方式改成微信支付就好了。比如取消keep在华为支付的自动续费，改微信支付自动续费。京东购物也不用京东支付了，直接走微信支付，这样就搞定了，是不是很方便？<br>而且微信记账本有一个好处就是商家走微信支付时，每一笔的消费都已分好了消费类目，所以可以自动给每笔消费分类，而且你的微信转账，收发红包都会一一帮你记录，实在太适合了。微信的确定就是淘宝购物吧，好像不支持微信支付的，需要手动去添加记录。还有就是银行卡的收入比如工资，也要自己手动去添加记录，还好的是微信记账功能有个提醒功能，比如工资，你可以设置个提醒，每个月发工资时提醒添加工资收入记录。而且在微信的生态里，我们平时用得最多的就是微信了，可不大可能会错过没看到提醒。<br>如果你觉得也很懒，不妨按照我的方式试下微信记账本吧。<br>如果你觉得对你有帮助，可以请我喝杯奶茶哦😬</p><p><img src="../../images/20200630162419.jpg" alt="微信记账本"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;为了生活更美好，最近开始学起了理财。&lt;br&gt;穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心
+      
+    
+    </summary>
+    
+    
+    
+      <category term="life" scheme="https://callmesoul.cn/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AE渲染成视频第一句语音渲染变声问题</title>
+    <link href="https://callmesoul.cn/posts/5/"/>
+    <id>https://callmesoul.cn/posts/5/</id>
+    <published>2020-06-30T08:01:31.000Z</published>
+    <updated>2020-06-30T08:17:02.877Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。<br>在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>这个问题找了很久<br>一开始以为是AI生成的语音音频有问题，几重新生成了次，换个格式都不行，把后面正常语音替换第一句语音，发现还是一样，确认和音频无关。<br>然后我才猜想是不是渲染的格式或者用来渲染的某些选项问题呢？后来试了很多都不行。<br>最后想为什么只有第一句怕的，然后我把第一句语音删了，发现不怕了，可能就是因为第一句太靠前了，视频刚开始就有一段语音音频，<br>然后我尝试把吧原来的第一段语音音频，拖后面一点，最后没玩解决的！<br>记录下，也方便遇到同样问题的人</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。&lt;br&gt;在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sequelize 问题汇总</title>
+    <link href="https://callmesoul.cn/posts/4/"/>
+    <id>https://callmesoul.cn/posts/4/</id>
+    <published>2020-06-17T01:20:33.000Z</published>
+    <updated>2020-06-17T01:46:11.565Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h2><p><code>sequelize</code> 是<code>nodejs</code>里面很成熟的数据库<code>ORM</code>，配合<code>nodejs</code>使用，开发事半功倍。相较于其他语言<code>ORM</code>，<code>sequelize</code> 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。</p><p>本文主要记录各种负责的数据查询使用<code>sequelize</code>如何实现，还有记录一些坑或bug。</p><h3 id="sequelize-include-order"><a href="#sequelize-include-order" class="headerlink" title="sequelize include order"></a>sequelize include order</h3><p>写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:</p><pre><code>ctx.model.User.findAll({    include: [        {            model: ctx.mode.Book,            as: &#39;books&#39;,            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]        }    ],    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]})</code></pre><p>以上查询最外层的<code>order</code>是有效的， 但是里面<code>include</code>层的<code>books</code>数组排序是无效的，会导致每次查询的数据顺序不一样，要指定<code>include</code>里面数据的排序，应该这样写</p><pre><code>ctx.model.User.findAll({    include: [        {            model: ctx.mode.Book,            as: &#39;books&#39;        }    ],    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]})</code></pre><p>类似于原生查询的<code>A.createdAt</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Sequelize&quot;&gt;&lt;a href=&quot;#Sequelize&quot; class=&quot;headerlink&quot; title=&quot;Sequelize&quot;&gt;&lt;/a&gt;Sequelize&lt;/h2&gt;&lt;p&gt;&lt;code&gt;sequelize&lt;/code&gt; 是&lt;code&gt;nodejs&lt;/code
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于Vue-router=&gt;addRoutes 方法的一些坑</title>
+    <link href="https://callmesoul.cn/posts/3/"/>
+    <id>https://callmesoul.cn/posts/3/</id>
+    <published>2020-02-28T00:07:10.000Z</published>
+    <updated>2020-02-28T00:08:46.091Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="关于Vue-router-gt-addRoutes-方法的一些坑"><a href="#关于Vue-router-gt-addRoutes-方法的一些坑" class="headerlink" title="关于Vue-router=&gt;addRoutes 方法的一些坑"></a>关于Vue-router=&gt;addRoutes 方法的一些坑</h1><ol><li><pre><code class="js">router.addRoutes(routes: Array&lt;RouteConfig&gt;)</code></pre></li></ol><p><code>routes</code> 是要符合路由规范的数组</p><ol start="2"><li><code>router.addRoutes</code> 只是注册了路由的规则，但是并不会自动更新路由列表项，需要先手动更新路由列表，再去注册规则</li></ol><pre><code class="javascript">// 手动添加路由列表项router.options.routes.push(...routers)// 注册路由规则router.addRoutes(routers)</code></pre><ol start="3"><li><p>注册完最好重定向</p><p>如果添加路由之前，要访问的地址是需要 <code>addRoutes</code> 添加的。</p><p>那么在调用<code>addRouters</code>之前路由并不存在，所以注册完需重定向一下要访问的地址</p><p>在路由导航守卫可以这样些</p><pre><code class="javascript">router.beforeEach((to, from, next) =&gt; {  // 其他逻辑  router.options.routes.push(...asyncRouterMap)  router.addRoutes(asyncRouterMap)  next(to.path)})</code></pre></li><li><p>动态引入组件component</p><p>网上很多人的文章的copy的，也没验证过，所有导致搜索的大部分方法都是不行</p><ul><li><p><code>component: () =&gt; import(componentPath)</code>  不行</p></li><li><p><code>component: () =&gt; import(&#39;@/&#39; + componentPath)</code>  不行</p><p>还有很多的网上办法都不行的</p><p>最后找到了解决方法：</p><pre><code class="json">component: require.ensure([], (require) =&gt; {        resolve(require(&#39;@/&#39; + componentPath))}),</code></pre><p>注意： <code>@/</code> 要分开写死，不可以连同地址一块传入，可能是为了给<code>webpack</code>标识的</p></li></ul></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;关于Vue-router-gt-addRoutes-方法的一些坑&quot;&gt;&lt;a href=&quot;#关于Vue-router-gt-addRoutes-方法的一些坑&quot; class=&quot;headerlink&quot; title=&quot;关于Vue-router=&amp;gt;addRoutes 方
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>自主项目【51领养】</title>
+    <link href="https://callmesoul.cn/posts/2/"/>
+    <id>https://callmesoul.cn/posts/2/</id>
+    <published>2019-12-25T02:10:03.000Z</published>
+    <updated>2019-12-25T02:18:15.199Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>因为自己有养猫，对流浪动物啊也时常关注，想多多少少出一份力啊。</p><p>我逛了下一些宠物机构，发现了很多宠物机构，没有自己的宠物管理系统，用户难以线上浏览可以领养的宠物，且每个机构的可宠物信息并不共享，就一定程度上加大了用户领养的难度，想领养的人只能线下一间间跑，看有没有合缘的宠物领养。</p><p>而且一些个人的宠物生了，需找人领养，只能发发朋友圈，信息扩散程序可想而知，从而加大了领养的难度。</p><p>所以我就想做一产品，可以给想领养的人，在线上可以看到身边可以领养的宠物，看上了就具体线下了解。</p><p>也可以给一些没有技术支持的机构/个人提供一个宠物的发布等管理系统让领养可以跨上那么一小步。</p><h3 id="项目状态"><a href="#项目状态" class="headerlink" title="项目状态"></a>项目状态</h3><p>项目现已完成了基本功能上线，功能会不断的迭代更新。</p><p>大家微信搜索<code>51领养</code> 就可以查看，或者扫描一下小程序码即可</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/gh_c80bd343213b_344.jpg" alt="文件无法预览。"></p><h3 id="宣传"><a href="#宣传" class="headerlink" title="宣传"></a>宣传</h3><p>项目刚上线啊，也不知道怎么宣传好，大家可以给给意见。</p><p>我自己做了张海报，不嫌弃的可以帮忙宣传下。</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/51%E9%A2%86%E5%85%BB%E5%AE%A3%E4%BC%A0%E6%B5%B7%E6%8A%A5.jpg" alt="文件无法预览。"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;因为自己有养猫，对流浪动物啊也时常关注，想多多少少出一份力啊。&lt;/p&gt;
+&lt;p&gt;我逛了下一些宠物机构，发现了很多宠物机构，没有自己的宠物管理系
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>webpack使用html-loader引入html模板</title>
+    <link href="https://callmesoul.cn/posts/100000/"/>
+    <id>https://callmesoul.cn/posts/100000/</id>
+    <published>2019-12-04T08:32:57.000Z</published>
+    <updated>2020-06-17T01:22:04.397Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。</p><p>vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。</p><p>直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:</p><ul><li>平时用惯了es6语法，要写回es5,要经常查文档</li><li>不能使用预处理样式(less,sass)，这个效率大打折扣啊</li><li>手动页面优化(压缩，去除注释,检测语法)</li></ul><p>本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。</p><p>本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。</p><p>于是乎就寻找各种方案了</p><h3 id="html-引入模板"><a href="#html-引入模板" class="headerlink" title="html 引入模板"></a>html 引入模板</h3><ol><li><p>iframe</p><p>首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。</p></li><li><p>模板引擎</p><p>这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。</p><ul><li>一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。</li><li>第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。</li></ul></li><li><p>html-loader 的  interpolate</p><p>html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。</p><p>首先要在webpack rules里加上加一条处理html的规则</p><pre><code class="javascript">{      test: /\.html$/,      use: {        loader: &#39;html-loader&#39;,        options: {          // 处理html 引用的图片          attrs: [&#39;img:src&#39;],          // 开启 html模板功能          interpolate: true        }      }    }</code></pre></li></ol><p>   然后在html文件就可以直接引入其他html模板了</p><pre><code class="html">   &lt;!DOCTYPE html&gt;   &lt;html&gt;   &lt;head&gt;     &lt;title&gt;index&lt;/title&gt;     ${require(&quot;../layouts/head.html&quot;)}   &lt;/head&gt;     ${require(&quot;../layouts/header.html&quot;)}   &lt;body&gt;     ${require(&quot;../layouts/footer.html&quot;)}   &lt;/body&gt;   &lt;/html&gt;</code></pre><p>   简单又灵活，Get it！</p><p>​        最后也分享下自己配置好手脚架：<strong><a href="https://github.com/callmesoul/webpack-multiple-pages-template" target="_blank" rel="noopener">webpack-multiple-pages-template</a></strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。&lt;/p&gt;
+&lt;p&gt;vue开发栈喜欢了，想用vue来开发，有感觉有点累
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用headless cms + ssr渲染框架来开发网站</title>
+    <link href="https://callmesoul.cn/posts/12005/"/>
+    <id>https://callmesoul.cn/posts/12005/</id>
+    <published>2019-11-25T03:15:44.000Z</published>
+    <updated>2019-12-09T08:04:45.362Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。</p><h5 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h5><p>根据以前的经验无非就是前端写完界面，然后找一个cms去套，但由于国内的cms框架（duxcms我之前一直用,dedecms.phpcms,wordpress）已经很难满足了现在的客户需求了。</p><p>比如做个网站，一开始以为做个网站就行，谁知道还要做小程序，App等等，但之前的cms都不带api，即使有写带比如wordpress，api接口也是问题多多的。</p><p>然后可以看国内开发的cms，即使的新开发新产品，也是比较保守的，还是跟以前的cms差不多，无非就多提供了api 供用户调用，然后后台操作界面交互也不咋地，所以很难找到一款非常合适的cms框架。</p><p>​        而我感觉国外的就比较思想超前敢冒险尝试，既然api方式通用，那我就专门做提供api和后台内容操作的cms，数据和界面教还给前端，自己爱拿什么数据那什么数据，唉什么布局怎么布局，前后分离。然后cms就专心做好内容管理和api接口的设计就可以了。</p><p>虽然这个想法早期还有点冒险，比较像这种前后端分离的<code>spa</code>还有有很多问题的</p><ul><li>做网站的人很看重的seo问题</li><li>首屏加载速度问题</li></ul><p>问题虽然有，但方向应该是对的，就看怎么解决这些问题而已。</p><h5 id="为什么写网站也要用spa"><a href="#为什么写网站也要用spa" class="headerlink" title="为什么写网站也要用spa"></a>为什么写网站也要用spa</h5><p>​        而且平时在公司或者自己写前端，写法习惯都已经从jq过渡到了前后端分离框架<code>vue</code>、<code>react</code>、<code>angular</code>等写法的习惯了。然后接了一个私单，又要突然转回去以前那种<code>jq</code>操作<code>dom</code>的 时代。</p><p>这个过程实在难受，而且效率也低。</p><p>有没有办法开发个网站也能使用现代化的开发流程和各种工具，然后解决seo，和首屏加载慢等<code>spa</code>问题的。</p><p>于是乎后面出现了各种<code>ssr</code>服务端渲染框架，去帮spa应用解决这些问题。</p><h3 id="SSR-服务端渲染框架"><a href="#SSR-服务端渲染框架" class="headerlink" title="SSR 服务端渲染框架"></a>SSR 服务端渲染框架</h3><p> 使用SSR（也称为“通用”或“同构”）模式，将使用Node.js服务器将基于Vue组件的HTML传递给客户端，而不是纯JavaScript。   — nuxt.js</p><p>目前主流有两个:</p><ul><li>vue 架构的 <a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">nuxt</a></li><li>react 机构的 <a href="https://nextjs.frontendx.cn/" target="_blank" rel="noopener">next</a></li></ul><p>两个都是开箱即用的，大大降低了开发部署的难度。</p><p>主要用那个技术栈就用那个框架吧，react好像还有个 <code>gatsby</code>好像挺好用，但我不主要react技术栈 ，所以就没深入了解了，看了文档和别人介绍感觉挺不错的，react技术栈的同学可以去了解下。</p><p>前端的开发框架我们选好了，然后我们就要选个后端的cms 去管理数据，提供api接口调用数据了。</p><p>我们先来想一下我们期待的cms是怎样的:</p><ul><li><p>内容可定制化程度高，因为网站有各种功能，比如轮播的海报，收集用户表单，新闻站的文章，画册张的相册等。</p></li><li><p>后台交互良好，至少交付给客户时，客户很快有会用。</p></li><li><p>良好的api接口设计</p></li><li><p>对<code>gatsby</code>友好</p></li><li><p>提供全平台sdk</p></li></ul><h3 id="headless-cms"><a href="#headless-cms" class="headerlink" title="headless cms"></a>headless cms</h3><p> 翻译一下就是只提供纯api的cms，不包含任何客户端代码，也就是老子只负责api你手机，还是网页想咋用咋用。 —  摘抄自<a href="https://www.jianshu.com/p/ac7caffe3931" target="_blank" rel="noopener">北方蜘蛛</a></p><h5 id="Contentful"><a href="#Contentful" class="headerlink" title="Contentful"></a><a href="https://www.contentful.com/" target="_blank" rel="noopener">Contentful</a></h5><p>你搜headless cms，然后到处都能看得到<a href="https://www.contentful.com/" target="_blank" rel="noopener">Contentful</a></p><p>来说说它的强大之处：</p><ul><li><h3 id="API-First-CMS-to-Power-All-Digital-Products-Contentful"><a href="#API-First-CMS-to-Power-All-Digital-Products-Contentful" class="headerlink" title="API-First CMS to Power All Digital Products | Contentful"></a><a href="http://www.baidu.com/link?url=U4F_e7OMQNL_JvtG6ojIW93MqoiriddS2TxnmcxkEHmT6Rx3ek4Rk_Lsp8ZRdA4z" target="_blank" rel="noopener">API-First CMS to Power All Digital Products | <em>Contentful</em></a></h3><p>简单翻译就是第一个只提供api的cms吧，先做有经验优势嘛</p></li><li><p>免费，不用自己部署，但有一定限制</p></li><li><p>Serverless 架构部署，可能就是用了serverless 才有可能有免费的提供用吧</p></li><li><p>提供restful 接口 + graaphql 接口</p></li><li><p>支持多站点，多项目，但需另外收费。</p></li></ul><p>可以说<code>contentful</code>是个先进技术集合的cms，各种现代化技术集合一体。</p><p>然后操作界面也比较简单简洁，感觉是挺不错的，操作还是流畅的，还提供多角色共同管理。</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/image-20191114163315536.png" alt="image-20191114163315536"></p><p>但作为接私单来开发网站还是有些问题的:</p><ul><li><p>不开源，所以不可以自己部署。你做完交接，要客户登陆别人的网站去管理，这样不大好吧。</p></li><li><p>后台管理不支持中文，怕客户看不懂，不好操作。</p></li><li><p>不收费的有限制，感觉以后也会慢慢变成收费的，收费项又确实比较贵</p></li><li><p>暂时没看到内容的导出与导入</p></li></ul><h5 id="strapi"><a href="#strapi" class="headerlink" title="strapi"></a><a href="https://strapi.io/" target="_blank" rel="noopener">strapi</a></h5><p>我试了挺久的一个，功能也简单，界面也简洁。</p><p>优势:</p><ul><li><p>开源免费，可以自己部署</p></li><li><p>简单又便捷，添加内容模型，添加内容，然后设置用户对这个内容接口的权限就好了</p></li><li><p>规范的restful接口，且接口信息简洁，没有返回其他很多没有必要的东西</p><pre><code class="json">///banners[    {        &quot;id&quot;: 1,        &quot;title&quot;: &quot;轮播海报&quot;,        &quot;link&quot;: &quot;sadasdasdasd&quot;,        &quot;created_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,        &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,        &quot;image&quot;: {            &quot;id&quot;: 1,            &quot;name&quot;: &quot;teacher-avatar.gif&quot;,            &quot;hash&quot;: &quot;466289966ffd4599afd646ede29bac40&quot;,            &quot;sha256&quot;: &quot;kgeU5VQ-bYTbtNlEwoTi_4LPykpIPxrtZLtlL-ehyAY&quot;,            &quot;ext&quot;: &quot;.gif&quot;,            &quot;mime&quot;: &quot;image/gif&quot;,            &quot;size&quot;: &quot;1.48&quot;,            &quot;url&quot;: &quot;/uploads/466289966ffd4599afd646ede29bac40.gif&quot;,            &quot;provider&quot;: &quot;local&quot;,            &quot;provider_metadata&quot;: null,            &quot;created_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;,            &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;        }    }]</code></pre></li><li><p>后台字段布局可自由拖动布局</p></li><li><p>有国际化，虽然中文的有些翻译有些蹩脚，有些也没翻译，但总比全英文好啊</p></li><li><p>也提供Graphql接口</p><p>感觉<code>strapi</code>虽简洁，简单，但功能齐全</p></li></ul><p>个人感觉的缺点：</p><ul><li><p>不支持多站点多项目</p><p>比如我想自己搭一个数据管理中心，给个各个网站使用，每个网站都有新闻内容模块</p><p>这时候我不能建一个新闻内容模块一起用，这样数据就混乱了。只能布置多个strapi或者新建多个新闻内容模块，以区分不同网站的新闻内容模块。</p><p>其实有考虑过根据新闻模块关联用户、根据用户去区分新闻模块对应的数据，这是一个可行的方法。但只只对没有用户系统的站点或项目，不然就又轮到用户信息混乱了。</p><p>但是用户又可以根据用户组去区分，感觉还是可以实现的-&gt;</p><p>根据添加不同用户组然后添加用户，去区分不同的网站，从而去同一个内容模型拿对应的内容数据</p><p>但说回来，要不同项目用统一个模型，两个项目的统一模型要高度统一，不然还是有很多问题的。</p><p>期待strapi后面可以有站点或者项目的概念，在站点或项目下，再去新建不同的内容模型，这就完美了。</p></li></ul><h3 id="ghost"><a href="#ghost" class="headerlink" title="ghost"></a><a href="https://ghost.org/" target="_blank" rel="noopener">ghost</a></h3><p>我用过算最好的博客系统吧，性能飞跃，后台管理、写作交互,体验都完美，也有很多很漂亮的，后来因为服务器到期了，续费太贵了，于是才把博客迁移到了<code>hexo</code>+<code>github pages</code> 免服务器啊，还可以<code>https</code>，当然速度和原来的没法比啊。而且你<code>github</code> 搜 <code>nodejs</code> 的 <code>headless cms</code> 第一名就是<code>ghost</code>,第二是``strapi`</p><p>个人感觉的优点:</p><ul><li>简单简洁，为博客而生，主要就添加文章或页面</li><li>完美的写作体验，完美兼容<code>markdown</code>和<code>html</code> 写作,也可以一篇文章即<code>html</code>又有<code>markdown</code></li><li>主题精美，速度飞快，后台操作也很友好</li><li>即提供服务端渲染，也提供api</li><li>代码开源，却已盈利</li><li>完善的开发手脚架，不仅可以初始项目，更包括集成 <code>Let&#39;s Encrypt</code> 自动帮你生成ssl证书，配置nginx ssl配置,等等……</li></ul><p>个人感觉的缺点:</p><ul><li>主要专注于博客，对于一些网站的其他功能还是显得有些不足。可扩展性不强。</li><li>虽提供api，但不是<code>restful</code> 规范的</li><li>主题虽精美，但相对于<code>wordpress</code> 还是相对较少的</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。&lt;/p&gt;
+&lt;h5 id=&quot;CMS&quot;&gt;&lt;a href=&quot;#CMS&quot; c
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Frontend-Sniper前端错误上报系统</title>
+    <link href="https://callmesoul.cn/posts/64826/"/>
+    <id>https://callmesoul.cn/posts/64826/</id>
+    <published>2019-10-21T00:57:01.000Z</published>
+    <updated>2019-12-09T08:04:45.354Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前端错误监控系统服务端"><a href="#前端错误监控系统服务端" class="headerlink" title="前端错误监控系统服务端"></a>前端错误监控系统服务端</h3><p>其实线上已经有很多监控系统了，例如<a href="https://www.fundebug.com/" target="_blank" rel="noopener">fundebug</a>。试用了一下还是挺不错的。<br>可惜都是收费的，免费的只能创建一个项目，收费也不便宜。<br>对于一些小公司来说很难花钱去搞，而且对小公司来说功能也不需要太复杂。<br>一些js的报错和接口报错就可以大大加快bug的修复，和预知bug。（当上级和测试都还没发现时）<br>所以我还是写这么个系统，是从自身需求出发吧。功能可以慢慢完善。</p><p>现在初期只实现了简单的js和接口资源报错。后期会加入UA和用户等信息以完善错误信息追踪错误。<br>对服务端还是新手所以代码质量….graphql也是试手。<br>但好在错误监控系统一般内部人使用，独立不影响线上项目和用户。所以大胆地使用吧。</p><h2 id="项目集"><a href="#项目集" class="headerlink" title="项目集"></a>项目集</h2><ul><li>服务端 <a href="https://github.com/callmesoul/frontend-sniper-server" target="_blank" rel="noopener">frontend-sniper-server</a></li><li>管理后台 <a href="https://github.com/callmesoul/frontend-sniper-admin" target="_blank" rel="noopener">frontend-sniper-admin</a></li><li>错误探针 <a href="https://github.com/callmesoul/better-js" target="_blank" rel="noopener">better-js</a></li></ul><h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2><ul><li><input checked="" disabled="" type="checkbox"> 支持vue</li><li><input checked="" disabled="" type="checkbox"> 邮件通知（新错误报错，旧错误5n次发邮件报错）</li><li><input disabled="" type="checkbox"> 添加UA信息</li><li><input disabled="" type="checkbox"> 添加用户信息</li><li><input checked="" disabled="" type="checkbox"> 记录用户行为</li><li><input disabled="" type="checkbox"> 手动上传报错</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前端错误监控系统服务端&quot;&gt;&lt;a href=&quot;#前端错误监控系统服务端&quot; class=&quot;headerlink&quot; title=&quot;前端错误监控系统服务端&quot;&gt;&lt;/a&gt;前端错误监控系统服务端&lt;/h3&gt;&lt;p&gt;其实线上已经有很多监控系统了，例如&lt;a href=&quot;https://
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一起用失效</title>
+    <link href="https://callmesoul.cn/posts/24625/"/>
+    <id>https://callmesoul.cn/posts/24625/</id>
+    <published>2019-10-21T00:54:28.000Z</published>
+    <updated>2019-12-09T08:04:45.365Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>重复多条记录问题</title>
+    <link href="https://callmesoul.cn/posts/41967/"/>
+    <id>https://callmesoul.cn/posts/41967/</id>
+    <published>2019-10-21T00:52:53.000Z</published>
+    <updated>2019-12-09T08:04:45.364Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="mysql-group-by-和-order-by-一起用失效"><a href="#mysql-group-by-和-order-by-一起用失效" class="headerlink" title="mysql group by 和 order by 一起用失效"></a>mysql group by 和 order by 一起用失效</h1><p>我自己写了一个前端错误监控系统。</p><p>前端有各种报错，后台就会自动发邮件通知、</p><p>这里就会遇到同一个错误可能很多人遇到，或者同一个人遇到很多次。</p><p>这样同一个错误就会有很多次报错。</p><p>当管理员进入后台时，看到很多同一个错误的报错，这很明显不人性化。</p><p>于是我就设计成，同一个错误的合并，只显示最新那个。</p><p>一开始sql写法为</p><pre><code class="sql">SELECT * from `errors` GROUP BY `title`,`msg`,`category`,`level`,`appId`  ORDER BY `createdAt` DESC</code></pre><p>发现同一个错误是合并了，但是 ORDER BY 并没有生效，合并后的错误不是最新的一条错误而是最早的一条。于是查了资料发现，GROUP BY 没有排序功能，默认取合并时的第一条。于是就想到了，先排序完再合并就好了，于是有下面代码：</p><pre><code class="sql">SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC ) as result GROUP BY `title` ORDER BY `createdAt` DESC</code></pre><p>但发现还是没用啊，我百度了下，很多人也是这样写的，但为什么就不生效呢？经过一番查找，终于找到原因了，mysql版本的问题，以上的代码在5.6或以下的代码应该都可以的，但在5.7则要加limit条件，不然子查询是不执行的，完整代码如下</p><pre><code class="sql">SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC LIMIT 100) as result GROUP BY `title` ORDER BY `createdAt` DESC</code></pre><p>是不是很坑。。。</p><p>记下先</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;mysql-group-by-和-order-by-一起用失效&quot;&gt;&lt;a href=&quot;#mysql-group-by-和-order-by-一起用失效&quot; class=&quot;headerlink&quot; title=&quot;mysql group by 和 order by 一起用失
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用HTTPCODE替换自定义CODE</title>
+    <link href="https://callmesoul.cn/posts/51837/"/>
+    <id>https://callmesoul.cn/posts/51837/</id>
+    <published>2019-10-21T00:47:58.000Z</published>
+    <updated>2020-06-17T01:21:38.301Z</updated>
+    
+    <content type="html"><![CDATA[<p>| 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。</p><p>但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。</p><p>而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：</p><pre><code class="javascript">{    data:{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;    },    engine:&#39;.....&#39;,    headers:{//....},    request:{//....},    status:200,    statusText:&quot;request:ok&quot;}</code></pre><p>而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:</p><pre><code class="javascript">response.use(  (response) =&gt; {    if(response.data.rcode===405){      //统一处理某个自定义错误code    }else{      return response.data;//返回我们要用的数据      promise.resolve();    }  },  (err) =&gt; {    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可    //发生网络错误后会走到这里    if(err.status&gt;=500){       //统一处理某个httpcode 500以上错误    }  });</code></pre><p>使用了拦截器后我们正常得到的数据格式如下:</p><pre><code class="javascript">{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;},</code></pre><p>但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如</p><pre><code class="javascript">let res=await this.api.getUserList();if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.data.userList;}</code></pre><p>以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个<code>if(res.data.rcode==300)</code>。能不能有办法优化下。</p><p>后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。</p><h3 id="先来说说httpcode相对于自定义code的好处"><a href="#先来说说httpcode相对于自定义code的好处" class="headerlink" title="先来说说httpcode相对于自定义code的好处"></a>先来说说httpcode相对于自定义code的好处</h3><ol><li>规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？</li><li>对于后端开发来说使用httpcode可以大大增加效率，例如：</li></ol><ul><li><p>使用自动code时输出数据</p><pre><code>//成功时this.body={  data:{      userList:[{id:1}]  },  rcode:300,  msg:&#39;成功&#39;}//失败时this.body={  rcode:400,  msg:&#39;失败&#39;}</code></pre></li><li><p>使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：</p><pre><code>//成功时this.body={    userList:[{id:1}]}//失败时this.status=400;this.body={    msg:&#39;失败&#39;}</code></pre><p>你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊</p></li></ul><p>  对于前端开发来说使用httpcode也可以大大增加效率，例如：</p><p>  拦截器就不用去判断自定义code 而直接判断httpcode：</p><pre><code class="javascript">  response.use(    (response) =&gt; {      if(response.data.rcode===405){        //统一处理某个自定义错误code      }else{        return response.data;//返回我们要用的数据        promise.resolve();      }    },    (err) =&gt; {      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可      //发生网络错误后会走到这里      if(err.status===400){        //统一处理某个httpcode 错误      }else if(err.status&gt;=500){         //统一处理某个httpcode 500以上错误      }    }  );</code></pre><p>然后再来对比下使用httpcode和使用自定义code的数据个操作：</p><pre><code class="javascript">//自定义code时返回数据{        data:{            userList:[                {id:1}            ]        },        rcode: 300,        message: &quot;操作成功&quot;}//httpcode时返回数据{        userList:[                {id:1}            ]},//自定义code时操作let res=await this.api.getUserList();if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.data.userList;}//httpcode时操作let res=await this.api.getUserList();if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的        this.userList=res.userList;}</code></pre><p>虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;| 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>坑吭记录</title>
+    <link href="https://callmesoul.cn/posts/12004/"/>
+    <id>https://callmesoul.cn/posts/12004/</id>
+    <published>2019-10-21T00:44:58.000Z</published>
+    <updated>2020-06-17T01:21:59.965Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>苹果IOS系统分享配置失败，签名错误</li></ul><p>原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。</p><p>解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。</p><pre><code class="javascript">// assign.js//ios端 histiry 模式兼容问题const location = global.locationconst u = navigator.userAgent let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URLexport default {  beforeRouteEnter(to, from, next) {    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过      // 此处不能使用location.replace        location.assign(baseUrl+to.fullPath)      //location.replace (baseUrl+to.fullPath)       //重定向时用location.replace 其他用location.assign    } else {      next()    }  }}</code></pre><ul><li>IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。</li></ul><p>原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。</p><p>解决：</p><pre><code class="javascript">// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复{    data:{        //...        handler: function (e) {          e.preventDefault()        }    },    methods:{        /* 解决iphone页面层级相互影响滑动的问题 */      closeTouch: function () {        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,          this.handler, { passive: false })// 阻止默认事件      },      openTouch: function () {        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,          this.handler, { passive: false })// 打开默认事件      },    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;苹果IOS系统分享配置失败，签名错误&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。&lt;/p&gt;
+&lt;p&gt;解决:就是手动把url改了，先建一个mixins插
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flex 布局问题汇总</title>
+    <link href="https://callmesoul.cn/posts/794/"/>
+    <id>https://callmesoul.cn/posts/794/</id>
+    <published>2019-10-14T08:24:03.000Z</published>
+    <updated>2020-06-17T01:21:45.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>flex布局使用起来很方便\n而且现在的浏览器也基本支持了<br>大家可放心用起来。<br>但用了flex总会有一些小问题<br>这里总结下再使用flex时遇到的问题：</p><h3 id="flex下-input-宽度无法自适应："><a href="#flex下-input-宽度无法自适应：" class="headerlink" title="flex下 input 宽度无法自适应："></a>flex下 input 宽度无法自适应：</h3><pre><code class="javascript">   &lt;div class=&#39;flex&#39;&gt;            &lt;input class=&#39;flex1&#39;&gt;    &lt;button&gt;提交&lt;/button&gt;  &lt;/div&gt;</code></pre><p>以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。</p><h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><ul><li><p>添加<code>min-width:0;</code>网上说的，但试了下并不行</p></li><li><p>添加div包裹即可（推荐）</p><pre><code class="javascript">  &lt;div class=&#39;flex&#39;&gt;          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;                &lt;button&gt;提交&lt;/button&gt;                    &lt;/div&gt;                      ```### flex 下`text-overflow: ellipsis;`不生效```javascript  &lt;div class=&#39;flex&#39;&gt;          &lt;label&gt;标题&lt;/label&gt;                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```</code></pre></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;flex布局使用起来很方便\n而且现在的浏览器也基本支持了&lt;br&gt;大家可放心用起来。&lt;br&gt;但用了flex总会有一些小问题&lt;br&gt;这里总结下再使用flex时遇到的问题：&lt;/p&gt;
+&lt;h3 id=&quot;flex下-input-宽度无法自适应：&quot;&gt;&lt;a href=&quot;#flex下-in
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>H5、微信开发video填坑</title>
+    <link href="https://callmesoul.cn/posts/13681/"/>
+    <id>https://callmesoul.cn/posts/13681/</id>
+    <published>2019-10-14T08:22:50.000Z</published>
+    <updated>2019-12-09T08:04:45.359Z</updated>
+    
+    <content type="html"><![CDATA[<p>“<ul></p><li>ios系统下，视频播放默认全屏播放<br>解决方法：加上<code>x5-playsinline=&quot;&quot; playsinline=&quot;&quot; webkit-playsinline=&quot;&quot;</code></li></ul>"]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;“&lt;ul&gt;&lt;/p&gt;
+&lt;li&gt;ios系统下，视频播放默认全屏播放&lt;br&gt;
+解决方法：加上&lt;code&gt;x5-playsinline=&amp;quot;&amp;quot; playsinline=&amp;quot;&amp;quot; webkit-playsinline=&amp;quot;&amp;quot;&lt;/co
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>REM自适应</title>
+    <link href="https://callmesoul.cn/posts/52063/"/>
+    <id>https://callmesoul.cn/posts/52063/</id>
+    <published>2019-10-14T08:14:57.000Z</published>
+    <updated>2020-06-17T01:21:50.921Z</updated>
+    
+    <content type="html"><![CDATA[<p>designSize=640 为设计稿大小<br>htmlFontSize=100为当设计稿为640px时html font-size为100px<br>(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)<br>此时1px=0.01rem;</p><pre><code> (function(doc, win, designSize,htmlFontSize) {        var docEl = doc.documentElement,                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';        docEl.dataset.dpr = dpr;        var recalc = function() {          var width = docEl.clientWidth;          if (width / dpr &gt; designSize) {            width = designSize * dpr;          }          docEl.dataset.width = width;          docEl.dataset.percent = htmlFontSize * (width / designSize);          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';        };        recalc();        if (!doc.addEventListener) return;        win.addEventListener(resizeEvt, recalc, false);      })(document, window,640,100);      ```</code></pre>"]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;designSize=640 为设计稿大小&lt;br&gt;
+htmlFontSize=100为当设计稿为640px时html font-size为100px&lt;br&gt;
+(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)&lt;br&gt;
+此时
+      
+    
+    </summary>
+    
+    
+    
+      <category term="frontend" scheme="https://callmesoul.cn/tags/frontend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小程序开发-使用editor组件替换第三方富文本组件</title>
+    <link href="https://callmesoul.cn/posts/43892/"/>
+    <id>https://callmesoul.cn/posts/43892/</id>
+    <published>2019-10-08T16:44:19.000Z</published>
+    <updated>2019-12-09T08:04:45.374Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="小程序富文本问题"><a href="#小程序富文本问题" class="headerlink" title="小程序富文本问题"></a>小程序富文本问题</h3><p>因为小程序用的不是html标签，，所以市面上的富文本编辑器都不适用，自己改起来也麻烦，大多都是小程序嵌入webview方式解决的富文本编辑框来实现，局限比较大。</p><p>还有个问题就是渲染富文本内容也就是html，前期哟很多第三方组件解决了这个问题  ，例如：<code>htmlparse</code>  等，但大多这些第三方组件也只是解决富文本的的渲染问题，而且性能也较大问题，编辑富文本一直是一个硬伤。最近期小程序推出了<code>editor</code>组件，就能基本解决以上问题，代替市面上第三方的关于小程序富文本插件。</p><p>本文就主要讲解下怎么用editor组件，封装一个自定义的富文本组件，既可以渲染html富文本，又可以变成富文本编辑框。</p><h3 id="editor"><a href="#editor" class="headerlink" title="editor"></a>editor</h3><p>关于editor组件的使用可以直接看 官方的文档</p><p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/editor.html" target="_blank" rel="noopener">editor组件</a> </p><h3 id="自定义富文本组件"><a href="#自定义富文本组件" class="headerlink" title="自定义富文本组件"></a>自定义富文本组件</h3><p> 其实 还是比较简单的，editor组件文档里有示例代码，我们把示例带啊跑起来，就是一个富文本编辑框了：</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1568601815906.png" alt="1568601815906"></p><p>然后我们主要就新建一个组定义组件，把示例带啊复制过去，</p><p>把编辑框内容(html)，是否只读（read-only），placeholder（空提示）作为参数传入即可。</p><ul><li><p>read-only</p><p>ture 时即为渲染html模式，把编辑相关的隐藏即可。</p><p>false 即为编辑框，显示编辑框相关内容，大家自行控制即可</p></li></ul><p>需要 注意的是 在组件内获取editor wxml时要加<code>.in(this)</code>表示是组件内的wxml</p><pre><code class="html">wx.createSelectorQuery().in(this)        .select(&#39;#editor&#39;)        .context(function(res) {        })        .exec()</code></pre><p>剩下的都比较简单了，我直接贴代码,大家可以根据自己需求diy</p><pre><code class="javascript">  &lt;config&gt;{  &quot;component&quot;: true}&lt;/config&gt;&lt;template&gt;  &lt;view class=&quot;wrapper {{readOnly?'readOnly':''}}&quot;&gt;    &lt;view class=&quot;toolbar&quot; bindtap=&quot;format&quot; wx:if=&quot;{{!readOnly}}&quot;&gt;      &lt;i class=&quot;editicon icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}&quot; data-name=&quot;bold&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-zitixieti {{formats.italic ? 'ql-active' : ''}}&quot; data-name=&quot;italic&quot;&gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}&quot;        data-name=&quot;underline&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}&quot;        data-name=&quot;strike&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zuoduiqi {{formats.align === 'left' ? 'ql-active' : ''}}&quot;        data-name=&quot;align&quot;        data-value=&quot;left&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-juzhongduiqi {{formats.align === 'center' ? 'ql-active' : ''}}&quot;        data-name=&quot;align&quot;        data-value=&quot;center&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-youduiqi {{formats.align === 'right' ? 'ql-active' : ''}}&quot;        data-name=&quot;align&quot;        data-value=&quot;right&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zuoyouduiqi {{formats.align === 'justify' ? 'ql-active' : ''}}&quot;        data-name=&quot;align&quot;        data-value=&quot;justify&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-line-height {{formats.lineHeight ? 'ql-active' : ''}}&quot;        data-name=&quot;lineHeight&quot;        data-value=&quot;2&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-Character-Spacing {{formats.letterSpacing ? 'ql-active' : ''}}&quot;        data-name=&quot;letterSpacing&quot;        data-value=&quot;2em&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-722bianjiqi_duanqianju {{formats.marginTop ? 'ql-active' : ''}}&quot;        data-name=&quot;marginTop&quot;        data-value=&quot;20px&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-723bianjiqi_duanhouju {{formats.micon-previewarginBottom ? 'ql-active' : ''}}&quot;        data-name=&quot;marginBottom&quot;        data-value=&quot;20px&quot;      &gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-clearedformat&quot; bindtap=&quot;removeFormat&quot;&gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-font {{formats.fontFamily ? 'ql-active' : ''}}&quot;        data-name=&quot;fontFamily&quot;        data-value=&quot;Pacifico&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-fontsize {{formats.fontSize === '24px' ? 'ql-active' : ''}}&quot;        data-name=&quot;fontSize&quot;        data-value=&quot;24px&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-text_color {{formats.color === '#0000ff' ? 'ql-active' : ''}}&quot;        data-name=&quot;color&quot;        data-value=&quot;#0000ff&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-fontbgcolor {{formats.backgroundColor === '#00ff00' ? 'ql-active' : ''}}&quot;        data-name=&quot;backgroundColor&quot;        data-value=&quot;#00ff00&quot;      &gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-date&quot; bindtap=&quot;insertDate&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon--checklist&quot; data-name=&quot;list&quot; data-value=&quot;check&quot;&gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}&quot;        data-name=&quot;list&quot;        data-value=&quot;ordered&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}&quot;        data-name=&quot;list&quot;        data-value=&quot;bullet&quot;      &gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-undo&quot; bindtap=&quot;undo&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-redo&quot; bindtap=&quot;redo&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-outdent&quot; data-name=&quot;indent&quot; data-value=&quot;-1&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-indent&quot; data-name=&quot;indent&quot; data-value=&quot;+1&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-fengexian&quot; bindtap=&quot;insertDivider&quot;&gt;&lt;/i&gt;      &lt;i class=&quot;editicon icon-charutupian&quot; bindtap=&quot;insertImage&quot;&gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}&quot;        data-name=&quot;header&quot;        data-value=&quot;{{1}}&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zitixiabiao {{formats.script === 'sub' ? 'ql-active' : ''}}&quot;        data-name=&quot;script&quot;        data-value=&quot;sub&quot;      &gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-zitishangbiao {{formats.script === 'super' ? 'ql-active' : ''}}&quot;        data-name=&quot;script&quot;        data-value=&quot;super&quot;      &gt;&lt;/i&gt;      &lt;!-- &lt;i class=&quot;editicon icon-quanping&quot;&gt;&lt;/i&gt; --&gt;      &lt;i class=&quot;editicon icon-shanchu&quot; bindtap=&quot;clear&quot;&gt;&lt;/i&gt;      &lt;i        class=&quot;editicon icon-direction-rtl {{formats.direction === 'rtl' ? 'ql-active' : ''}}&quot;        data-name=&quot;direction&quot;        data-value=&quot;rtl&quot;      &gt;&lt;/i&gt;    &lt;/view&gt;    &lt;editor      id=&quot;editor&quot;      class=&quot;readOnly?&#39;readOnly-container&#39;:&#39;ql-container&#39;&quot;      placeholder=&quot;{{placeholder}}&quot;      showImgSize      showImgToolbar      showImgResize      bindstatuschange=&quot;onStatusChange&quot;      read-only=&quot;{{readOnly}}&quot;      bindready=&quot;onEditorReady&quot;    &gt;&lt;/editor&gt;    &lt;!-- &lt;view&gt;        &lt;button bindtap=&quot;readOnlyChange&quot;&gt;{{readOnly ? '可写':'只读'}}&lt;/button&gt;    &lt;/view&gt;--&gt;  &lt;/view&gt;&lt;/template&gt;&lt;script&gt;Component({  properties: {    readOnly: {      type: Boolean,      value: false    },      placeholder:{      type: String,      value: &#39;开始输入...&#39;    },    html:{      type: String,      value: &#39;&#39;    }  },  data: {    formats: {},    bottom: 0,    _focus: false,    editorCtx:&#39;&#39;  },  observers: {    &#39;html&#39;: function (html) {      // 在 numberA 或者 numberB 被设置时，执行这个函数      if(this.editorCtx){        this.editorCtx.setContents({        html: html      })      }    }  },  attached: function() {},  ready: function() {},  methods: {    onEditorReady() {      const that = this      wx.createSelectorQuery().in(this)        .select(&#39;#editor&#39;)        .context(function(res) {          that.editorCtx = res.context          that.editorCtx.setContents({            html: that.data.html          })        })        .exec()    },    undo() {      this.editorCtx.undo()    },    redo() {      this.editorCtx.redo()    },    format(e) {      let { name, value } = e.target.dataset      if (!name) return      // console.log(&#39;format&#39;, name, value)      this.editorCtx.format(name, value)    },    onStatusChange(e) {      const formats = e.detail      this.setData({ formats })    },    insertDivider() {      this.editorCtx.insertDivider({        success: function() {          console.log(&#39;insert divider success&#39;)        },      })    },    clear() {      this.editorCtx.clear({        success: function(res) {          console.log(&#39;clear success&#39;)        },      })    },    removeFormat() {      this.editorCtx.removeFormat()    },    insertDate() {      const date = new Date()      const formatDate = `${date.getFullYear()}/${date.getMonth() +        1}/${date.getDate()}`      this.editorCtx.insertText({        text: formatDate,      })    },    insertImage() {      const that = this      wx.chooseImage({        count: 1,        success: function() {          that.editorCtx.insertImage({            src:              &#39;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1543767268337&amp;di=5a3bbfaeb30149b2afd33a3c7aaa4ead&amp;imgtype=0&amp;src=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20151031%2Ftooopen_sy_147004931368.jpg&#39;,            data: {              id: &#39;abcd&#39;,              role: &#39;god&#39;,            },            success: function() {              console.log(&#39;insert image success&#39;)            },          })        },      })    },  },})&lt;/script&gt;&lt;style lang=&quot;scss&quot; src=&quot;./rich-text.scss&quot;&gt;&lt;/style&gt;</code></pre><p>大家赶紧把第三方的富文本组件换过来吧<del>~</del></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;小程序富文本问题&quot;&gt;&lt;a href=&quot;#小程序富文本问题&quot; class=&quot;headerlink&quot; title=&quot;小程序富文本问题&quot;&gt;&lt;/a&gt;小程序富文本问题&lt;/h3&gt;&lt;p&gt;因为小程序用的不是html标签，，所以市面上的富文本编辑器都不适用，自己改起来也麻烦，大多都
+      
+    
+    </summary>
+    
+    
+      <category term="wxapp" scheme="https://callmesoul.cn/categories/wxapp/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>产品经理使用git发布/部署Axure原型</title>
+    <link href="https://callmesoul.cn/posts/45115/"/>
+    <id>https://callmesoul.cn/posts/45115/</id>
+    <published>2019-09-10T01:14:14.000Z</published>
+    <updated>2019-12-09T08:04:45.366Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>工作了几年了，也和不少产品打过交道发现了和产品交流上的一些问题，就是axure原型分享。</p><p>产品做完原型就要发给老板，设计师，开发看，每人发一份。然后后面原型有修改或添加之类的，又要重新每人发一份，别人又要经常接受一份。</p><p>看似很正常的传统工作流程，但效率有点低，而且接受的人，接受了多个版本以后会经常弄混乱，没有整理的人还要每次去找产品经理发的 原型放在了哪里？哪个才是最新的版本。</p><p>下面就介绍下git来解决以上问题。</p><h3 id="Axure"><a href="#Axure" class="headerlink" title="Axure"></a>Axure</h3><p>axure是一原型开发工具，做产品都都应该很熟悉。</p><p>其实前言说到的问题，一些新的做原型产品其实很好解决了，例如墨刀之类的，做完只需要发个预览链接到群里就行了，然后每次更新了，预览的链接也会跟着更新。但墨刀是收费，而且功能也相对Axure有点限制，axure的生态更完善，比如UI框架都有开源自己的Axure组件，所以大多产品还是比较喜欢Axure做原型多。</p><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>git 是一版本控制系统，一般用来管理开发代码居多，开发人员必会的了，产品经理可能少接触写。</p><p>windows 安装：<a href="https://www.cnblogs.com/wj-1314/p/7993819.html" target="_blank" rel="noopener">https://www.cnblogs.com/wj-1314/p/7993819.html</a></p><p>mac 安装：<a href="https://git-scm.com/book/zh/v2/起步-安装-Git" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git</a></p><p>安装完打开命令行初始化</p><p>windows : win键 + R键 –&gt; 输入<code>cmd</code> 回车 </p><pre><code>git config --global user.name &quot;你的名字&quot;git config --global user.email &quot;你的邮箱&quot;</code></pre><h3 id="Gitee-Github"><a href="#Gitee-Github" class="headerlink" title="Gitee,Github"></a>Gitee,Github</h3><p>可以理解为使用git的文件托管平台</p><p>这里推荐gitee，国内快。</p><p>网址：<a href="https://gitee.com/" target="_blank" rel="noopener">https://gitee.com/</a></p><p>先去注册个账号，免费的放心。</p><h3 id="开始使用gitee-部署-axure项目-github等其他托管平台相似"><a href="#开始使用gitee-部署-axure项目-github等其他托管平台相似" class="headerlink" title="开始使用gitee 部署 axure项目 github等其他托管平台相似"></a>开始使用gitee 部署 axure项目 github等其他托管平台相似</h3><ol><li>登陆后创建个仓库</li></ol><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567589996040.png" alt="1567589996040"></p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567590260125.png" alt="1567590260125"></p><ol start="2"><li><p>创建一个<code>index.html</code>文件</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567591236721.png" alt="1567591236721"></p><p><img src="C:%5CUsers%5CBenz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567591334990.png" alt="1567591334990"></p></li><li><p>开始仓库pages服务</p></li></ol><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567591427074.png" alt="1567591427074"></p><p>   <img src="C:%5CUsers%5CBenz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567591471259.png" alt="1567591471259"></p><p>   点启动</p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567591517421.png" alt="1567591517421"></p><p>   需要等一会时间</p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567591557067.png" alt="1567591557067"></p><p>   部署完后就可以访问下地址 <a href="https://callmesoul.gitee.io/" target="_blank" rel="noopener">https://你的用户名.gitee.io</a></p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567591916474.png" alt="1567591916474"></p><p>   其实就是我们刚创建的<code>index.html</code>内容</p><ol start="4"><li><p>把gitee项目拉下来</p><p>复制gitee项目地址</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567593069749.png" alt="1567593069749"></p></li></ol><p>   打开你要放置项目的目录右键，右键打开命令行</p><p>   windows用户可以右键选择<code>Git Bash here</code></p><p>   输入 <code>git clone 刚复制的项目地址</code></p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567593148050.png" alt="1567593148050"></p><p>   完成后就会多个你的项目名的文件夹</p><ol start="5"><li><p>设置 Axure 项目导出 到本地的 gitee 项目文件夹地址</p><p>打来Axure, 选择 <code>发布</code> -&gt; <code>生成html</code></p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567644410702.png" alt="1567644410702"></p><p>然后输出目标文件夹我们就选刚创建的gitte本地文件夹，然后考虑我我们后面会有多个项目，于是乎我们就在里面新建一个文件夹去当前项目，下次有新项目了就只需在里面再创建个心文件夹放就可以了</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567644652834.png" alt="1567644652834"></p><p>弄完此时就可以看到可以访问打方才输出的html axure原型了</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567644792908.png" alt="1567644792908"></p></li></ol><p>   但此时只是本地或局域网可以问题，你发给别人，别人看不到的。</p><p>   而且要一直开着机。</p><p>   下面我们就要把gitee本地文件夹中里面我们刚才新加的内容同步上gitee仓库里，这样就可以通过上面的域名访问了。</p><ol start="6"><li><p>把本地的gitee文件夹同步到gittee仓库</p><p>回到本地gitee文件夹的命令行</p><p>输入</p><pre><code>git add *</code></pre><p>意思就是添加所有文件</p><p>再输入</p><pre><code>git commit -m 备注信息 </code></pre><p>就是提交修改的意思 ，后面的备注信息是备注你每次提交修改了什么内容一个提示（自定义）</p><p>最后输入</p><pre><code>git push</code></pre><p>意思就是推送到线上对应仓库，</p><p>第一次推送时会需要填写gitee的账号密码，因为要知道那你仓库是属于你的才可以推送，不然每个人都可以往你仓库推送那就麻烦了。</p><p><img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567645656523.png" alt="1567645656523"></p></li></ol><p>   然后回到gittee仓库的pages服务页面更新下就可以访问了</p><p>   然后就可以试下访问线上的域名了。</p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567646417382.png" alt="1567646417382"></p><p>   还记得域名么？</p><p>   <code>https://你的用户名.gitee.io/</code></p><p>   你直接访问这个是没变的，因为我们的文件放在了一个目录下了。所有要加上目录名，然后Axure的导航页是<code>start.html</code></p><p>   于是你要访问的域名就是</p><p>   <code>https://你的用户名.gitee.io/项目文件夹名/start.html</code></p><p>   <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/1567646603270.png" alt="1567646603270"></p><p>   最后大功告成，可以把url发给各位老板，开发者，设计师了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;工作了几年了，也和不少产品打过交道发现了和产品交流上的一些问题，就是axure原型分享。&lt;/p&gt;
+&lt;p&gt;产品做完原型就要发给老板，设计师，开
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>小程序开发-PC网页端扫小程序码登陆解决方案</title>
+    <link href="https://callmesoul.cn/posts/22147/"/>
+    <id>https://callmesoul.cn/posts/22147/</id>
+    <published>2019-09-10T01:13:14.000Z</published>
+    <updated>2019-12-09T08:04:45.372Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近做了一个小程序<code>我爱阅读</code>,是一款针对小学生阅读习惯培养的一个小程序工具，有兴趣的可以了解下。</p><p>小程序在学校反映不错，于是有了老师提出需要PC网页端的需求。因为老师平时办公一般在电脑上，在电脑上给学生布置阅读作业，会更方便得多，而移动小程序端对于老师来说更像一个辅助工具，平时用不到电脑时可以通过小程序操作。而且学生的阅读数据再网页展示也方便老师在课堂上给学生投影展示。</p><p>于是乎就有了网页端的需求。</p><h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><p>这是要做网页端最开始要解决的问题。</p><p>一开始有一下解决方案</p><ol><li>初始化账号密码，网页通过账号密码登陆</li><li>微信开发平台，公众号和小程序绑定，通过公众平台的网页二维码授权登陆。</li></ol><p>但以上两种方法都不能很好地解决需求：</p><ul><li>第一种，初始化账号密码，秘密好办可以统一初始密码，但用什么作为账号呢？微信用户名，openid不可能，用户手机又不是全都用。就算解决了初始化账号密码问题，安全度也不高。</li><li>第二种，有个缺陷就是用户必须关注了绑定的公众号后再进入小程序，才可以实现。我们现在主打的是小程序，公众号只是运行的一个中间平台。而且很多新用户是通过小程序分享的链接进入，完全没法先去关注公众号。所以这种方法也不适合。</li></ul><h3 id="转转游戏"><a href="#转转游戏" class="headerlink" title="转转游戏"></a>转转游戏</h3><p>以上两种方法行不通，于是网上找各种方法。最终找到了<a href="http://game.zhuanzhuan.com/" target="_blank" rel="noopener">转转游戏</a>，就是通过扫描小程序码登陆的，体验了一下，大概也了解了方法。</p><h3 id="扫小程序码登陆逻辑"><a href="#扫小程序码登陆逻辑" class="headerlink" title="扫小程序码登陆逻辑"></a>扫小程序码登陆逻辑</h3><ol><li>首先在小程序添加一个网页登陆的页面，页面接收一个登陆id（loginId）</li><li>网页端展示小程序网页登陆页的小程序码，附带登陆id（loginId）</li><li>用户通过扫描网页上的小程序码，手机微信进入相应小程序的网页登陆页，设置确认登陆和取消登陆按钮，同时网页端扫面后应开启socket或者定时去请求后台，当前登陆id(loginId)的使用状态。<ul><li>如果loginId使用后且确认登陆，应一起返回用户的token，网页就可以使用该token去当前单用户去请求接口了</li><li>如果用户取消登陆或超时则网页提示相应信息，且重新获取新的小程序码。</li></ul></li></ol><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这样可以完美地使用小程序当前用户信息去登陆网页端，用户不用输入账号密码，也不用计账号密码，直接用微信扫一扫就可以登陆，真实方便简洁。完美~~</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近做了一个小程序&lt;code&gt;我爱阅读&lt;/code&gt;,是一款针对小学生阅读习惯培养的一个小程序工具，有兴趣的可以了解下。&lt;/p&gt;
+&lt;p&gt;小程序在学校反映不错，于是有了老师提出需要PC网页端的需求。因为老师平时办公一般在电脑上，在电脑上给学生布置阅读作业，会更方便得多，而移动
+      
+    
+    </summary>
+    
+    
+      <category term="wxapp" scheme="https://callmesoul.cn/categories/wxapp/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目</title>
+    <link href="https://callmesoul.cn/posts/36621/"/>
+    <id>https://callmesoul.cn/posts/36621/</id>
+    <published>2019-02-10T01:13:14.000Z</published>
+    <updated>2019-12-09T08:04:45.375Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="今天介绍的工具是wecos"><a href="#今天介绍的工具是wecos" class="headerlink" title="今天介绍的工具是wecos"></a>今天介绍的工具是<a href="https://github.com/tencentyun/wecos" target="_blank" rel="noopener">wecos</a></h3><ul><li><h2 id="原生小程序"><a href="#原生小程序" class="headerlink" title="原生小程序"></a>原生小程序</h2></li></ul><p>原生的小程序直接根据wecos的文章操作即可，wecos提供了上传本地资源文件到cos、替换小程序的引用本地路径为上传路径等。</p><p>这里不作详细说明，主要介绍webpack打包的小程序项目。</p><p>因为原生写起来很不方便。</p><ul><li><h2 id="webpack小程序打包项目"><a href="#webpack小程序打包项目" class="headerlink" title="webpack小程序打包项目"></a>webpack小程序打包项目</h2><p>最好是开发完再来进行这一步，前期专心开发。</p><p>我前期开发时，引用静态资源用的是相对路径，用的绝对路径应该也可以的。</p><p>项目开发完后</p><ol><li><p>webpack设置打包后的cdn地址, webpack rules选项：</p><pre><code class="javascript">{        test: /\.(png|jpg|jpeg|gif|svg)$/,        use: {          loader: &#39;file-loader&#39;,          options: {            name: &#39;/[path][name].[ext]&#39;,            publicPath: function (file) {              if(isProduction){//判断是否生产环境，自己判断咯。                if(file.indexOf(&#39;tabbar&#39;)&gt;=0){//如果有tabbar的，tabbar用一个tabbar的文件夹装起来，因为tabbar图片只支持本地。                  return file;                }                else{                  return &#39;https://xxx-1234567.cos.ap-guangzhou.myqcloud.com/&#39;+file;//你的腾讯云cos bucket的域名。                }              }else{                return file;              }            }          }        },      },</code></pre></li><li><p>安装<code>wecos</code></p><p><code>npm install -g wecos</code></p></li><li><p>跟目录创建<code>wecos.config.json</code>文件</p></li><li><p>填写<code>wecos.config.json</code> 配置</p><pre><code class="javascript">{  &quot;appDir&quot;: &quot;./dist/assets&quot;,  &quot;cos&quot;: {    &quot;secret_id&quot;: &quot;xxxxx&quot;,    &quot;secret_key&quot;: &quot;xxxxx&quot;,    &quot;bucket&quot;: &quot;xxx-1234567&quot;,//bucker-appid    &quot;region&quot;: &quot;ap-guangzhou&quot;, //创建 bucket 时选择的地域简称    &quot;folder&quot;: &quot;/assets&quot; //资源存放在 bucket 的哪个目录下  },  &quot;uploadFileSuffix&quot;: [&quot;.jpg&quot;,&quot;.png&quot;,&quot;.gif&quot;,&quot;.webp&quot;,&quot;.svg&quot;],  &quot;uploadFileBlackList&quot;: [//不上传的图片，填tabbar的目录    &quot;./dist/assets/images/tabbar&quot;,  ]}</code></pre></li><li><p>在根目录运行<code>wecos</code>即可。</p></li></ol></li></ul><ul><li><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></li><li><p>为什么不用<code>webpack</code>的 <code>publicPath</code> 而用<code>file-loader</code>的<code>publicPath</code> ？</p><p>因为<code>webpack</code>的 <code>publicPath</code>只支持字符串，一但改成线上域名，所有静态资源的前缀都会变成cdn域名。而小城的tabbar并不支持网络图片，base64也不支持，只支持本地图片。</p><p>这时我们就用<code>file-loader</code>的<code>publicPath</code> ，支持函数且返回文件名，可以写条件去过滤掉tabbar的文件。</p><p>使tabbar文件使用本地的，而其他使用线上cdn域名的文件。</p></li><li><p>为什么要用<code>wecos</code>？</p><p>当然你也可以不用自己，本地打包后自己手动上传到cos后台。</p><p>然后删除了本地的图片文件（除了tabbar的图片）。</p><p>然后开发者工具再上传代码。</p><p>你会发现这步骤很累赘。</p><p>使用<code>wecos</code>后，我们打包后只需要跑一下<code>cos</code>就可以自动上传本地的上cdn，且自动删除本地的（tabbar图片除外）。</p><p>是不是方便多了？</p><p>赶紧在你项目用上把！</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;今天介绍的工具是wecos&quot;&gt;&lt;a href=&quot;#今天介绍的工具是wecos&quot; class=&quot;headerlink&quot; title=&quot;今天介绍的工具是wecos&quot;&gt;&lt;/a&gt;今天介绍的工具是&lt;a href=&quot;https://github.com/tencentyun/
+      
+    
+    </summary>
+    
+    
+      <category term="wxapp" scheme="https://callmesoul.cn/categories/wxapp/"/>
+    
+    
+  </entry>
+  
+</feed>

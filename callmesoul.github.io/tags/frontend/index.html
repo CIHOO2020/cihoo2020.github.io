@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>标签: frontend | CallMeSoul</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="description" content="web前端开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CallMeSoul">
+<meta property="og:url" content="https://callmesoul.cn/tags/frontend/index.html">
+<meta property="og:site_name" content="CallMeSoul">
+<meta property="og:description" content="web前端开发">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="CallMeSoul">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="icon" href="/images/icon.png">
+  
+  
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+  <!-- 百度站長統計-->
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f4e4f3d9d2532faa71e451f2ab41cbb6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  
+  <meta name="sogou_site_verification" content="hHwAVZfHTs"/>
+  <script data-ad-client="ca-pub-2041041323733631" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="CallMeSoul" type="application/atom+xml">
+</head>
+
+<div class="main height-100 flex flex-v">
+  <div class="phone-header">
+    <a to="/home" class="mobile-logo" > <img src="/images/logo.svg" /> </a>
+    <a class="menu iconfont icon-menu" onclick="toggleMenu()"></a>
+  </div>
+  <div class="main-top flex flex1">
+    <nuxt-link  to="/home" class="mobile-nav-btn iconfont icon-fenlei"></nuxt-link>
+    <!--主页上左部分-->
+    <div class="height-100 main-left  flex flex-v">
+      <div class="main-left-top flex1">
+        <a class="logo">
+          <img src="/images/logo.svg" />
+          <div class="sub-title">Front-end developer</div>
+        </a>
+        <nav class="nav">
+
+  
+    
+      <a title="首页"  alt="首页"  v-for="(menu,index) in menus" href="/">
+        <div class="icon"><i class="iconfont icon-home"></i></div>
+        <div class="name">
+          <div class="cnname">首页</div>
+          <div class="enname">Home Page</div>
+        </div>
+      </a>
+
+    
+      <a title="归档"  alt="归档"  v-for="(menu,index) in menus" href="/archives">
+        <div class="icon"><i class="iconfont icon-archives"></i></div>
+        <div class="name">
+          <div class="cnname">归档</div>
+          <div class="enname">Archive Page</div>
+        </div>
+      </a>
+
+    
+      <a title="关于我"  alt="关于我"  v-for="(menu,index) in menus" href="/about">
+        <div class="icon"><i class="iconfont icon-about"></i></div>
+        <div class="name">
+          <div class="cnname">关于我</div>
+          <div class="enname">About Me</div>
+        </div>
+      </a>
+
+    
+  
+
+  <!--<a href="/link/">
+    <div class="icon"><i class="iconfont icon-link"></i></div>
+    <div class="name">
+      <div class="cnname">友情链接</div>
+      <div class="enname">Friends Web Link</div>
+    </div>
+  </a>-->
+</nav>
+
+      </div>
+
+      <view class="website-msg">
+        <div class="beian"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备15053557号</a></div>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <div class="beian"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+        <div class="theme-drsc">PowerBy:<a href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
+        <div class="copyright">Copyright &#169 <a href="mailto:d.guangying@foxmail.com">2019 CallMeSoul</a> </div>
+      </view>
+
+      <div class="social flex flex-align-center ">
+        
+          
+            
+              <a class="flex1 text-center" href="https://weibo.com/tellmesoul/home?wvr=5" target="_blank" title="weibo" alt="weibo">
+                <div class="icon relative">
+                  <i class="iconfont icon-weibo"></i>
+                </div>
+              </a>
+            
+          
+            
+              <a class="flex1 text-center" href="https://github.com/callmesoul" target="_blank" title="GitHub" alt="GitHub">
+                <div class="icon relative">
+                  <i class="iconfont icon-github"></i>
+                </div>
+              </a>
+            
+          
+            
+          
+        
+      </div>
+    </div>
+    <!--主页上右部分-->
+    
+  
+    
+    <div class="project-card project-card-continuous">
+  
+    <div class="imgWrap">
+      <img src="../images/ae.png" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/5/" class="title">AE渲染成视频第一句语音渲染变声问题</a>
+    <section class="desc">
+  背景最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。
+解决方案这个问题找了很久一开始以为是AI生成的语音音频有问题，几重新生成了次，换个格式都不行，把后面正常语音替换第一句语音，发现还是一样，确认和音频无关。然后我才猜想是不是渲染的格式或者用来渲染的某些选项问题呢？后来试了很多都不行。最后想为什么只有第一句怕的，然后我把第一句语音删了，发现不怕了，可能就是因为第一句太靠前了，视频刚开始就有一段语音音频，然后我尝试把吧原来的第一段语音音频，拖后面一点，最后没玩解决的！记录下，也方便遇到同样问题的人
+
+
+</section>
+    <p class="sub">6月 30, 2020</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+    <div class="imgWrap">
+      <img src="../images/sequelize.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/4/" class="title">sequelize 问题汇总</a>
+    <section class="desc">
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+</section>
+    <p class="sub">6月 17, 2020</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/100000/" class="title">webpack使用html-loader引入html模板</a>
+    <section class="desc">
+  前言最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。
+vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。
+直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:
+
+平时用惯了es6语法，要写回es5,要经常查文档
+不能使用预处理样式(less,sass)，这个效率大打折扣啊
+手动页面优化(压缩，去除注释,检测语法)
+
+本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。
+本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。
+于是乎就寻找各种方案了
+html 引入模板
+iframe
+首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。
+
+模板引擎
+这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。
+
+一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。
+第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。
+
+
+html-loader 的  interpolate
+html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。
+首先要在webpack rules里加上加一条处理html的规则
+{
+      test: /\.html$/,
+      use: {
+        loader: &#39;html-loader&#39;,
+        options: {
+          // 处理html 引用的图片
+          attrs: [&#39;img:src&#39;],
+          // 开启 html模板功能
+          interpolate: true
+        }
+      }
+    }
+
+
+   然后在html文件就可以直接引入其他html模板了
+   &lt;!DOCTYPE html&gt;
+   &lt;html&gt;
+
+   &lt;head&gt;
+     &lt;title&gt;index&lt;/title&gt;
+     ${require(&quot;../layouts/head.html&quot;)}
+   &lt;/head&gt;
+     ${require(&quot;../layouts/header.html&quot;)}
+   &lt;body&gt;
+
+     ${require(&quot;../layouts/footer.html&quot;)}
+   &lt;/body&gt;
+
+   &lt;/html&gt;
+   简单又灵活，Get it！
+​        最后也分享下自己配置好手脚架：webpack-multiple-pages-template
+
+
+</section>
+    <p class="sub">12月 4, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/12005/" class="title">使用headless cms + ssr渲染框架来开发网站</a>
+    <section class="desc">
+  前言由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。
+CMS根据以前的经验无非就是前端写完界面，然后找一个cms去套，但由于国内的cms框架（duxcms我之前一直用,dedecms.phpcms,wordpress）已经很难满足了现在的客户需求了。
+比如做个网站，一开始以为做个网站就行，谁知道还要做小程序，App等等，但之前的cms都不带api，即使有写带比如wordpress，api接口也是问题多多的。
+然后可以看国内开发的cms，即使的新开发新产品，也是比较保守的，还是跟以前的cms差不多，无非就多提供了api 供用户调用，然后后台操作界面交互也不咋地，所以很难找到一款非常合适的cms框架。
+​        而我感觉国外的就比较思想超前敢冒险尝试，既然api方式通用，那我就专门做提供api和后台内容操作的cms，数据和界面教还给前端，自己爱拿什么数据那什么数据，唉什么布局怎么布局，前后分离。然后cms就专心做好内容管理和api接口的设计就可以了。
+虽然这个想法早期还有点冒险，比较像这种前后端分离的spa还有有很多问题的
+
+做网站的人很看重的seo问题
+首屏加载速度问题
+
+问题虽然有，但方向应该是对的，就看怎么解决这些问题而已。
+为什么写网站也要用spa​        而且平时在公司或者自己写前端，写法习惯都已经从jq过渡到了前后端分离框架vue、react、angular等写法的习惯了。然后接了一个私单，又要突然转回去以前那种jq操作dom的 时代。
+这个过程实在难受，而且效率也低。
+有没有办法开发个网站也能使用现代化的开发流程和各种工具，然后解决seo，和首屏加载慢等spa问题的。
+于是乎后面出现了各种ssr服务端渲染框架，去帮spa应用解决这些问题。
+SSR 服务端渲染框架 使用SSR（也称为“通用”或“同构”）模式，将使用Node.js服务器将基于Vue组件的HTML传递给客户端，而不是纯JavaScript。   — nuxt.js
+目前主流有两个:
+
+vue 架构的 nuxt
+react 机构的 next
+
+两个都是开箱即用的，大大降低了开发部署的难度。
+主要用那个技术栈就用那个框架吧，react好像还有个 gatsby好像挺好用，但我不主要react技术栈 ，所以就没深入了解了，看了文档和别人介绍感觉挺不错的，react技术栈的同学可以去了解下。
+前端的开发框架我们选好了，然后我们就要选个后端的cms 去管理数据，提供api接口调用数据了。
+我们先来想一下我们期待的cms是怎样的:
+
+内容可定制化程度高，因为网站有各种功能，比如轮播的海报，收集用户表单，新闻站的文章，画册张的相册等。
+
+后台交互良好，至少交付给客户时，客户很快有会用。
+
+良好的api接口设计
+
+对gatsby友好
+
+提供全平台sdk
+
+
+headless cms 翻译一下就是只提供纯api的cms，不包含任何客户端代码，也就是老子只负责api你手机，还是网页想咋用咋用。 —  摘抄自北方蜘蛛
+Contentful你搜headless cms，然后到处都能看得到Contentful
+来说说它的强大之处：
+
+API-First CMS to Power All Digital Products | Contentful简单翻译就是第一个只提供api的cms吧，先做有经验优势嘛
+
+免费，不用自己部署，但有一定限制
+
+Serverless 架构部署，可能就是用了serverless 才有可能有免费的提供用吧
+
+提供restful 接口 + graaphql 接口
+
+支持多站点，多项目，但需另外收费。
+
+
+可以说contentful是个先进技术集合的cms，各种现代化技术集合一体。
+然后操作界面也比较简单简洁，感觉是挺不错的，操作还是流畅的，还提供多角色共同管理。
+
+但作为接私单来开发网站还是有些问题的:
+
+不开源，所以不可以自己部署。你做完交接，要客户登陆别人的网站去管理，这样不大好吧。
+
+后台管理不支持中文，怕客户看不懂，不好操作。
+
+不收费的有限制，感觉以后也会慢慢变成收费的，收费项又确实比较贵
+
+暂时没看到内容的导出与导入
+
+
+strapi我试了挺久的一个，功能也简单，界面也简洁。
+优势:
+
+开源免费，可以自己部署
+
+简单又便捷，添加内容模型，添加内容，然后设置用户对这个内容接口的权限就好了
+
+规范的restful接口，且接口信息简洁，没有返回其他很多没有必要的东西
+///banners
+[
+    {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;轮播海报&quot;,
+        &quot;link&quot;: &quot;sadasdasdasd&quot;,
+        &quot;created_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;image&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;teacher-avatar.gif&quot;,
+            &quot;hash&quot;: &quot;466289966ffd4599afd646ede29bac40&quot;,
+            &quot;sha256&quot;: &quot;kgeU5VQ-bYTbtNlEwoTi_4LPykpIPxrtZLtlL-ehyAY&quot;,
+            &quot;ext&quot;: &quot;.gif&quot;,
+            &quot;mime&quot;: &quot;image/gif&quot;,
+            &quot;size&quot;: &quot;1.48&quot;,
+            &quot;url&quot;: &quot;/uploads/466289966ffd4599afd646ede29bac40.gif&quot;,
+            &quot;provider&quot;: &quot;local&quot;,
+            &quot;provider_metadata&quot;: null,
+            &quot;created_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;,
+            &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;
+        }
+    }
+]
+
+后台字段布局可自由拖动布局
+
+有国际化，虽然中文的有些翻译有些蹩脚，有些也没翻译，但总比全英文好啊
+
+也提供Graphql接口
+感觉strapi虽简洁，简单，但功能齐全
+
+
+个人感觉的缺点：
+
+不支持多站点多项目
+比如我想自己搭一个数据管理中心，给个各个网站使用，每个网站都有新闻内容模块
+这时候我不能建一个新闻内容模块一起用，这样数据就混乱了。只能布置多个strapi或者新建多个新闻内容模块，以区分不同网站的新闻内容模块。
+其实有考虑过根据新闻模块关联用户、根据用户去区分新闻模块对应的数据，这是一个可行的方法。但只只对没有用户系统的站点或项目，不然就又轮到用户信息混乱了。
+但是用户又可以根据用户组去区分，感觉还是可以实现的-&gt;
+根据添加不同用户组然后添加用户，去区分不同的网站，从而去同一个内容模型拿对应的内容数据
+但说回来，要不同项目用统一个模型，两个项目的统一模型要高度统一，不然还是有很多问题的。
+期待strapi后面可以有站点或者项目的概念，在站点或项目下，再去新建不同的内容模型，这就完美了。
+
+
+ghost我用过算最好的博客系统吧，性能飞跃，后台管理、写作交互,体验都完美，也有很多很漂亮的，后来因为服务器到期了，续费太贵了，于是才把博客迁移到了hexo+github pages 免服务器啊，还可以https，当然速度和原来的没法比啊。而且你github 搜 nodejs 的 headless cms 第一名就是ghost,第二是``strapi`
+个人感觉的优点:
+
+简单简洁，为博客而生，主要就添加文章或页面
+完美的写作体验，完美兼容markdown和html 写作,也可以一篇文章即html又有markdown
+主题精美，速度飞快，后台操作也很友好
+即提供服务端渲染，也提供api
+代码开源，却已盈利
+完善的开发手脚架，不仅可以初始项目，更包括集成 Let&#39;s Encrypt 自动帮你生成ssl证书，配置nginx ssl配置,等等……
+
+个人感觉的缺点:
+
+主要专注于博客，对于一些网站的其他功能还是显得有些不足。可扩展性不强。
+虽提供api，但不是restful 规范的
+主题虽精美，但相对于wordpress 还是相对较少的
+
+
+
+</section>
+    <p class="sub">11月 25, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/51837/" class="title">使用HTTPCODE替换自定义CODE</a>
+    <section class="desc">
+  | 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。
+但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。
+而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：
+{
+    data:{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+    },
+    engine:&#39;.....&#39;,
+    headers:{//....},
+    request:{//....},
+    status:200,
+    statusText:&quot;request:ok&quot;
+}
+而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:
+response.use(
+  (response) =&gt; {
+    if(response.data.rcode===405){
+      //统一处理某个自定义错误code
+    }else{
+      return response.data;//返回我们要用的数据
+      promise.resolve();
+    }
+  },
+  (err) =&gt; {
+    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+    //发生网络错误后会走到这里
+    if(err.status&gt;=500){
+       //统一处理某个httpcode 500以上错误
+    }
+  }
+);
+使用了拦截器后我们正常得到的数据格式如下:
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+},
+但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个if(res.data.rcode==300)。能不能有办法优化下。
+后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。
+先来说说httpcode相对于自定义code的好处
+规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？
+对于后端开发来说使用httpcode可以大大增加效率，例如：
+
+
+使用自动code时输出数据
+//成功时
+this.body={
+  data:{
+      userList:[{id:1}]
+  },
+  rcode:300,
+  msg:&#39;成功&#39;
+}
+//失败时
+this.body={
+  rcode:400,
+  msg:&#39;失败&#39;
+}
+
+使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：
+//成功时
+this.body={
+    userList:[{id:1}]
+}
+//失败时
+this.status=400;
+this.body={
+    msg:&#39;失败&#39;
+}你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊
+
+
+  对于前端开发来说使用httpcode也可以大大增加效率，例如：
+  拦截器就不用去判断自定义code 而直接判断httpcode：
+  response.use(
+    (response) =&gt; {
+      if(response.data.rcode===405){
+        //统一处理某个自定义错误code
+      }else{
+        return response.data;//返回我们要用的数据
+        promise.resolve();
+      }
+    },
+    (err) =&gt; {
+      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+      //发生网络错误后会走到这里
+      if(err.status===400){
+        //统一处理某个httpcode 错误
+      }else if(err.status&gt;=500){
+         //统一处理某个httpcode 500以上错误
+      }
+    }
+  );
+然后再来对比下使用httpcode和使用自定义code的数据个操作：
+//自定义code时返回数据
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+}
+
+//httpcode时返回数据
+{
+        userList:[
+                {id:1}
+            ]
+},
+
+
+//自定义code时操作
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+
+
+//httpcode时操作
+let res=await this.api.getUserList();
+if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.userList;
+}
+虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/12004/" class="title">坑吭记录</a>
+    <section class="desc">
+  
+苹果IOS系统分享配置失败，签名错误
+
+原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。
+解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。
+// assign.js
+
+//ios端 histiry 模式兼容问题
+
+const location = global.location
+const u = navigator.userAgent 
+let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URL
+
+export default {
+  beforeRouteEnter(to, from, next) {
+    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过
+      // 此处不能使用location.replace
+        location.assign(baseUrl+to.fullPath)
+      //location.replace (baseUrl+to.fullPath) 
+      //重定向时用location.replace 其他用location.assign
+    } else {
+      next()
+    }
+  }
+}
+
+IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。
+
+原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。
+解决：
+// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复
+{
+    data:{
+        //...
+        handler: function (e) {
+          e.preventDefault()
+        }
+    },
+    methods:{
+        /* 解决iphone页面层级相互影响滑动的问题 */
+      closeTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 阻止默认事件
+      },
+      openTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 打开默认事件
+      },
+    }
+}
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/794/" class="title">Flex 布局问题汇总</a>
+    <section class="desc">
+  flex布局使用起来很方便\n而且现在的浏览器也基本支持了大家可放心用起来。但用了flex总会有一些小问题这里总结下再使用flex时遇到的问题：
+flex下 input 宽度无法自适应：   &lt;div class=&#39;flex&#39;&gt;        
+    &lt;input class=&#39;flex1&#39;&gt;
+    &lt;button&gt;提交&lt;/button&gt;
+  &lt;/div&gt;
+以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。
+解决方法：
+添加min-width:0;网上说的，但试了下并不行
+
+添加div包裹即可（推荐）
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;
+
+                &lt;button&gt;提交&lt;/button&gt;
+                    &lt;/div&gt;
+                      ```
+### flex 下`text-overflow: ellipsis;`不生效
+```javascript
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;label&gt;标题&lt;/label&gt;
+                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```
+
+
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>
+  
+    
+    <div class="project-card project-card-continuous">
+  
+  <div class="ctnWrap">
+    <a href="/posts/52063/" class="title">REM自适应</a>
+    <section class="desc">
+  designSize=640 为设计稿大小
+htmlFontSize=100为当设计稿为640px时html font-size为100px
+(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)
+此时1px=0.01rem;
+ (function(doc, win, designSize,htmlFontSize) {
+        var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        docEl.dataset.dpr = dpr;
+        var recalc = function() {
+          var width = docEl.clientWidth;
+          if (width / dpr &gt; designSize) {
+            width = designSize * dpr;
+          }
+          docEl.dataset.width = width;
+          docEl.dataset.percent = htmlFontSize * (width / designSize);
+          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window,640,100);
+      ```
+"
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>
+  
+  
+
+
+  </div>
+  <div class="main-bottom">
+    <div class="music flex flex-pack-justify flex-align-center">
+      <div class="control">
+        <a onclick="preSong()"><span class="iconfont icon-shangyishou"></span></a>
+        <a onclick="playControl()"><span class="iconfont play-icon icon-kaishi1"></span></a>
+        <a onclick="nextSong()"><span class="iconfont icon-xiayishou-copy"></span></a>
+      </div>
+      <div class="msg">
+        <span class="time"></span>
+        <div class="line" ref="progress-line-warp">
+          <div class="song-msg">周杰伦 - 说好不哭</div>
+          <!--<div class="current-line" ref="progress-line">
+            <a tag="a" class="target" v-on:mousedown.prevent="mousedown"></a>
+          </div>-->
+        </div>
+        <span class="all-time"></span>
+      </div>
+      <div class="right-control">
+        <a class="order-btn flex flex-align-center" onclick="toogleShowMusicList()">
+          <span class="iconfont icon-ttpodicon"></span>
+          <span class="number flex1">3</span>
+        </a>
+      </div>
+      <audio id="audio" class="mian-audio" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+  <div class="music-list">
+    <div id="musiclist">
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 说好不哭" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3" onclick="changePlayIndex(0)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">说好不哭 - 周杰伦</span>
+        </a>
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 爱在西元前" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E7%88%B1%E5%9C%A8%E8%A5%BF%E5%85%83%E5%89%8D%20%5Bmqms2%5D.mp3" onclick="changePlayIndex(1)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">爱在西元前 - 周杰伦</span>
+        </a>
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 龙拳" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E9%BE%99%E6%8B%B3%20%5Bmqms2%5D.mp3" onclick="changePlayIndex(2)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">龙拳 - 周杰伦</span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  var playIndex = localStorage.getItem('playIndex') ? parseInt(localStorage.getItem('playIndex')) : 0
+  let musics = $('.music-item')
+  musics.eq(playIndex).addClass('active')
+  var audio = document.getElementById("audio");
+
+  $('.song-msg').html(musics[playIndex].dataset.name)
+  audio.src = musics[playIndex].dataset.url
+
+
+  var playbtn = document.getElementsByClassName("play-icon")[0];
+  var playing = false;
+  audio.loop = false;
+  audio.addEventListener('ended', function () {
+    playbtn.classList.remove("icon-kaishi")
+    playbtn.classList.add("icon-kaishi1")
+    playing = false
+  }, false);
+  audio.addEventListener('play', function () {
+    playbtn.classList.remove("icon-kaishi1")
+    playbtn.classList.add("icon-kaishi")
+    playing= true
+  }, false);
+  audio.addEventListener('pause', function () {
+    playbtn.classList.remove("icon-kaishi")
+    playbtn.classList.add("icon-kaishi1")
+    playing = false
+  }, false);
+  function toogleShowMusicList() {
+    var musiclist = document.getElementsByClassName("music-list")[0];
+    if(musiclist.className.indexOf("active") === -1){
+      musiclist.classList.add("active")
+    }else{
+      musiclist.classList.remove("active");
+    }
+  }
+
+  function playControl() {
+    if(playing){
+      audio.pause()
+    }else{
+      audio.play()
+    }
+  }
+
+  function changePlayIndex(index) {
+    if(playIndex !== index){
+      localStorage.setItem('playIndex',index)
+      playIndex = index
+      musics.removeClass('active')
+      musics.eq(playIndex).addClass('active')
+      $('.song-msg').html(musics[playIndex].dataset.name)
+      audio.src = musics[playIndex].dataset.url
+      audio.play()
+    }else{
+      playControl()
+    }
+  }
+
+  function preSong() {
+    var index
+    if(playIndex === 0){
+      index = musics.length - 1
+    }else{
+      index = playIndex - 1
+    }
+    changePlayIndex(index)
+  }
+
+  function nextSong() {
+    var index
+    if(playIndex === musics.length - 1){
+      index = 0
+    }else{
+      index = playIndex + 1
+    }
+    changePlayIndex(index)
+  }
+
+  function toggleMenu() {
+    var mainLeft = $('.main-left')
+    if(mainLeft.hasClass('active')){
+      mainLeft.removeClass('active')
+      $('.menu').removeClass('icon-close')
+      $('.menu').addClass('icon-menu')
+    }else{
+      mainLeft.addClass('active')
+      $('.menu').removeClass('icon-menu')
+      $('.menu').addClass('icon-close')
+    }
+  }
+</script>

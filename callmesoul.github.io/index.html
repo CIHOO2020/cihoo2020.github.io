@@ -1,0 +1,4089 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CallMeSoul</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="description" content="web前端开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CallMeSoul">
+<meta property="og:url" content="https://callmesoul.cn/index.html">
+<meta property="og:site_name" content="CallMeSoul">
+<meta property="og:description" content="web前端开发">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="CallMeSoul">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="icon" href="/images/icon.png">
+  
+  
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+  <!-- 百度站長統計-->
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f4e4f3d9d2532faa71e451f2ab41cbb6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  
+  <meta name="sogou_site_verification" content="hHwAVZfHTs"/>
+  <script data-ad-client="ca-pub-2041041323733631" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="CallMeSoul" type="application/atom+xml">
+</head>
+
+<div class="main height-100 flex flex-v">
+  <div class="phone-header">
+    <a to="/home" class="mobile-logo" > <img src="/images/logo.svg" /> </a>
+    <a class="menu iconfont icon-menu" onclick="toggleMenu()"></a>
+  </div>
+  <div class="main-top flex flex1">
+    <nuxt-link  to="/home" class="mobile-nav-btn iconfont icon-fenlei"></nuxt-link>
+    <!--主页上左部分-->
+    <div class="height-100 main-left  flex flex-v">
+      <div class="main-left-top flex1">
+        <a class="logo">
+          <img src="/images/logo.svg" />
+          <div class="sub-title">Front-end developer</div>
+        </a>
+        <nav class="nav">
+
+  
+    
+      <a title="首页"  alt="首页"  v-for="(menu,index) in menus" href="/">
+        <div class="icon"><i class="iconfont icon-home"></i></div>
+        <div class="name">
+          <div class="cnname">首页</div>
+          <div class="enname">Home Page</div>
+        </div>
+      </a>
+
+    
+      <a title="归档"  alt="归档"  v-for="(menu,index) in menus" href="/archives">
+        <div class="icon"><i class="iconfont icon-archives"></i></div>
+        <div class="name">
+          <div class="cnname">归档</div>
+          <div class="enname">Archive Page</div>
+        </div>
+      </a>
+
+    
+      <a title="关于我"  alt="关于我"  v-for="(menu,index) in menus" href="/about">
+        <div class="icon"><i class="iconfont icon-about"></i></div>
+        <div class="name">
+          <div class="cnname">关于我</div>
+          <div class="enname">About Me</div>
+        </div>
+      </a>
+
+    
+  
+
+  <!--<a href="/link/">
+    <div class="icon"><i class="iconfont icon-link"></i></div>
+    <div class="name">
+      <div class="cnname">友情链接</div>
+      <div class="enname">Friends Web Link</div>
+    </div>
+  </a>-->
+</nav>
+
+      </div>
+
+      <view class="website-msg">
+        <div class="beian"><a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备15053557号</a></div>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <div class="beian"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+        <div class="theme-drsc">PowerBy:<a href="https://hexo.io" target="_blank">Hexo</a> ThemeBy:<a href="" target="_blank">Soul</a></div>
+        <div class="copyright">Copyright &#169 <a href="mailto:d.guangying@foxmail.com">2019 CallMeSoul</a> </div>
+      </view>
+
+      <div class="social flex flex-align-center ">
+        
+          
+            
+              <a class="flex1 text-center" href="https://weibo.com/tellmesoul/home?wvr=5" target="_blank" title="weibo" alt="weibo">
+                <div class="icon relative">
+                  <i class="iconfont icon-weibo"></i>
+                </div>
+              </a>
+            
+          
+            
+              <a class="flex1 text-center" href="https://github.com/callmesoul" target="_blank" title="GitHub" alt="GitHub">
+                <div class="icon relative">
+                  <i class="iconfont icon-github"></i>
+                </div>
+              </a>
+            
+          
+            
+          
+        
+      </div>
+    </div>
+    <!--主页上右部分-->
+    
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/1590/" class="title">mysql Group by获取每个分组最新的记录</a>
+    <section class="desc">
+  GROUP BY 查询默认是去每个分组第一条很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。
+原始sql:
+SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC这里的ORDER BY是不生效的，因为GROUP BY 的执行会先于 ORDER BY
+于是我们可以先排序后再来GROUP BY：
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC
+) as result
+GROUP BY result.type大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，GROUP BY 后就出问题了。后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上LIMIT就可以了
+完整的正确写法:
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999
+) as result
+GROUP BY result.typeNices!
+
+
+</section>
+    <p class="sub">9月 2, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="../images/20200630162413.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/6/" class="title">理财入门—懒人记账</a>
+    <section class="desc">
+  背景为了生活更美好，最近开始学起了理财。穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心啊，自己的钱次怎么花就怎么花。之前喝瓶可乐都要问老爸老妈，现在直接一箱箱买，想喝就喝，快哉快哉。长期这么自由自在真的很爽，可存款却永远在原地踏步，不见增长。眼看身边的人都买车买楼了，而自己还一无所有。可见凡事都有代价的。总结下原因就是不会理财、大花、月光族等等。于是痛下决心开始理财，控制自己的消费。第一步就当然是记账啦。记账可以知道自己每个月的消费、收入，清晰知道自己主要消费在哪里？哪些消费过度了，应该控制下的。但这一步也是艰难的一步啊！
+市面上的记账软件说到记账，第一步就是找个好用的记账软件了。市面上的记账软件很多，基本都满足需求。但！就是坚持不下去，因为每次的消费都要手工在软件上记下去，坚持了10 天坚持不了15天。换了很多了记账软件都这样，功能是满足了，但没解决我的懒惰啊。而已有时很匆忙的一笔微信转账，一下就忘了记账了。于是乎我在继续寻找适合我的记账。我的设想就是有没有可以读取信息的记账软件，然后我以后的消费都走银行卡，消费了收到信息，软件自动记录，是不是很方便？但在市面找了一圈后发现，有些记账软件是可以读取短信消费记录的，但它并不知道消费的分类，需要自己的手选是个大工程。然后各种卡的话也容易混淆。原本想自己找时间写一个的，读读短信信息应该没什么难度。但后来我找到了一个比较理想比较适合我的记账软件，也就省得我自己开发了。
+微信记账本我的最终选择就是微信记账本。是一个小程序很方便也不用安装。他可以读取你的微信各种消费和各种收入信息，我本来的比较多的也就是微信支付，除了keep会员是华为支付，京东购物用的是京东支付外，都是走的微信支付，自动记录。现在我只要要用其他不走微信支付的支付方式改成微信支付就好了。比如取消keep在华为支付的自动续费，改微信支付自动续费。京东购物也不用京东支付了，直接走微信支付，这样就搞定了，是不是很方便？而且微信记账本有一个好处就是商家走微信支付时，每一笔的消费都已分好了消费类目，所以可以自动给每笔消费分类，而且你的微信转账，收发红包都会一一帮你记录，实在太适合了。微信的确定就是淘宝购物吧，好像不支持微信支付的，需要手动去添加记录。还有就是银行卡的收入比如工资，也要自己手动去添加记录，还好的是微信记账功能有个提醒功能，比如工资，你可以设置个提醒，每个月发工资时提醒添加工资收入记录。而且在微信的生态里，我们平时用得最多的就是微信了，可不大可能会错过没看到提醒。如果你觉得也很懒，不妨按照我的方式试下微信记账本吧。如果你觉得对你有帮助，可以请我喝杯奶茶哦😬
+
+
+
+</section>
+    <p class="sub">6月 30, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="../images/ae.png" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/5/" class="title">AE渲染成视频第一句语音渲染变声问题</a>
+    <section class="desc">
+  背景最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。
+解决方案这个问题找了很久一开始以为是AI生成的语音音频有问题，几重新生成了次，换个格式都不行，把后面正常语音替换第一句语音，发现还是一样，确认和音频无关。然后我才猜想是不是渲染的格式或者用来渲染的某些选项问题呢？后来试了很多都不行。最后想为什么只有第一句怕的，然后我把第一句语音删了，发现不怕了，可能就是因为第一句太靠前了，视频刚开始就有一段语音音频，然后我尝试把吧原来的第一段语音音频，拖后面一点，最后没玩解决的！记录下，也方便遇到同样问题的人
+
+
+</section>
+    <p class="sub">6月 30, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="../images/sequelize.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/4/" class="title">sequelize 问题汇总</a>
+    <section class="desc">
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+</section>
+    <p class="sub">6月 17, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/3/" class="title">关于Vue-router=&gt;addRoutes 方法的一些坑</a>
+    <section class="desc">
+  关于Vue-router=&gt;addRoutes 方法的一些坑
+router.addRoutes(routes: Array&lt;RouteConfig&gt;)
+
+
+routes 是要符合路由规范的数组
+
+router.addRoutes 只是注册了路由的规则，但是并不会自动更新路由列表项，需要先手动更新路由列表，再去注册规则
+
+// 手动添加路由列表项
+router.options.routes.push(...routers)
+// 注册路由规则
+router.addRoutes(routers)
+
+注册完最好重定向
+如果添加路由之前，要访问的地址是需要 addRoutes 添加的。
+那么在调用addRouters之前路由并不存在，所以注册完需重定向一下要访问的地址
+在路由导航守卫可以这样些
+router.beforeEach((to, from, next) =&gt; {
+  // 其他逻辑
+  router.options.routes.push(...asyncRouterMap)
+  router.addRoutes(asyncRouterMap)
+  next(to.path)
+})
+
+动态引入组件component
+网上很多人的文章的copy的，也没验证过，所有导致搜索的大部分方法都是不行
+
+component: () =&gt; import(componentPath)  不行
+
+component: () =&gt; import(&#39;@/&#39; + componentPath)  不行
+还有很多的网上办法都不行的
+最后找到了解决方法：
+component: require.ensure([], (require) =&gt; {
+        resolve(require(&#39;@/&#39; + componentPath))
+}),
+注意： @/ 要分开写死，不可以连同地址一块传入，可能是为了给webpack标识的
+
+
+
+
+
+
+</section>
+    <p class="sub">2月 28, 2020</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/2/" class="title">自主项目【51领养】</a>
+    <section class="desc">
+  前言因为自己有养猫，对流浪动物啊也时常关注，想多多少少出一份力啊。
+我逛了下一些宠物机构，发现了很多宠物机构，没有自己的宠物管理系统，用户难以线上浏览可以领养的宠物，且每个机构的可宠物信息并不共享，就一定程度上加大了用户领养的难度，想领养的人只能线下一间间跑，看有没有合缘的宠物领养。
+而且一些个人的宠物生了，需找人领养，只能发发朋友圈，信息扩散程序可想而知，从而加大了领养的难度。
+所以我就想做一产品，可以给想领养的人，在线上可以看到身边可以领养的宠物，看上了就具体线下了解。
+也可以给一些没有技术支持的机构/个人提供一个宠物的发布等管理系统让领养可以跨上那么一小步。
+项目状态项目现已完成了基本功能上线，功能会不断的迭代更新。
+大家微信搜索51领养 就可以查看，或者扫描一下小程序码即可
+
+宣传项目刚上线啊，也不知道怎么宣传好，大家可以给给意见。
+我自己做了张海报，不嫌弃的可以帮忙宣传下。
+
+
+
+</section>
+    <p class="sub">12月 25, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/100000/" class="title">webpack使用html-loader引入html模板</a>
+    <section class="desc">
+  前言最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。
+vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。
+直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:
+
+平时用惯了es6语法，要写回es5,要经常查文档
+不能使用预处理样式(less,sass)，这个效率大打折扣啊
+手动页面优化(压缩，去除注释,检测语法)
+
+本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。
+本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。
+于是乎就寻找各种方案了
+html 引入模板
+iframe
+首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。
+
+模板引擎
+这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。
+
+一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。
+第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。
+
+
+html-loader 的  interpolate
+html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。
+首先要在webpack rules里加上加一条处理html的规则
+{
+      test: /\.html$/,
+      use: {
+        loader: &#39;html-loader&#39;,
+        options: {
+          // 处理html 引用的图片
+          attrs: [&#39;img:src&#39;],
+          // 开启 html模板功能
+          interpolate: true
+        }
+      }
+    }
+
+
+   然后在html文件就可以直接引入其他html模板了
+   &lt;!DOCTYPE html&gt;
+   &lt;html&gt;
+
+   &lt;head&gt;
+     &lt;title&gt;index&lt;/title&gt;
+     ${require(&quot;../layouts/head.html&quot;)}
+   &lt;/head&gt;
+     ${require(&quot;../layouts/header.html&quot;)}
+   &lt;body&gt;
+
+     ${require(&quot;../layouts/footer.html&quot;)}
+   &lt;/body&gt;
+
+   &lt;/html&gt;
+   简单又灵活，Get it！
+​        最后也分享下自己配置好手脚架：webpack-multiple-pages-template
+
+
+</section>
+    <p class="sub">12月 4, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/12005/" class="title">使用headless cms + ssr渲染框架来开发网站</a>
+    <section class="desc">
+  前言由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。
+CMS根据以前的经验无非就是前端写完界面，然后找一个cms去套，但由于国内的cms框架（duxcms我之前一直用,dedecms.phpcms,wordpress）已经很难满足了现在的客户需求了。
+比如做个网站，一开始以为做个网站就行，谁知道还要做小程序，App等等，但之前的cms都不带api，即使有写带比如wordpress，api接口也是问题多多的。
+然后可以看国内开发的cms，即使的新开发新产品，也是比较保守的，还是跟以前的cms差不多，无非就多提供了api 供用户调用，然后后台操作界面交互也不咋地，所以很难找到一款非常合适的cms框架。
+​        而我感觉国外的就比较思想超前敢冒险尝试，既然api方式通用，那我就专门做提供api和后台内容操作的cms，数据和界面教还给前端，自己爱拿什么数据那什么数据，唉什么布局怎么布局，前后分离。然后cms就专心做好内容管理和api接口的设计就可以了。
+虽然这个想法早期还有点冒险，比较像这种前后端分离的spa还有有很多问题的
+
+做网站的人很看重的seo问题
+首屏加载速度问题
+
+问题虽然有，但方向应该是对的，就看怎么解决这些问题而已。
+为什么写网站也要用spa​        而且平时在公司或者自己写前端，写法习惯都已经从jq过渡到了前后端分离框架vue、react、angular等写法的习惯了。然后接了一个私单，又要突然转回去以前那种jq操作dom的 时代。
+这个过程实在难受，而且效率也低。
+有没有办法开发个网站也能使用现代化的开发流程和各种工具，然后解决seo，和首屏加载慢等spa问题的。
+于是乎后面出现了各种ssr服务端渲染框架，去帮spa应用解决这些问题。
+SSR 服务端渲染框架 使用SSR（也称为“通用”或“同构”）模式，将使用Node.js服务器将基于Vue组件的HTML传递给客户端，而不是纯JavaScript。   — nuxt.js
+目前主流有两个:
+
+vue 架构的 nuxt
+react 机构的 next
+
+两个都是开箱即用的，大大降低了开发部署的难度。
+主要用那个技术栈就用那个框架吧，react好像还有个 gatsby好像挺好用，但我不主要react技术栈 ，所以就没深入了解了，看了文档和别人介绍感觉挺不错的，react技术栈的同学可以去了解下。
+前端的开发框架我们选好了，然后我们就要选个后端的cms 去管理数据，提供api接口调用数据了。
+我们先来想一下我们期待的cms是怎样的:
+
+内容可定制化程度高，因为网站有各种功能，比如轮播的海报，收集用户表单，新闻站的文章，画册张的相册等。
+
+后台交互良好，至少交付给客户时，客户很快有会用。
+
+良好的api接口设计
+
+对gatsby友好
+
+提供全平台sdk
+
+
+headless cms 翻译一下就是只提供纯api的cms，不包含任何客户端代码，也就是老子只负责api你手机，还是网页想咋用咋用。 —  摘抄自北方蜘蛛
+Contentful你搜headless cms，然后到处都能看得到Contentful
+来说说它的强大之处：
+
+API-First CMS to Power All Digital Products | Contentful简单翻译就是第一个只提供api的cms吧，先做有经验优势嘛
+
+免费，不用自己部署，但有一定限制
+
+Serverless 架构部署，可能就是用了serverless 才有可能有免费的提供用吧
+
+提供restful 接口 + graaphql 接口
+
+支持多站点，多项目，但需另外收费。
+
+
+可以说contentful是个先进技术集合的cms，各种现代化技术集合一体。
+然后操作界面也比较简单简洁，感觉是挺不错的，操作还是流畅的，还提供多角色共同管理。
+
+但作为接私单来开发网站还是有些问题的:
+
+不开源，所以不可以自己部署。你做完交接，要客户登陆别人的网站去管理，这样不大好吧。
+
+后台管理不支持中文，怕客户看不懂，不好操作。
+
+不收费的有限制，感觉以后也会慢慢变成收费的，收费项又确实比较贵
+
+暂时没看到内容的导出与导入
+
+
+strapi我试了挺久的一个，功能也简单，界面也简洁。
+优势:
+
+开源免费，可以自己部署
+
+简单又便捷，添加内容模型，添加内容，然后设置用户对这个内容接口的权限就好了
+
+规范的restful接口，且接口信息简洁，没有返回其他很多没有必要的东西
+///banners
+[
+    {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;轮播海报&quot;,
+        &quot;link&quot;: &quot;sadasdasdasd&quot;,
+        &quot;created_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;image&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;teacher-avatar.gif&quot;,
+            &quot;hash&quot;: &quot;466289966ffd4599afd646ede29bac40&quot;,
+            &quot;sha256&quot;: &quot;kgeU5VQ-bYTbtNlEwoTi_4LPykpIPxrtZLtlL-ehyAY&quot;,
+            &quot;ext&quot;: &quot;.gif&quot;,
+            &quot;mime&quot;: &quot;image/gif&quot;,
+            &quot;size&quot;: &quot;1.48&quot;,
+            &quot;url&quot;: &quot;/uploads/466289966ffd4599afd646ede29bac40.gif&quot;,
+            &quot;provider&quot;: &quot;local&quot;,
+            &quot;provider_metadata&quot;: null,
+            &quot;created_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;,
+            &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;
+        }
+    }
+]
+
+后台字段布局可自由拖动布局
+
+有国际化，虽然中文的有些翻译有些蹩脚，有些也没翻译，但总比全英文好啊
+
+也提供Graphql接口
+感觉strapi虽简洁，简单，但功能齐全
+
+
+个人感觉的缺点：
+
+不支持多站点多项目
+比如我想自己搭一个数据管理中心，给个各个网站使用，每个网站都有新闻内容模块
+这时候我不能建一个新闻内容模块一起用，这样数据就混乱了。只能布置多个strapi或者新建多个新闻内容模块，以区分不同网站的新闻内容模块。
+其实有考虑过根据新闻模块关联用户、根据用户去区分新闻模块对应的数据，这是一个可行的方法。但只只对没有用户系统的站点或项目，不然就又轮到用户信息混乱了。
+但是用户又可以根据用户组去区分，感觉还是可以实现的-&gt;
+根据添加不同用户组然后添加用户，去区分不同的网站，从而去同一个内容模型拿对应的内容数据
+但说回来，要不同项目用统一个模型，两个项目的统一模型要高度统一，不然还是有很多问题的。
+期待strapi后面可以有站点或者项目的概念，在站点或项目下，再去新建不同的内容模型，这就完美了。
+
+
+ghost我用过算最好的博客系统吧，性能飞跃，后台管理、写作交互,体验都完美，也有很多很漂亮的，后来因为服务器到期了，续费太贵了，于是才把博客迁移到了hexo+github pages 免服务器啊，还可以https，当然速度和原来的没法比啊。而且你github 搜 nodejs 的 headless cms 第一名就是ghost,第二是``strapi`
+个人感觉的优点:
+
+简单简洁，为博客而生，主要就添加文章或页面
+完美的写作体验，完美兼容markdown和html 写作,也可以一篇文章即html又有markdown
+主题精美，速度飞快，后台操作也很友好
+即提供服务端渲染，也提供api
+代码开源，却已盈利
+完善的开发手脚架，不仅可以初始项目，更包括集成 Let&#39;s Encrypt 自动帮你生成ssl证书，配置nginx ssl配置,等等……
+
+个人感觉的缺点:
+
+主要专注于博客，对于一些网站的其他功能还是显得有些不足。可扩展性不强。
+虽提供api，但不是restful 规范的
+主题虽精美，但相对于wordpress 还是相对较少的
+
+
+
+</section>
+    <p class="sub">11月 25, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/64826/" class="title">Frontend-Sniper前端错误上报系统</a>
+    <section class="desc">
+  前端错误监控系统服务端其实线上已经有很多监控系统了，例如fundebug。试用了一下还是挺不错的。可惜都是收费的，免费的只能创建一个项目，收费也不便宜。对于一些小公司来说很难花钱去搞，而且对小公司来说功能也不需要太复杂。一些js的报错和接口报错就可以大大加快bug的修复，和预知bug。（当上级和测试都还没发现时）所以我还是写这么个系统，是从自身需求出发吧。功能可以慢慢完善。
+现在初期只实现了简单的js和接口资源报错。后期会加入UA和用户等信息以完善错误信息追踪错误。对服务端还是新手所以代码质量….graphql也是试手。但好在错误监控系统一般内部人使用，独立不影响线上项目和用户。所以大胆地使用吧。
+项目集
+服务端 frontend-sniper-server
+管理后台 frontend-sniper-admin
+错误探针 better-js
+
+todo
+ 支持vue
+ 邮件通知（新错误报错，旧错误5n次发邮件报错）
+ 添加UA信息
+ 添加用户信息
+ 记录用户行为
+ 手动上传报错
+
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/24625/" class="title">一起用失效</a>
+    <section class="desc">
+  
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/41967/" class="title">重复多条记录问题</a>
+    <section class="desc">
+  mysql group by 和 order by 一起用失效我自己写了一个前端错误监控系统。
+前端有各种报错，后台就会自动发邮件通知、
+这里就会遇到同一个错误可能很多人遇到，或者同一个人遇到很多次。
+这样同一个错误就会有很多次报错。
+当管理员进入后台时，看到很多同一个错误的报错，这很明显不人性化。
+于是我就设计成，同一个错误的合并，只显示最新那个。
+一开始sql写法为
+SELECT * from `errors` GROUP BY `title`,`msg`,`category`,`level`,`appId`  ORDER BY `createdAt` DESC
+发现同一个错误是合并了，但是 ORDER BY 并没有生效，合并后的错误不是最新的一条错误而是最早的一条。于是查了资料发现，GROUP BY 没有排序功能，默认取合并时的第一条。于是就想到了，先排序完再合并就好了，于是有下面代码：
+SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC ) as result GROUP BY `title` ORDER BY `createdAt` DESC
+但发现还是没用啊，我百度了下，很多人也是这样写的，但为什么就不生效呢？经过一番查找，终于找到原因了，mysql版本的问题，以上的代码在5.6或以下的代码应该都可以的，但在5.7则要加limit条件，不然子查询是不执行的，完整代码如下
+SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC LIMIT 100) as result GROUP BY `title` ORDER BY `createdAt` DESC
+是不是很坑。。。
+记下先
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/51837/" class="title">使用HTTPCODE替换自定义CODE</a>
+    <section class="desc">
+  | 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。
+但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。
+而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：
+{
+    data:{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+    },
+    engine:&#39;.....&#39;,
+    headers:{//....},
+    request:{//....},
+    status:200,
+    statusText:&quot;request:ok&quot;
+}
+而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:
+response.use(
+  (response) =&gt; {
+    if(response.data.rcode===405){
+      //统一处理某个自定义错误code
+    }else{
+      return response.data;//返回我们要用的数据
+      promise.resolve();
+    }
+  },
+  (err) =&gt; {
+    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+    //发生网络错误后会走到这里
+    if(err.status&gt;=500){
+       //统一处理某个httpcode 500以上错误
+    }
+  }
+);
+使用了拦截器后我们正常得到的数据格式如下:
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+},
+但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个if(res.data.rcode==300)。能不能有办法优化下。
+后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。
+先来说说httpcode相对于自定义code的好处
+规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？
+对于后端开发来说使用httpcode可以大大增加效率，例如：
+
+
+使用自动code时输出数据
+//成功时
+this.body={
+  data:{
+      userList:[{id:1}]
+  },
+  rcode:300,
+  msg:&#39;成功&#39;
+}
+//失败时
+this.body={
+  rcode:400,
+  msg:&#39;失败&#39;
+}
+
+使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：
+//成功时
+this.body={
+    userList:[{id:1}]
+}
+//失败时
+this.status=400;
+this.body={
+    msg:&#39;失败&#39;
+}你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊
+
+
+  对于前端开发来说使用httpcode也可以大大增加效率，例如：
+  拦截器就不用去判断自定义code 而直接判断httpcode：
+  response.use(
+    (response) =&gt; {
+      if(response.data.rcode===405){
+        //统一处理某个自定义错误code
+      }else{
+        return response.data;//返回我们要用的数据
+        promise.resolve();
+      }
+    },
+    (err) =&gt; {
+      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+      //发生网络错误后会走到这里
+      if(err.status===400){
+        //统一处理某个httpcode 错误
+      }else if(err.status&gt;=500){
+         //统一处理某个httpcode 500以上错误
+      }
+    }
+  );
+然后再来对比下使用httpcode和使用自定义code的数据个操作：
+//自定义code时返回数据
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+}
+
+//httpcode时返回数据
+{
+        userList:[
+                {id:1}
+            ]
+},
+
+
+//自定义code时操作
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+
+
+//httpcode时操作
+let res=await this.api.getUserList();
+if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.userList;
+}
+虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/12004/" class="title">坑吭记录</a>
+    <section class="desc">
+  
+苹果IOS系统分享配置失败，签名错误
+
+原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。
+解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。
+// assign.js
+
+//ios端 histiry 模式兼容问题
+
+const location = global.location
+const u = navigator.userAgent 
+let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URL
+
+export default {
+  beforeRouteEnter(to, from, next) {
+    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过
+      // 此处不能使用location.replace
+        location.assign(baseUrl+to.fullPath)
+      //location.replace (baseUrl+to.fullPath) 
+      //重定向时用location.replace 其他用location.assign
+    } else {
+      next()
+    }
+  }
+}
+
+IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。
+
+原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。
+解决：
+// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复
+{
+    data:{
+        //...
+        handler: function (e) {
+          e.preventDefault()
+        }
+    },
+    methods:{
+        /* 解决iphone页面层级相互影响滑动的问题 */
+      closeTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 阻止默认事件
+      },
+      openTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 打开默认事件
+      },
+    }
+}
+
+
+</section>
+    <p class="sub">10月 21, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/794/" class="title">Flex 布局问题汇总</a>
+    <section class="desc">
+  flex布局使用起来很方便\n而且现在的浏览器也基本支持了大家可放心用起来。但用了flex总会有一些小问题这里总结下再使用flex时遇到的问题：
+flex下 input 宽度无法自适应：   &lt;div class=&#39;flex&#39;&gt;        
+    &lt;input class=&#39;flex1&#39;&gt;
+    &lt;button&gt;提交&lt;/button&gt;
+  &lt;/div&gt;
+以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。
+解决方法：
+添加min-width:0;网上说的，但试了下并不行
+
+添加div包裹即可（推荐）
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;
+
+                &lt;button&gt;提交&lt;/button&gt;
+                    &lt;/div&gt;
+                      ```
+### flex 下`text-overflow: ellipsis;`不生效
+```javascript
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;label&gt;标题&lt;/label&gt;
+                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```
+
+
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/13681/" class="title">H5、微信开发video填坑</a>
+    <section class="desc">
+  “
+ios系统下，视频播放默认全屏播放
+解决方法：加上x5-playsinline=&quot;&quot; playsinline=&quot;&quot; webkit-playsinline=&quot;&quot;
+
+"
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/52063/" class="title">REM自适应</a>
+    <section class="desc">
+  designSize=640 为设计稿大小
+htmlFontSize=100为当设计稿为640px时html font-size为100px
+(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)
+此时1px=0.01rem;
+ (function(doc, win, designSize,htmlFontSize) {
+        var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        docEl.dataset.dpr = dpr;
+        var recalc = function() {
+          var width = docEl.clientWidth;
+          if (width / dpr &gt; designSize) {
+            width = designSize * dpr;
+          }
+          docEl.dataset.width = width;
+          docEl.dataset.percent = htmlFontSize * (width / designSize);
+          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window,640,100);
+      ```
+"
+
+
+</section>
+    <p class="sub">10月 14, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/43892/" class="title">小程序开发-使用editor组件替换第三方富文本组件</a>
+    <section class="desc">
+  小程序富文本问题因为小程序用的不是html标签，，所以市面上的富文本编辑器都不适用，自己改起来也麻烦，大多都是小程序嵌入webview方式解决的富文本编辑框来实现，局限比较大。
+还有个问题就是渲染富文本内容也就是html，前期哟很多第三方组件解决了这个问题  ，例如：htmlparse  等，但大多这些第三方组件也只是解决富文本的的渲染问题，而且性能也较大问题，编辑富文本一直是一个硬伤。最近期小程序推出了editor组件，就能基本解决以上问题，代替市面上第三方的关于小程序富文本插件。
+本文就主要讲解下怎么用editor组件，封装一个自定义的富文本组件，既可以渲染html富文本，又可以变成富文本编辑框。
+editor关于editor组件的使用可以直接看 官方的文档
+editor组件 
+自定义富文本组件 其实 还是比较简单的，editor组件文档里有示例代码，我们把示例带啊跑起来，就是一个富文本编辑框了：
+
+然后我们主要就新建一个组定义组件，把示例带啊复制过去，
+把编辑框内容(html)，是否只读（read-only），placeholder（空提示）作为参数传入即可。
+
+read-only
+ture 时即为渲染html模式，把编辑相关的隐藏即可。
+false 即为编辑框，显示编辑框相关内容，大家自行控制即可
+
+
+需要 注意的是 在组件内获取editor wxml时要加.in(this)表示是组件内的wxml
+wx.createSelectorQuery().in(this)
+        .select(&#39;#editor&#39;)
+        .context(function(res) {
+
+        })
+        .exec()
+剩下的都比较简单了，我直接贴代码,大家可以根据自己需求diy
+  &lt;config&gt;
+{
+  &quot;component&quot;: true
+}
+&lt;/config&gt;
+
+&lt;template&gt;
+  &lt;view class=&quot;wrapper {{readOnly?'readOnly':''}}&quot;&gt;
+    &lt;view class=&quot;toolbar&quot; bindtap=&quot;format&quot; wx:if=&quot;{{!readOnly}}&quot;&gt;
+      &lt;i class=&quot;editicon icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}&quot; data-name=&quot;bold&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-zitixieti {{formats.italic ? 'ql-active' : ''}}&quot; data-name=&quot;italic&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}&quot;
+        data-name=&quot;underline&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}&quot;
+        data-name=&quot;strike&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zuoduiqi {{formats.align === 'left' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;left&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-juzhongduiqi {{formats.align === 'center' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;center&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-youduiqi {{formats.align === 'right' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;right&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zuoyouduiqi {{formats.align === 'justify' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;justify&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-line-height {{formats.lineHeight ? 'ql-active' : ''}}&quot;
+        data-name=&quot;lineHeight&quot;
+        data-value=&quot;2&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-Character-Spacing {{formats.letterSpacing ? 'ql-active' : ''}}&quot;
+        data-name=&quot;letterSpacing&quot;
+        data-value=&quot;2em&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-722bianjiqi_duanqianju {{formats.marginTop ? 'ql-active' : ''}}&quot;
+        data-name=&quot;marginTop&quot;
+        data-value=&quot;20px&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-723bianjiqi_duanhouju {{formats.micon-previewarginBottom ? 'ql-active' : ''}}&quot;
+        data-name=&quot;marginBottom&quot;
+        data-value=&quot;20px&quot;
+      &gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-clearedformat&quot; bindtap=&quot;removeFormat&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-font {{formats.fontFamily ? 'ql-active' : ''}}&quot;
+        data-name=&quot;fontFamily&quot;
+        data-value=&quot;Pacifico&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-fontsize {{formats.fontSize === '24px' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;fontSize&quot;
+        data-value=&quot;24px&quot;
+      &gt;&lt;/i&gt;
+
+      &lt;i
+        class=&quot;editicon icon-text_color {{formats.color === '#0000ff' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;color&quot;
+        data-value=&quot;#0000ff&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-fontbgcolor {{formats.backgroundColor === '#00ff00' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;backgroundColor&quot;
+        data-value=&quot;#00ff00&quot;
+      &gt;&lt;/i&gt;
+
+      &lt;i class=&quot;editicon icon-date&quot; bindtap=&quot;insertDate&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon--checklist&quot; data-name=&quot;list&quot; data-value=&quot;check&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;list&quot;
+        data-value=&quot;ordered&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;list&quot;
+        data-value=&quot;bullet&quot;
+      &gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-undo&quot; bindtap=&quot;undo&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-redo&quot; bindtap=&quot;redo&quot;&gt;&lt;/i&gt;
+
+      &lt;i class=&quot;editicon icon-outdent&quot; data-name=&quot;indent&quot; data-value=&quot;-1&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-indent&quot; data-name=&quot;indent&quot; data-value=&quot;+1&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-fengexian&quot; bindtap=&quot;insertDivider&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-charutupian&quot; bindtap=&quot;insertImage&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}&quot;
+        data-name=&quot;header&quot;
+        data-value=&quot;{{1}}&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitixiabiao {{formats.script === 'sub' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;script&quot;
+        data-value=&quot;sub&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitishangbiao {{formats.script === 'super' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;script&quot;
+        data-value=&quot;super&quot;
+      &gt;&lt;/i&gt;
+      &lt;!-- &lt;i class=&quot;editicon icon-quanping&quot;&gt;&lt;/i&gt; --&gt;
+      &lt;i class=&quot;editicon icon-shanchu&quot; bindtap=&quot;clear&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-direction-rtl {{formats.direction === 'rtl' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;direction&quot;
+        data-value=&quot;rtl&quot;
+      &gt;&lt;/i&gt;
+    &lt;/view&gt;
+
+    &lt;editor
+      id=&quot;editor&quot;
+      class=&quot;readOnly?&#39;readOnly-container&#39;:&#39;ql-container&#39;&quot;
+      placeholder=&quot;{{placeholder}}&quot;
+      showImgSize
+      showImgToolbar
+      showImgResize
+      bindstatuschange=&quot;onStatusChange&quot;
+      read-only=&quot;{{readOnly}}&quot;
+      bindready=&quot;onEditorReady&quot;
+    &gt;&lt;/editor&gt;
+
+    &lt;!-- &lt;view&gt;
+        &lt;button bindtap=&quot;readOnlyChange&quot;&gt;{{readOnly ? '可写':'只读'}}&lt;/button&gt;
+    &lt;/view&gt;--&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+Component({
+  properties: {
+    readOnly: {
+      type: Boolean,
+      value: false
+    },
+      placeholder:{
+      type: String,
+      value: &#39;开始输入...&#39;
+    },
+    html:{
+      type: String,
+      value: &#39;&#39;
+    }
+  },
+  data: {
+    formats: {},
+    bottom: 0,
+    _focus: false,
+    editorCtx:&#39;&#39;
+  },
+  observers: {
+    &#39;html&#39;: function (html) {
+      // 在 numberA 或者 numberB 被设置时，执行这个函数
+      if(this.editorCtx){
+        this.editorCtx.setContents({
+        html: html
+      })
+      }
+    }
+  },
+  attached: function() {},
+  ready: function() {},
+  methods: {
+    onEditorReady() {
+      const that = this
+      wx.createSelectorQuery().in(this)
+        .select(&#39;#editor&#39;)
+        .context(function(res) {
+          that.editorCtx = res.context
+          that.editorCtx.setContents({
+            html: that.data.html
+          })
+        })
+        .exec()
+    },
+
+    undo() {
+      this.editorCtx.undo()
+    },
+    redo() {
+      this.editorCtx.redo()
+    },
+    format(e) {
+      let { name, value } = e.target.dataset
+      if (!name) return
+      // console.log(&#39;format&#39;, name, value)
+      this.editorCtx.format(name, value)
+    },
+    onStatusChange(e) {
+      const formats = e.detail
+      this.setData({ formats })
+    },
+    insertDivider() {
+      this.editorCtx.insertDivider({
+        success: function() {
+          console.log(&#39;insert divider success&#39;)
+        },
+      })
+    },
+    clear() {
+      this.editorCtx.clear({
+        success: function(res) {
+          console.log(&#39;clear success&#39;)
+        },
+      })
+    },
+    removeFormat() {
+      this.editorCtx.removeFormat()
+    },
+    insertDate() {
+      const date = new Date()
+      const formatDate = `${date.getFullYear()}/${date.getMonth() +
+        1}/${date.getDate()}`
+      this.editorCtx.insertText({
+        text: formatDate,
+      })
+    },
+    insertImage() {
+      const that = this
+      wx.chooseImage({
+        count: 1,
+        success: function() {
+          that.editorCtx.insertImage({
+            src:
+              &#39;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1543767268337&amp;di=5a3bbfaeb30149b2afd33a3c7aaa4ead&amp;imgtype=0&amp;src=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20151031%2Ftooopen_sy_147004931368.jpg&#39;,
+            data: {
+              id: &#39;abcd&#39;,
+              role: &#39;god&#39;,
+            },
+            success: function() {
+              console.log(&#39;insert image success&#39;)
+            },
+          })
+        },
+      })
+    },
+  },
+})
+&lt;/script&gt;
+&lt;style lang=&quot;scss&quot; src=&quot;./rich-text.scss&quot;&gt;&lt;/style&gt;
+
+大家赶紧把第三方的富文本组件换过来吧~
+
+
+</section>
+    <p class="sub">10月 9, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BD%BF%E7%94%A8git%E5%8F%91%E5%B8%83%E9%83%A8%E7%BD%B2Axure%E5%8E%9F%E5%9E%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/45115/" class="title">产品经理使用git发布/部署Axure原型</a>
+    <section class="desc">
+  前言工作了几年了，也和不少产品打过交道发现了和产品交流上的一些问题，就是axure原型分享。
+产品做完原型就要发给老板，设计师，开发看，每人发一份。然后后面原型有修改或添加之类的，又要重新每人发一份，别人又要经常接受一份。
+看似很正常的传统工作流程，但效率有点低，而且接受的人，接受了多个版本以后会经常弄混乱，没有整理的人还要每次去找产品经理发的 原型放在了哪里？哪个才是最新的版本。
+下面就介绍下git来解决以上问题。
+Axureaxure是一原型开发工具，做产品都都应该很熟悉。
+其实前言说到的问题，一些新的做原型产品其实很好解决了，例如墨刀之类的，做完只需要发个预览链接到群里就行了，然后每次更新了，预览的链接也会跟着更新。但墨刀是收费，而且功能也相对Axure有点限制，axure的生态更完善，比如UI框架都有开源自己的Axure组件，所以大多产品还是比较喜欢Axure做原型多。
+Gitgit 是一版本控制系统，一般用来管理开发代码居多，开发人员必会的了，产品经理可能少接触写。
+windows 安装：https://www.cnblogs.com/wj-1314/p/7993819.html
+mac 安装：https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
+安装完打开命令行初始化
+windows : win键 + R键 –&gt; 输入cmd 回车 
+git config --global user.name &quot;你的名字&quot;
+git config --global user.email &quot;你的邮箱&quot;Gitee,Github可以理解为使用git的文件托管平台
+这里推荐gitee，国内快。
+网址：https://gitee.com/
+先去注册个账号，免费的放心。
+开始使用gitee 部署 axure项目 github等其他托管平台相似
+登陆后创建个仓库
+
+
+
+
+创建一个index.html文件
+
+
+
+开始仓库pages服务
+
+
+   
+   
+   点启动
+   
+   需要等一会时间
+   
+   部署完后就可以访问下地址 https://你的用户名.gitee.io
+   
+   其实就是我们刚创建的index.html内容
+
+把gitee项目拉下来
+复制gitee项目地址
+
+
+
+   打开你要放置项目的目录右键，右键打开命令行
+   windows用户可以右键选择Git Bash here
+   输入 git clone 刚复制的项目地址
+   
+   完成后就会多个你的项目名的文件夹
+
+设置 Axure 项目导出 到本地的 gitee 项目文件夹地址
+打来Axure, 选择 发布 -&gt; 生成html
+
+然后输出目标文件夹我们就选刚创建的gitte本地文件夹，然后考虑我我们后面会有多个项目，于是乎我们就在里面新建一个文件夹去当前项目，下次有新项目了就只需在里面再创建个心文件夹放就可以了
+
+弄完此时就可以看到可以访问打方才输出的html axure原型了
+
+
+
+   但此时只是本地或局域网可以问题，你发给别人，别人看不到的。
+   而且要一直开着机。
+   下面我们就要把gitee本地文件夹中里面我们刚才新加的内容同步上gitee仓库里，这样就可以通过上面的域名访问了。
+
+把本地的gitee文件夹同步到gittee仓库
+回到本地gitee文件夹的命令行
+输入
+git add *意思就是添加所有文件
+再输入
+git commit -m 备注信息 就是提交修改的意思 ，后面的备注信息是备注你每次提交修改了什么内容一个提示（自定义）
+最后输入
+git push意思就是推送到线上对应仓库，
+第一次推送时会需要填写gitee的账号密码，因为要知道那你仓库是属于你的才可以推送，不然每个人都可以往你仓库推送那就麻烦了。
+
+
+
+   然后回到gittee仓库的pages服务页面更新下就可以访问了
+   然后就可以试下访问线上的域名了。
+   
+   还记得域名么？
+   https://你的用户名.gitee.io/
+   你直接访问这个是没变的，因为我们的文件放在了一个目录下了。所有要加上目录名，然后Axure的导航页是start.html
+   于是你要访问的域名就是
+   https://你的用户名.gitee.io/项目文件夹名/start.html
+   
+   最后大功告成，可以把url发给各位老板，开发者，设计师了。
+
+
+</section>
+    <p class="sub">9月 10, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/22147/" class="title">小程序开发-PC网页端扫小程序码登陆解决方案</a>
+    <section class="desc">
+  最近做了一个小程序我爱阅读,是一款针对小学生阅读习惯培养的一个小程序工具，有兴趣的可以了解下。
+小程序在学校反映不错，于是有了老师提出需要PC网页端的需求。因为老师平时办公一般在电脑上，在电脑上给学生布置阅读作业，会更方便得多，而移动小程序端对于老师来说更像一个辅助工具，平时用不到电脑时可以通过小程序操作。而且学生的阅读数据再网页展示也方便老师在课堂上给学生投影展示。
+于是乎就有了网页端的需求。
+登陆这是要做网页端最开始要解决的问题。
+一开始有一下解决方案
+
+初始化账号密码，网页通过账号密码登陆
+微信开发平台，公众号和小程序绑定，通过公众平台的网页二维码授权登陆。
+
+但以上两种方法都不能很好地解决需求：
+
+第一种，初始化账号密码，秘密好办可以统一初始密码，但用什么作为账号呢？微信用户名，openid不可能，用户手机又不是全都用。就算解决了初始化账号密码问题，安全度也不高。
+第二种，有个缺陷就是用户必须关注了绑定的公众号后再进入小程序，才可以实现。我们现在主打的是小程序，公众号只是运行的一个中间平台。而且很多新用户是通过小程序分享的链接进入，完全没法先去关注公众号。所以这种方法也不适合。
+
+转转游戏以上两种方法行不通，于是网上找各种方法。最终找到了转转游戏，就是通过扫描小程序码登陆的，体验了一下，大概也了解了方法。
+扫小程序码登陆逻辑
+首先在小程序添加一个网页登陆的页面，页面接收一个登陆id（loginId）
+网页端展示小程序网页登陆页的小程序码，附带登陆id（loginId）
+用户通过扫描网页上的小程序码，手机微信进入相应小程序的网页登陆页，设置确认登陆和取消登陆按钮，同时网页端扫面后应开启socket或者定时去请求后台，当前登陆id(loginId)的使用状态。
+如果loginId使用后且确认登陆，应一起返回用户的token，网页就可以使用该token去当前单用户去请求接口了
+如果用户取消登陆或超时则网页提示相应信息，且重新获取新的小程序码。
+
+
+
+总结这样可以完美地使用小程序当前用户信息去登陆网页端，用户不用输入账号密码，也不用计账号密码，直接用微信扫一扫就可以登陆，真实方便简洁。完美~~
+
+
+</section>
+    <p class="sub">9月 10, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/36621/" class="title">小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目</a>
+    <section class="desc">
+  今天介绍的工具是wecos
+原生小程序
+
+原生的小程序直接根据wecos的文章操作即可，wecos提供了上传本地资源文件到cos、替换小程序的引用本地路径为上传路径等。
+这里不作详细说明，主要介绍webpack打包的小程序项目。
+因为原生写起来很不方便。
+
+webpack小程序打包项目最好是开发完再来进行这一步，前期专心开发。
+我前期开发时，引用静态资源用的是相对路径，用的绝对路径应该也可以的。
+项目开发完后
+
+webpack设置打包后的cdn地址, webpack rules选项：
+{
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        use: {
+          loader: &#39;file-loader&#39;,
+          options: {
+            name: &#39;/[path][name].[ext]&#39;,
+            publicPath: function (file) {
+              if(isProduction){//判断是否生产环境，自己判断咯。
+                if(file.indexOf(&#39;tabbar&#39;)&gt;=0){//如果有tabbar的，tabbar用一个tabbar的文件夹装起来，因为tabbar图片只支持本地。
+                  return file;
+                }
+                else{
+                  return &#39;https://xxx-1234567.cos.ap-guangzhou.myqcloud.com/&#39;+file;//你的腾讯云cos bucket的域名。
+                }
+              }else{
+                return file;
+              }
+            }
+          }
+        },
+      },
+
+安装wecos
+npm install -g wecos
+
+跟目录创建wecos.config.json文件
+
+填写wecos.config.json 配置
+{
+  &quot;appDir&quot;: &quot;./dist/assets&quot;,
+  &quot;cos&quot;: {
+    &quot;secret_id&quot;: &quot;xxxxx&quot;,
+    &quot;secret_key&quot;: &quot;xxxxx&quot;,
+    &quot;bucket&quot;: &quot;xxx-1234567&quot;,//bucker-appid
+    &quot;region&quot;: &quot;ap-guangzhou&quot;, //创建 bucket 时选择的地域简称
+    &quot;folder&quot;: &quot;/assets&quot; //资源存放在 bucket 的哪个目录下
+  },
+  &quot;uploadFileSuffix&quot;: [&quot;.jpg&quot;,&quot;.png&quot;,&quot;.gif&quot;,&quot;.webp&quot;,&quot;.svg&quot;],
+  &quot;uploadFileBlackList&quot;: [//不上传的图片，填tabbar的目录
+    &quot;./dist/assets/images/tabbar&quot;,
+  ]
+}
+
+在根目录运行wecos即可。
+
+
+
+
+
+总结
+为什么不用webpack的 publicPath 而用file-loader的publicPath ？
+因为webpack的 publicPath只支持字符串，一但改成线上域名，所有静态资源的前缀都会变成cdn域名。而小城的tabbar并不支持网络图片，base64也不支持，只支持本地图片。
+这时我们就用file-loader的publicPath ，支持函数且返回文件名，可以写条件去过滤掉tabbar的文件。
+使tabbar文件使用本地的，而其他使用线上cdn域名的文件。
+
+为什么要用wecos？
+当然你也可以不用自己，本地打包后自己手动上传到cos后台。
+然后删除了本地的图片文件（除了tabbar的图片）。
+然后开发者工具再上传代码。
+你会发现这步骤很累赘。
+使用wecos后，我们打包后只需要跑一下cos就可以自动上传本地的上cdn，且自动删除本地的（tabbar图片除外）。
+是不是方便多了？
+赶紧在你项目用上把！
+
+
+
+
+</section>
+    <p class="sub">2月 10, 2019</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/4649/" class="title">石墨文档 Vs 腾讯文档</a>
+    <section class="desc">
+  最近腾讯大力再推一个新产品—腾讯文档。
+朋友圈也纷纷转发感觉是一个不错的产品。
+但其实早在四年前左右吧，大概忘记了，就有了石墨文档了。
+没用过石墨文档的，直接用腾讯文档可能觉得腾讯文档很6，下面就来对比两款产品。
+大家都主打的功能
+在线文档
+在线编辑，word，excel文档。即时保存，不用手动保存，即使电脑死机奔溃，记录都在。大家应该都试过谢了一篇很长的文章就突然死机等原因就需要重写了吧。在这两款产品都可以很好的解决这问题。
+
+多人协助
+这也是我最开始用石墨文档的原因。我是做开发，经常有一些开发需求，或bug需要修复。产品就会把需要做的东西用word文档列好发给我。
+然后我做着做着发现有一些问题出现
+· 不是我的问题  —我发文档给源问题人。
+· 多人同时处理   —-需要分工，然后把问题的文档也得发他一份。
+· 做完要给回人复验 — 又要把文档发给别人，因为我再文档做了标注哪些问题之类的。
+· 最重要的是进度没有一个全局的把控。 — 一份文档多人再分工。进度需要查看多人的文档处理的和
+· 等等等~~  项目大，人越多就会有越多的问题出题在沟通成本上。
+
+
+但用了这两个产品后。多人同时编辑一个文档，有新的内容需求，直接加，所有都可以看到。不用再另外再给没人发一份新添加的需求文档这样。
+用石墨文档首页的介绍，很好地介绍了多人协作文档的强大！
+
+这里的动画是gif比较不顺畅。可以看石墨官网的原展示介绍(https://shimo.im/)[https://shimo.im/]
+界面对比没用石墨文档的人可能没感觉，但用过石墨文档的人在用腾讯文档。就会感觉的怎么就一个翻本石墨文档呢？可能我想多了吧。但企鹅的抄袭却是不是盖的。
+腾讯文档word界面
+石墨文档word界面
+石墨word vs 腾讯word可以看书界面布局几乎差不多，但是可以看出石墨的设计更细致写，有一种沉浸式写作的感觉，毕竟上线一段时间了，有一定的优化。相对腾讯刚上线，页面相对比粗糙简单。
+可看到功能基本差不多
+腾讯文档word多了 水印和翻译功能。 试了下翻译功能好像挺不错。
+
+而石墨文档word功能会多了一个特殊格式的片段，如代码片段，引用片段等。不同的内容有不同的段落样式，可读性会高很多。
+markdown功能是两个文档的缺陷。两个产品都支持一些很简单的写法不能很好的兼容markdown。
+还有以下几点：
+
+石墨文档有修改记录，也有手动保存的版本记录两种。而腾讯只有修改记录。
+
+石墨文档多个评论的功能。使文档变得可交互交流。
+
+石墨文档的每个小功能都有一个简单的视频操作介绍，点右下角的问号可找到
+
+
+石墨文档支持快捷键，也有快捷列表可以看，同样右下角问号
+
+
+
+
+多人协助的文档，石墨可看到每一个部分的的编写者，这个还是很强大的。
+石墨贴心的的免打扰，不过网页的消息一般会比较少。
+
+石墨 excel Vs  腾讯excel和word文档对比差不多。
+布局风格，功能都差不多。
+石墨多了些高级点的功能如：根据表格信息生产图表。也可以创建表单收集信息等。
+
+
+总结以上可以出，石墨是个很用心的产品，无论从设计还是功能的研发还是一些交互。而且石墨也有了一段时间的沉淀优化，所以石墨总体还是比腾讯文档更细致一些。感觉腾讯文档就如早其版本的石墨吧。
+但是后面也难说，腾讯有这么大的流量各种优势，后面会变怎样很难说。替石墨抓鸡了…
+题外话有现场的比较完善的石墨文档腾讯为何还要自研发一款呢？
+其实原因的显而易见的。QQ脱离了日常沟通，变成了工作交流的主流功能，每天不知道都有多少工作文件在qq传来传去。
+再从qq到TIM的转变都可以看出qq在日常娱乐社交工具慢慢转向一个专注工作交流的工具。
+而在线文档这么核心的功能是不太可能接入第三家的，第一费用大。长期的这么多分享。第二资源外泄。
+其实我会更看好腾讯收购石墨文档，然后用石墨文档。这样就双赢了。
+以上只针对web端的简单评测。
+##你还在用word，excel？？？欧特曼啦！！
+##快来用用在线文档吧。
+*不过一些非常私隐性，安全要求比较高的文档还是线下吧
+
+
+</section>
+    <p class="sub">9月 10, 2018</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/41651/" class="title">歧江吹风随便拍拍</a>
+    <section class="desc">
+  
+拍照时间：2018-04-04
+拍照设备手机（坚果Pro2）
+地点在歧江河边的末端，较兴中更安静，人会少点，没有市区人多的吵杂，更清静。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+    <p class="sub">9月 10, 2018</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/47402/" class="title">使用**gitalk** 代替其他第三方评论插件</a>
+    <section class="desc">
+  前言第三方评论插件已经死得差不多了，从一开始多说到后来的网易云跟帖，最后剩下了畅言。最近畅言为了活下去，也退出了广告，让用户体验更差了。本来用户体验就不咋地。可惜碍于找不到其他更好的代替者就只好将就一下了。
+知道今天找到gitalk，坚定不移地把畅言给换了。
+关于gitalkGitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。 
+
+使用 GitHub 登录
+支持多语言 [en, zh-CN, zh-TW, es-ES, fr, ru]
+支持个人或组织
+无干扰模式（设置 distractionFreeMode 为 true 开启）
+快捷键提交评论 （cmd|ctrl + enter）
+
+Readme 在线示例
+使用
+在需要插入评论的地方给个占位&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+
+接着在占位下方引入插件
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;也可以js文件和css文件下载下来自己引入
+
+创建 GitHub Application，如果没有 点击这里申请 
+
+
+
+
+在自己的GitHub账号创建一个库来放评论，库名称填上一步的应用名称
+
+在博客的引用插件下方填写配置
+var gitalk = new Gitalk({
+                clientID: &#39;9f89xxxxxxde0f46&#39;, ///步骤3创建后得到的
+                clientSecret: &#39;22fc21a22xxxxxxf599fd41746ff54f&#39;,///步骤3创建后得到的
+                repo: &#39;myblog_comment&#39;,///步骤4创建的库名
+                owner: &#39;callmesoul&#39;,//自己的GitHub用户名
+                admin: [&#39;callmesoul&#39;],//自己的GitHub用户名
+                id: &#39;{{id}}&#39;, // 唯一标示，一般是文章id也可以是文章url
+                distractionFreeMode: false  // Facebook-like distraction free mode
+            })
+            gitalk.render(&#39;gitalk-container&#39;)
+
+以上完成后就可以上传上自己的博客了。
+上传完，第一次进入相应页面会出现一个初始化提示。
+根据操作登录自己的GitHub授权就可以了。
+
+
+值得一说的就一有评论就相当于项目有issue，gitthub就自动会有邮件提示。
+比畅言好多了，畅言你不登录它后台看都不知道有新的评论。
+以上就完成了，有什么问题不懂得可以在评论处提问。
+
+
+</section>
+    <p class="sub">6月 10, 2018</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+  <div class="ctnWrap">
+    <a href="/posts/30696/" class="title">装机日志</a>
+    <section class="desc">
+  
+前言
+
+​     只从从家里搬出来后，自己带着台小mac air。因为太小了，用惯了台式。这段是时间每天下班都很少开电脑，也就少做事了。
+最近有空想着不能这么闲下去，于是就像买回台台式回来干些事。
+首先自己逛了下组装机市场，感觉低端市场，较少了。好多品牌都主打高端组装机，水冷之类，动不动上万。个人虽也玩玩游戏，但也不是什么游戏骨灰级或发烧级玩家，一般配置也就玩得起我玩得游戏了。没必要那么高。而做稍微低端点市场的品牌都较杂，质量难保证。尤其淘宝，你可以搜下组装电脑，有些一整套才两千多，但跟着他的配置自己去京东捡，远超两千多好不。哪有那么好的事的，硬件的来源渠道和质量可想而知。而且个人对审美较高要求啊，想自己组装个小机箱，不想那么大，占位置，所有最后还是确定自己组装咯。
+
+预算价格：4000左右
+作用：玩玩lol啊，吃吃鸡啊（虽然我不吃鸡），开发，ps简单设计等。算是正常的娱乐+工作级别的机器吧。
+
+
+
+硬件
+机箱：乔思伯（JONSBO）UMX1-PLUS侧透版本 银色 MINI-ITX机箱（支持ITX主板/全铝外（这机箱合适我这种，没多少预算又追求颜值的，价格刚刚好，能接受，颜值算同价格数一数二了。没颜值追求的可以在机箱省些钱。而且买普通大机箱，其他硬件随便挑）
+主板：华擎（ASRock）H310M-ITX/ac主板（Intel H310/LGA 1151）（如果选了小机箱，选主板一定要注意，只能选ITX小主板，不然就装不了翻车了。）
+CPU：英特尔（Intel） 酷睿i3 8100/8350K CPU八代 台式机电脑处理器盒装 板U套装 中文盒装 （为了最求稳定，稳定至上，最后还是选了I系列，为什么选i3，不选i5，i7。有钱我能不选？）
+内存：金士顿(Kingston)骇客神条 Fury系列 DDR4 2400 8G 台式机内存*2（开发都是知道了，内存必须16g起步，不然很烦心的，开个PS，开个webStrom，开个chrome都去了不少了。）
+固态硬盘：金士顿(Kingston)A400系列 240G SATA3 固态硬盘（这年头没固态不行啊，120能装个系统和一些其他东西，但是我的一些开发工具啊，工作相关的工具都想放在固态上，保证速度，于是乎选个240，应该差不多了。）
+机械硬盘：希捷(SEAGATE)酷鱼系列 2TB 7200转64M SATA3 台式机机械硬盘(ST2000DM006)（建议1Tb起步啦，2Tb应该一般用户都足够用，不用愁了。而且机械硬盘便宜到烂了现在。）
+电源：安钛克(Antec)VP500台式机电脑主机机箱电源500W（40万好评VP系列/台系电容/静音风（小机箱对电源的大小也有要求，要看好咯。这电源好评多，品牌也行，也就这个。）
+键盘：雷柏（Rapoo） V500PRO 104键混光机械键盘 游戏键盘 吃鸡键盘 背光键盘 电脑键盘（较便宜的机械键盘了，有的话可以买更好的。不过也够用了。）
+鼠标：华擎（ASRock）ASR-M01 幻影之舞 光电游戏鼠标 电竞鼠标（这是是买华擎主板送的，还不错）
+散热器：乔思伯（JONSBO）CR-701七彩流光版 CPU散热器 （多平台/5热管/下吹CPU散热器/12CM（买这个主要为了颜值啊，加点氛围，不然的话完全不用买，cpu自带散热风扇的了。一开始买回来只为了颜值，买回来后发现，乔思伯真的很不错，颜值做工用料设计都很用心很有保证，说是追求完美的厂家一点不过分，以后买东西乔思伯有的都可以考虑买乔思伯的。）
+显卡：显卡一开始没买的。因为集显先可以先用着，前期还是开发为主，后面买了条影驰的GTX 760 发现不兼容 win10 因为760最高支持dix11，而win10的dix是 12；后面换了条微星（MSI）GeForce GTX 1050 Ti GAMING X 4G 1290-1493MHZ 128BIT GDDR5 PCI-E 
+
+
+
+用760显卡的话总费用是4500左右，算在预算中，后面不兼容换了1050就5000多点，超了点，也还行。个人感觉整体配置旗鼓相当，都是统一等级的硬件，不会说那个硬件买贵了，浪费看了，用不了这么高。但要说唯一的话那就是显卡吧，但是显卡可以长期用，以后升级其他都不用升级显卡。
+有什么好建议，也可以留言，给其他人一些参考。
+
+装机京东就是快啊，全部京东送货，隔天就全到了，服务赞赞赞！下面就开始紧张的装机咯！
+
+
+
+
+
+
+拆机箱
+机箱做工设计都完美
+
+
+
+
+
+
+装电源
+500w大电源，不怕不够啦。
+
+
+
+
+
+拆主版
+主版还行，小身板，麻雀虽小五脏俱全啊。
+
+
+
+
+拆CPU
+八代I3，基本够用也稳定。
+
+
+
+
+把cpu装主版上
+这部最好小心点，毕竟cpu你懂的~
+那封盖是要拿掉的哦。
+
+
+
+
+装Cpu风扇
+自带的风扇没有，用了乔思伯的风扇，做工设计颜值都一流。
+
+
+
+
+
+把装好Cpu和风扇的主版装进机箱
+装好主版就连机箱线，电源线等，不懂的百度可以找到教程，跟着教程走没什么难度。
+
+原来这主版自带无限网卡，自带两天线，赞！
+
+
+
+
+连好机箱线跟电源线就可以开机了，这里用的是主版的集显。开机试试
+注意的是有些主版cpu要独立供电，我这款就是。
+
+
+能进到主版的bios就证明成功了。
+
+
+
+成功，就可以把剩下的机械和固态硬盘装上去了
+机械不用说了，有了固定座。固态硬盘是有些水绵圈，装上后再卡位向下推卡进去的，挺不错的设计。
+显卡最后装，因为比较大。
+装完就可以开机装系统了。
+
+
+
+
+结尾好了，装机到此结束了。好久没装机了。一开始卡在了cpu独立供电哪里。因为之前的都是主版供电给Cpu的啊，坑。折腾了很久，主版通电，风扇也转，就是进不去主版的bois。后来发现cpu附近有6口的电源位，后来插上就行了。
+感觉自己组装会更适合自己，配置啊，机箱啊颜值啊。也实惠。也可以增强自己的动手能力。好了，大家也去装机把。
+
+
+</section>
+    <p class="sub">5月 10, 2018</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/20484/" class="title">小程序开发之-使用GraphQl</a>
+    <section class="desc">
+  之前文章有介绍到graphql的好处，而且很大可能就是未来Restful api的代替者,不过以后的事谁也不好说啊。反正就是好的东西，我们就想折腾下用起来。最近自己写了小程序，想顺便学习graphql，实践。于事有了本篇教程
+ApolloApollo是一整套的关于GraphQl的工具套件吧，各种后台语言java、php、nodej的都有，关于前端框架封装GraphQl，让GraphQl使用更简单，更优化的库类也都有。vue、react等。
+小程序但小程序不同传统的网页。小程序是无浏览器环境的，而且也没ajax用的是自己的api。很显然apollo这么好的社区出的这么好的工具在小程序上根本没法用啊。
+毕竟小程序比较小众，想用的话就只能自己折腾了。
+原理其实GraphQl请求跟Restfel api的请求一样，都是一个http请求。只是GraphQl的请求入口有且只有一个，一般是graphql服务端的入口，一般是/graphql 而且是post放，所有。
+所以GraphQl请求无非就是post方法的http://xxxx.com/graphql的请求后台再传这graphql的参数来使graphql服务端根据参数不同来执行不同的方法，从而实现不同的接口效果。
+搞清这原理就可以慢慢折腾了。
+开始var Fly=require(&quot;../lib/wx.js&quot;) //wx.js is your downloaded code
+var fly=new Fly(); //Create an instance of Fly
+import message from &#39;./message&#39;
+import { create_client } from &#39;tiny-graphql-client&#39;
+
+const client =create_client( async( body)=&gt;{
+  const res_data = await fly.post(&quot;/graphql&quot;,body)
+  const {data ,errors}=res_data;
+  if(errors){
+    message.error(errors[0].message);
+    throw errors;
+  }
+  return res_data.data;
+})
+
+export default client;
+fly是一个兼容小程序的http组件，你可以使用原生的request来替换。
+tiny-graphql-client 是一别人封装好的graphql工具类，详情：https://github.com/xialvjun/tiny-graphql-client
+graphql返回的字段，一定会有data，无论成功后失败。只是有错误失败时才会有errors字段。所以我们在全局处理graphql返回时先判断有没有errors字段的存在，有就是有错误。没有就是成功了。
+
+使用queryuser=await this.$parent.client.run(`query getUser{getUser{id nickName avatarUrl space nowSpace album}}`);mutationlet bucket=await this.$parent.client.run(`mutation createBucket($name:String!){createBucket(name:$name){id name createdAt}}`,this.album);使用前记得先引入上面封装好的client哦。
+好了，大家快来试试吧。
+
+
+</section>
+    <p class="sub">10月 10, 2017</p>
+  </div>
+</div>-->
+<!---->
+<!--  <div class="project-card">
+  
+    <div class="imgWrap">
+      <img src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg" alt="" />
+    </div>
+  
+  <div class="ctnWrap">
+    <a href="/posts/38984/" class="title">小程序开发-路由拦截设计</a>
+    <section class="desc">
+  首先说下小程序的简单运行：1.app onLaunch
+2.如果有app onLaunch 的 path参数有值则跳到 path对应页面否则为app的json第一个路由
+onLaunch 的path怎么来的？1.通过分享给朋友的接口传的path
+暂时只发现这个
+app onLaunch 里拦截路由？以后可得知小程序统一入口就是app的onLaunch，所以在onLaunch 拦截是最理想的。但是onLaunch里并没有提供拦截的接口或方法，当你在onLaunch有异步处理时，还没处理完，onLaunch就直接跳到了下一个页面了。
+例如：你想获得用户信息在进入页面。
+你在app onLaunch去请求用户信息，但onLaunch不会等你请求完再跳到页面。
+所以在app没办法实现。
+app.json第一个路由里拦截！！！既然app里面实现不了只能退居求次在第一个页面处理了，因为当没有path（onLaunch(option)）也就是正常打开小程序都会进入第一个页面，我们可以在第一个页面统一处理好逻辑再选择去跳其他页面。
+分享的页面带path会直接跳到path页面不跳到第一个页面？其实很简单分享的时候分享页面的path填写第一个页面路由例如/pages/login,在把你当前页面的路由作为一个参数一起传过去：
+onShareAppMessage(res) {
+      let fromPath=&#39;/pages/activity&#39;
+      return {
+        title: &#39;xxxxx！&#39;,
+        path: &#39;/pages/login?fromPath=&#39;+fromPath,
+        imageUrl:xxxxx,
+        success: (res) =&gt; {
+          xxxxxx
+        }
+      }
+    }这样分享出去的页面就会跳到一个页面而且是带你分享的页面路径作为参数的。
+在第一个页面获得分享的路径做跳转就好，还可以加些逻辑之类方便多。
+上面的写法有个问题，如果分享的页面也要参数，分享的path就会有两个??
+/pages/login?fromPath=/pages/activity?activityId=1
+如果这样直接传过去第一个页面，activityId会被拦截掉，所以我们需要一个把问号转码的函数转码了再传过去，第一个页面获得页面后解码再跳转即可:
+onShareAppMessage(res) {
+      let fromPath=&#39;/pages/activity?activityId=2&#39;
+      fromPath=encodeURIComponent(fromPath);
+      return {
+        title: xxxxxx！&#39;,
+        path: &#39;/pages/login?fromPath=&#39;+fromPath,
+        imageUrl:xxxx,
+        success: (res) =&gt; {
+          xxxx
+        }
+      }
+    }然后在第一个页面使用对应函数解码即可：
+onLoad(params){
+    if(params.fromPath){
+            let fromPath=decodeURIComponent(params.fromPath);
+            ///do somethings...
+   }
+}大概流程就这样。
+
+
+</section>
+    <p class="sub">10月 10, 2017</p>
+  </div>
+</div>-->
+<!---->
+<!--
+-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+<div class="main-right flex1 flex flex-v">
+    <div class="box-content flex1">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                
+                    <a title="mysql Group by获取每个分组最新的记录" alt="mysql Group by获取每个分组最新的记录" href="/posts/1590/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="mysql Group by获取每个分组最新的记录" alt="mysql Group by获取每个分组最新的记录"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; mysql Group by获取每个分组最新的记录 &gt;</div>
+                            <div class="content flex1">
+                                
+  GROUP BY 查询默认是去每个分组第一条很多时候我们需要获取每个分组的最后一条，例如查当前用户于其他用户的聊天记录的最后一条。
+原始sql:
+SELECT * FROM table  GROUP BY type  ORDER BY createdAt DESC这里的ORDER BY是不生效的，因为GROUP BY 的执行会先于 ORDER BY
+于是我们可以先排序后再来GROUP BY：
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC
+) as result
+GROUP BY result.type大功告成！但是在某些mysql版本group by虽然不是拿了第一条，但也不是最后一条，奇了怪了。排查下，排序的查询是没问题，GROUP BY 后就出问题了。后来百度以一段时间啊，好像有些兼容性，排序查询的时间要加上LIMIT就可以了
+完整的正确写法:
+SELECT * FROM (
+  SELECT * FROM table ORDER BY createdAt DESC LIMIT 9999
+) as result
+GROUP BY result.typeNices!
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 2, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="理财入门—懒人记账" alt="理财入门—懒人记账" href="/posts/6/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="理财入门—懒人记账" alt="理财入门—懒人记账" src="../images/20200630162413.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 理财入门—懒人记账 &gt;</div>
+                            <div class="content flex1">
+                                
+  背景为了生活更美好，最近开始学起了理财。穷人家的孩子，从小到大没人告诉过你理财的重要性，自然也就没那习惯了，后来自己出来赚钱了。自然开心啊，自己的钱次怎么花就怎么花。之前喝瓶可乐都要问老爸老妈，现在直接一箱箱买，想喝就喝，快哉快哉。长期这么自由自在真的很爽，可存款却永远在原地踏步，不见增长。眼看身边的人都买车买楼了，而自己还一无所有。可见凡事都有代价的。总结下原因就是不会理财、大花、月光族等等。于是痛下决心开始理财，控制自己的消费。第一步就当然是记账啦。记账可以知道自己每个月的消费、收入，清晰知道自己主要消费在哪里？哪些消费过度了，应该控制下的。但这一步也是艰难的一步啊！
+市面上的记账软件说到记账，第一步就是找个好用的记账软件了。市面上的记账软件很多，基本都满足需求。但！就是坚持不下去，因为每次的消费都要手工在软件上记下去，坚持了10 天坚持不了15天。换了很多了记账软件都这样，功能是满足了，但没解决我的懒惰啊。而已有时很匆忙的一笔微信转账，一下就忘了记账了。于是乎我在继续寻找适合我的记账。我的设想就是有没有可以读取信息的记账软件，然后我以后的消费都走银行卡，消费了收到信息，软件自动记录，是不是很方便？但在市面找了一圈后发现，有些记账软件是可以读取短信消费记录的，但它并不知道消费的分类，需要自己的手选是个大工程。然后各种卡的话也容易混淆。原本想自己找时间写一个的，读读短信信息应该没什么难度。但后来我找到了一个比较理想比较适合我的记账软件，也就省得我自己开发了。
+微信记账本我的最终选择就是微信记账本。是一个小程序很方便也不用安装。他可以读取你的微信各种消费和各种收入信息，我本来的比较多的也就是微信支付，除了keep会员是华为支付，京东购物用的是京东支付外，都是走的微信支付，自动记录。现在我只要要用其他不走微信支付的支付方式改成微信支付就好了。比如取消keep在华为支付的自动续费，改微信支付自动续费。京东购物也不用京东支付了，直接走微信支付，这样就搞定了，是不是很方便？而且微信记账本有一个好处就是商家走微信支付时，每一笔的消费都已分好了消费类目，所以可以自动给每笔消费分类，而且你的微信转账，收发红包都会一一帮你记录，实在太适合了。微信的确定就是淘宝购物吧，好像不支持微信支付的，需要手动去添加记录。还有就是银行卡的收入比如工资，也要自己手动去添加记录，还好的是微信记账功能有个提醒功能，比如工资，你可以设置个提醒，每个月发工资时提醒添加工资收入记录。而且在微信的生态里，我们平时用得最多的就是微信了，可不大可能会错过没看到提醒。如果你觉得也很懒，不妨按照我的方式试下微信记账本吧。如果你觉得对你有帮助，可以请我喝杯奶茶哦😬
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # life
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>6月 30, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="AE渲染成视频第一句语音渲染变声问题" alt="AE渲染成视频第一句语音渲染变声问题" href="/posts/5/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="AE渲染成视频第一句语音渲染变声问题" alt="AE渲染成视频第一句语音渲染变声问题" src="../images/ae.png"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; AE渲染成视频第一句语音渲染变声问题 &gt;</div>
+                            <div class="content flex1">
+                                
+  背景最近在玩AE做动画，导到ME,然后渲染生成视频, 视频有配音是AI合成的。在AE预览的时候是没问题的，但是在ME渲染成视频后，视频的第一句音频渲染总是有问题的，很快，也变了调。而且只有第一句有问题，后面的语音音频都正常。
+解决方案这个问题找了很久一开始以为是AI生成的语音音频有问题，几重新生成了次，换个格式都不行，把后面正常语音替换第一句语音，发现还是一样，确认和音频无关。然后我才猜想是不是渲染的格式或者用来渲染的某些选项问题呢？后来试了很多都不行。最后想为什么只有第一句怕的，然后我把第一句语音删了，发现不怕了，可能就是因为第一句太靠前了，视频刚开始就有一段语音音频，然后我尝试把吧原来的第一段语音音频，拖后面一点，最后没玩解决的！记录下，也方便遇到同样问题的人
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>6月 30, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="sequelize 问题汇总" alt="sequelize 问题汇总" href="/posts/4/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="sequelize 问题汇总" alt="sequelize 问题汇总" src="../images/sequelize.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; sequelize 问题汇总 &gt;</div>
+                            <div class="content flex1">
+                                
+  Sequelizesequelize 是nodejs里面很成熟的数据库ORM，配合nodejs使用，开发事半功倍。相较于其他语言ORM，sequelize 有着一整套完整的解决方案，包括各种复杂的查询，联表，数据库表的设计与生成等。
+本文主要记录各种负责的数据查询使用sequelize如何实现，还有记录一些坑或bug。
+sequelize include order写过原生sql查询的人都知道，排序都是在最外层排序的，所以一下代码无效:
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;,
+            order: [[&#39;createdAt&#39;, &#39;ASC&#39;]]
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;]]
+})以上查询最外层的order是有效的， 但是里面include层的books数组排序是无效的，会导致每次查询的数据顺序不一样，要指定include里面数据的排序，应该这样写
+ctx.model.User.findAll({
+    include: [
+        {
+            model: ctx.mode.Book,
+            as: &#39;books&#39;
+        }
+    ],
+    order: [[&#39;createdAt&#39;, &#39;DESC&#39;], order: [[&#39;books&#39;, &#39;createdAt&#39;, &#39;ASC&#39;]]]
+})类似于原生查询的A.createdAt
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>6月 17, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="关于Vue-router=&gt;addRoutes 方法的一些坑" alt="关于Vue-router=&gt;addRoutes 方法的一些坑" href="/posts/3/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="关于Vue-router=&gt;addRoutes 方法的一些坑" alt="关于Vue-router=&gt;addRoutes 方法的一些坑"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 关于Vue-router=&gt;addRoutes 方法的一些坑 &gt;</div>
+                            <div class="content flex1">
+                                
+  关于Vue-router=&gt;addRoutes 方法的一些坑
+router.addRoutes(routes: Array&lt;RouteConfig&gt;)
+
+
+routes 是要符合路由规范的数组
+
+router.addRoutes 只是注册了路由的规则，但是并不会自动更新路由列表项，需要先手动更新路由列表，再去注册规则
+
+// 手动添加路由列表项
+router.options.routes.push(...routers)
+// 注册路由规则
+router.addRoutes(routers)
+
+注册完最好重定向
+如果添加路由之前，要访问的地址是需要 addRoutes 添加的。
+那么在调用addRouters之前路由并不存在，所以注册完需重定向一下要访问的地址
+在路由导航守卫可以这样些
+router.beforeEach((to, from, next) =&gt; {
+  // 其他逻辑
+  router.options.routes.push(...asyncRouterMap)
+  router.addRoutes(asyncRouterMap)
+  next(to.path)
+})
+
+动态引入组件component
+网上很多人的文章的copy的，也没验证过，所有导致搜索的大部分方法都是不行
+
+component: () =&gt; import(componentPath)  不行
+
+component: () =&gt; import(&#39;@/&#39; + componentPath)  不行
+还有很多的网上办法都不行的
+最后找到了解决方法：
+component: require.ensure([], (require) =&gt; {
+        resolve(require(&#39;@/&#39; + componentPath))
+}),
+注意： @/ 要分开写死，不可以连同地址一块传入，可能是为了给webpack标识的
+
+
+
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>2月 28, 2020</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="自主项目【51领养】" alt="自主项目【51领养】" href="/posts/2/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="自主项目【51领养】" alt="自主项目【51领养】" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/51adopt/banner.png"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 自主项目【51领养】 &gt;</div>
+                            <div class="content flex1">
+                                
+  前言因为自己有养猫，对流浪动物啊也时常关注，想多多少少出一份力啊。
+我逛了下一些宠物机构，发现了很多宠物机构，没有自己的宠物管理系统，用户难以线上浏览可以领养的宠物，且每个机构的可宠物信息并不共享，就一定程度上加大了用户领养的难度，想领养的人只能线下一间间跑，看有没有合缘的宠物领养。
+而且一些个人的宠物生了，需找人领养，只能发发朋友圈，信息扩散程序可想而知，从而加大了领养的难度。
+所以我就想做一产品，可以给想领养的人，在线上可以看到身边可以领养的宠物，看上了就具体线下了解。
+也可以给一些没有技术支持的机构/个人提供一个宠物的发布等管理系统让领养可以跨上那么一小步。
+项目状态项目现已完成了基本功能上线，功能会不断的迭代更新。
+大家微信搜索51领养 就可以查看，或者扫描一下小程序码即可
+
+宣传项目刚上线啊，也不知道怎么宣传好，大家可以给给意见。
+我自己做了张海报，不嫌弃的可以帮忙宣传下。
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>12月 25, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="webpack使用html-loader引入html模板" alt="webpack使用html-loader引入html模板" href="/posts/100000/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="webpack使用html-loader引入html模板" alt="webpack使用html-loader引入html模板"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; webpack使用html-loader引入html模板 &gt;</div>
+                            <div class="content flex1">
+                                
+  前言最近在打一个多页面的手脚架，因为经常会接到一两个页面的临时活动的开发需求。
+vue开发栈喜欢了，想用vue来开发，有感觉有点累赘，大材小用的感觉。
+直接新建个html，手撸起来又各种问题，导致开发效率低下，例如:
+
+平时用惯了es6语法，要写回es5,要经常查文档
+不能使用预处理样式(less,sass)，这个效率大打折扣啊
+手动页面优化(压缩，去除注释,检测语法)
+
+本着现代开流，还是自己根据自己的需求撸个基于webpack的多页面开发手脚架，虽然没用vue，但是开发的流程基本跟vue开发流程一直，能自动化的部分都自动化，能提高开发效率的都用上，以后再也这类需求，就直接拉下手脚架，开发就行，不用再另外一个个配置了。
+本以为大功告成，却忽略了一个问题，就是有时几个页面的头部或者底部是共用的，这时候需要分离出来，不然三个页面个三个一样的头部，要修改头部时也要修改三个页面，这很不好维护。
+于是乎就寻找各种方案了
+html 引入模板
+iframe
+首先淘汰了这种方法，因为iframe算是历史遗留产物，而且会引起许多的bug，能不用还是不用吧。对iframe真心没好感。
+
+模板引擎
+这是开始确认的方向，因为之前玩node用过ejs，使用起来简单方便，于是乎在网上找了各种方案，但还是没找到合适的。
+
+一种是基于一个布局模板去生成html，但这不够灵活啊，不是所有的页面都一定要基于那个模板，比如有几个页面公用一个头部，另一个页面公用另一个头部这样，我能根据自己需求来引入才是完美的，而且ejs并没有继承的功能，不能再一个模板上追加内容，也是个大问题。
+第二种就是项目直接全部用ejs，webpack解析打包成html。虽然解决了上面的问题.但对于前端开发来说不是很友好，都变成了.ejs后缀了，最终还是舍弃了。
+
+
+html-loader 的  interpolate
+html-loader 大部分人都有用，甚至在解决这个问题前我自己也用了，但大部分人都想我一样，用来处理html文件中的静态资源文件，但其实有一个引入模板的功能。
+首先要在webpack rules里加上加一条处理html的规则
+{
+      test: /\.html$/,
+      use: {
+        loader: &#39;html-loader&#39;,
+        options: {
+          // 处理html 引用的图片
+          attrs: [&#39;img:src&#39;],
+          // 开启 html模板功能
+          interpolate: true
+        }
+      }
+    }
+
+
+   然后在html文件就可以直接引入其他html模板了
+   &lt;!DOCTYPE html&gt;
+   &lt;html&gt;
+
+   &lt;head&gt;
+     &lt;title&gt;index&lt;/title&gt;
+     ${require(&quot;../layouts/head.html&quot;)}
+   &lt;/head&gt;
+     ${require(&quot;../layouts/header.html&quot;)}
+   &lt;body&gt;
+
+     ${require(&quot;../layouts/footer.html&quot;)}
+   &lt;/body&gt;
+
+   &lt;/html&gt;
+   简单又灵活，Get it！
+​        最后也分享下自己配置好手脚架：webpack-multiple-pages-template
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>12月 4, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="使用headless cms + ssr渲染框架来开发网站" alt="使用headless cms + ssr渲染框架来开发网站" href="/posts/12005/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="使用headless cms + ssr渲染框架来开发网站" alt="使用headless cms + ssr渲染框架来开发网站"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 使用headless cms + ssr渲染框架来开发网站 &gt;</div>
+                            <div class="content flex1">
+                                
+  前言由于我是一名前端开发者，偶尔会接一些私单，最主要的无非就是帮人做网站了。
+CMS根据以前的经验无非就是前端写完界面，然后找一个cms去套，但由于国内的cms框架（duxcms我之前一直用,dedecms.phpcms,wordpress）已经很难满足了现在的客户需求了。
+比如做个网站，一开始以为做个网站就行，谁知道还要做小程序，App等等，但之前的cms都不带api，即使有写带比如wordpress，api接口也是问题多多的。
+然后可以看国内开发的cms，即使的新开发新产品，也是比较保守的，还是跟以前的cms差不多，无非就多提供了api 供用户调用，然后后台操作界面交互也不咋地，所以很难找到一款非常合适的cms框架。
+​        而我感觉国外的就比较思想超前敢冒险尝试，既然api方式通用，那我就专门做提供api和后台内容操作的cms，数据和界面教还给前端，自己爱拿什么数据那什么数据，唉什么布局怎么布局，前后分离。然后cms就专心做好内容管理和api接口的设计就可以了。
+虽然这个想法早期还有点冒险，比较像这种前后端分离的spa还有有很多问题的
+
+做网站的人很看重的seo问题
+首屏加载速度问题
+
+问题虽然有，但方向应该是对的，就看怎么解决这些问题而已。
+为什么写网站也要用spa​        而且平时在公司或者自己写前端，写法习惯都已经从jq过渡到了前后端分离框架vue、react、angular等写法的习惯了。然后接了一个私单，又要突然转回去以前那种jq操作dom的 时代。
+这个过程实在难受，而且效率也低。
+有没有办法开发个网站也能使用现代化的开发流程和各种工具，然后解决seo，和首屏加载慢等spa问题的。
+于是乎后面出现了各种ssr服务端渲染框架，去帮spa应用解决这些问题。
+SSR 服务端渲染框架 使用SSR（也称为“通用”或“同构”）模式，将使用Node.js服务器将基于Vue组件的HTML传递给客户端，而不是纯JavaScript。   — nuxt.js
+目前主流有两个:
+
+vue 架构的 nuxt
+react 机构的 next
+
+两个都是开箱即用的，大大降低了开发部署的难度。
+主要用那个技术栈就用那个框架吧，react好像还有个 gatsby好像挺好用，但我不主要react技术栈 ，所以就没深入了解了，看了文档和别人介绍感觉挺不错的，react技术栈的同学可以去了解下。
+前端的开发框架我们选好了，然后我们就要选个后端的cms 去管理数据，提供api接口调用数据了。
+我们先来想一下我们期待的cms是怎样的:
+
+内容可定制化程度高，因为网站有各种功能，比如轮播的海报，收集用户表单，新闻站的文章，画册张的相册等。
+
+后台交互良好，至少交付给客户时，客户很快有会用。
+
+良好的api接口设计
+
+对gatsby友好
+
+提供全平台sdk
+
+
+headless cms 翻译一下就是只提供纯api的cms，不包含任何客户端代码，也就是老子只负责api你手机，还是网页想咋用咋用。 —  摘抄自北方蜘蛛
+Contentful你搜headless cms，然后到处都能看得到Contentful
+来说说它的强大之处：
+
+API-First CMS to Power All Digital Products | Contentful简单翻译就是第一个只提供api的cms吧，先做有经验优势嘛
+
+免费，不用自己部署，但有一定限制
+
+Serverless 架构部署，可能就是用了serverless 才有可能有免费的提供用吧
+
+提供restful 接口 + graaphql 接口
+
+支持多站点，多项目，但需另外收费。
+
+
+可以说contentful是个先进技术集合的cms，各种现代化技术集合一体。
+然后操作界面也比较简单简洁，感觉是挺不错的，操作还是流畅的，还提供多角色共同管理。
+
+但作为接私单来开发网站还是有些问题的:
+
+不开源，所以不可以自己部署。你做完交接，要客户登陆别人的网站去管理，这样不大好吧。
+
+后台管理不支持中文，怕客户看不懂，不好操作。
+
+不收费的有限制，感觉以后也会慢慢变成收费的，收费项又确实比较贵
+
+暂时没看到内容的导出与导入
+
+
+strapi我试了挺久的一个，功能也简单，界面也简洁。
+优势:
+
+开源免费，可以自己部署
+
+简单又便捷，添加内容模型，添加内容，然后设置用户对这个内容接口的权限就好了
+
+规范的restful接口，且接口信息简洁，没有返回其他很多没有必要的东西
+///banners
+[
+    {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;轮播海报&quot;,
+        &quot;link&quot;: &quot;sadasdasdasd&quot;,
+        &quot;created_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.350Z&quot;,
+        &quot;image&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;teacher-avatar.gif&quot;,
+            &quot;hash&quot;: &quot;466289966ffd4599afd646ede29bac40&quot;,
+            &quot;sha256&quot;: &quot;kgeU5VQ-bYTbtNlEwoTi_4LPykpIPxrtZLtlL-ehyAY&quot;,
+            &quot;ext&quot;: &quot;.gif&quot;,
+            &quot;mime&quot;: &quot;image/gif&quot;,
+            &quot;size&quot;: &quot;1.48&quot;,
+            &quot;url&quot;: &quot;/uploads/466289966ffd4599afd646ede29bac40.gif&quot;,
+            &quot;provider&quot;: &quot;local&quot;,
+            &quot;provider_metadata&quot;: null,
+            &quot;created_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;,
+            &quot;updated_at&quot;: &quot;2019-11-14T07:19:50.471Z&quot;
+        }
+    }
+]
+
+后台字段布局可自由拖动布局
+
+有国际化，虽然中文的有些翻译有些蹩脚，有些也没翻译，但总比全英文好啊
+
+也提供Graphql接口
+感觉strapi虽简洁，简单，但功能齐全
+
+
+个人感觉的缺点：
+
+不支持多站点多项目
+比如我想自己搭一个数据管理中心，给个各个网站使用，每个网站都有新闻内容模块
+这时候我不能建一个新闻内容模块一起用，这样数据就混乱了。只能布置多个strapi或者新建多个新闻内容模块，以区分不同网站的新闻内容模块。
+其实有考虑过根据新闻模块关联用户、根据用户去区分新闻模块对应的数据，这是一个可行的方法。但只只对没有用户系统的站点或项目，不然就又轮到用户信息混乱了。
+但是用户又可以根据用户组去区分，感觉还是可以实现的-&gt;
+根据添加不同用户组然后添加用户，去区分不同的网站，从而去同一个内容模型拿对应的内容数据
+但说回来，要不同项目用统一个模型，两个项目的统一模型要高度统一，不然还是有很多问题的。
+期待strapi后面可以有站点或者项目的概念，在站点或项目下，再去新建不同的内容模型，这就完美了。
+
+
+ghost我用过算最好的博客系统吧，性能飞跃，后台管理、写作交互,体验都完美，也有很多很漂亮的，后来因为服务器到期了，续费太贵了，于是才把博客迁移到了hexo+github pages 免服务器啊，还可以https，当然速度和原来的没法比啊。而且你github 搜 nodejs 的 headless cms 第一名就是ghost,第二是``strapi`
+个人感觉的优点:
+
+简单简洁，为博客而生，主要就添加文章或页面
+完美的写作体验，完美兼容markdown和html 写作,也可以一篇文章即html又有markdown
+主题精美，速度飞快，后台操作也很友好
+即提供服务端渲染，也提供api
+代码开源，却已盈利
+完善的开发手脚架，不仅可以初始项目，更包括集成 Let&#39;s Encrypt 自动帮你生成ssl证书，配置nginx ssl配置,等等……
+
+个人感觉的缺点:
+
+主要专注于博客，对于一些网站的其他功能还是显得有些不足。可扩展性不强。
+虽提供api，但不是restful 规范的
+主题虽精美，但相对于wordpress 还是相对较少的
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>11月 25, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="Frontend-Sniper前端错误上报系统" alt="Frontend-Sniper前端错误上报系统" href="/posts/64826/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="Frontend-Sniper前端错误上报系统" alt="Frontend-Sniper前端错误上报系统"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; Frontend-Sniper前端错误上报系统 &gt;</div>
+                            <div class="content flex1">
+                                
+  前端错误监控系统服务端其实线上已经有很多监控系统了，例如fundebug。试用了一下还是挺不错的。可惜都是收费的，免费的只能创建一个项目，收费也不便宜。对于一些小公司来说很难花钱去搞，而且对小公司来说功能也不需要太复杂。一些js的报错和接口报错就可以大大加快bug的修复，和预知bug。（当上级和测试都还没发现时）所以我还是写这么个系统，是从自身需求出发吧。功能可以慢慢完善。
+现在初期只实现了简单的js和接口资源报错。后期会加入UA和用户等信息以完善错误信息追踪错误。对服务端还是新手所以代码质量….graphql也是试手。但好在错误监控系统一般内部人使用，独立不影响线上项目和用户。所以大胆地使用吧。
+项目集
+服务端 frontend-sniper-server
+管理后台 frontend-sniper-admin
+错误探针 better-js
+
+todo
+ 支持vue
+ 邮件通知（新错误报错，旧错误5n次发邮件报错）
+ 添加UA信息
+ 添加用户信息
+ 记录用户行为
+ 手动上传报错
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 21, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="一起用失效" alt="一起用失效" href="/posts/24625/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="一起用失效" alt="一起用失效"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 一起用失效 &gt;</div>
+                            <div class="content flex1">
+                                
+  
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 21, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="重复多条记录问题" alt="重复多条记录问题" href="/posts/41967/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="重复多条记录问题" alt="重复多条记录问题"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 重复多条记录问题 &gt;</div>
+                            <div class="content flex1">
+                                
+  mysql group by 和 order by 一起用失效我自己写了一个前端错误监控系统。
+前端有各种报错，后台就会自动发邮件通知、
+这里就会遇到同一个错误可能很多人遇到，或者同一个人遇到很多次。
+这样同一个错误就会有很多次报错。
+当管理员进入后台时，看到很多同一个错误的报错，这很明显不人性化。
+于是我就设计成，同一个错误的合并，只显示最新那个。
+一开始sql写法为
+SELECT * from `errors` GROUP BY `title`,`msg`,`category`,`level`,`appId`  ORDER BY `createdAt` DESC
+发现同一个错误是合并了，但是 ORDER BY 并没有生效，合并后的错误不是最新的一条错误而是最早的一条。于是查了资料发现，GROUP BY 没有排序功能，默认取合并时的第一条。于是就想到了，先排序完再合并就好了，于是有下面代码：
+SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC ) as result GROUP BY `title` ORDER BY `createdAt` DESC
+但发现还是没用啊，我百度了下，很多人也是这样写的，但为什么就不生效呢？经过一番查找，终于找到原因了，mysql版本的问题，以上的代码在5.6或以下的代码应该都可以的，但在5.7则要加limit条件，不然子查询是不执行的，完整代码如下
+SELECT * FROM (SELECT `errors`.*,`apps`.name from `errors` LEFT JOIN `apps` ON `errors`.`appId`=`apps`.`id` WHERE `apps`.userId=1  ORDER BY `createdAt` DESC LIMIT 100) as result GROUP BY `title` ORDER BY `createdAt` DESC
+是不是很坑。。。
+记下先
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 21, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="使用HTTPCODE替换自定义CODE" alt="使用HTTPCODE替换自定义CODE" href="/posts/51837/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="使用HTTPCODE替换自定义CODE" alt="使用HTTPCODE替换自定义CODE"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 使用HTTPCODE替换自定义CODE &gt;</div>
+                            <div class="content flex1">
+                                
+  | 前言：现在的开发基本都是前后端分离的项目，既解放了前后台各自的生产力（后台专注写业务给出数据就行，再也不用管前端UI的事。前台专注于写UI拿数据就行，再也不用跑后台服务，不用打开eclipse了）又可以一套代码兼容多个项目：APP，网页，微信，微信小程序等。
+但在开发的过程中发现了，现在后台普遍用了自定义code去判断接口的成功失败信息。而http code则变成鸡脖，除非是服务器蹦了之外，其他一律返回200成功。为什么会有这个现状呢？具体不是很了解啊，据说是以前IE上有些http code报错会导致IE一些问题。不知道是不是，知道的可以给我科普下。
+而在开发中使用自定义code也并没有什么问题，例如我们的项目一般接口返回的response信息完整结构：
+{
+    data:{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+    },
+    engine:&#39;.....&#39;,
+    headers:{//....},
+    request:{//....},
+    status:200,
+    statusText:&quot;request:ok&quot;
+}
+而我们开发中一般用一个拦截器去拦截接口中的错误和返回接口要用的东西，不用的heades我们就不返回了。例如:
+response.use(
+  (response) =&gt; {
+    if(response.data.rcode===405){
+      //统一处理某个自定义错误code
+    }else{
+      return response.data;//返回我们要用的数据
+      promise.resolve();
+    }
+  },
+  (err) =&gt; {
+    //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+    //发生网络错误后会走到这里
+    if(err.status&gt;=500){
+       //统一处理某个httpcode 500以上错误
+    }
+  }
+);
+使用了拦截器后我们正常得到的数据格式如下:
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+},
+但我们请求完数据后必须判断rcode是否成功才好操作,否则会报错，例如
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+以上就基本大部分公司的写法，也没什么问题。但写多了（例如：100个接口）就会发现,100个接口，前端就要写100个if(res.data.rcode==300)。能不能有办法优化下。
+后来用接触了nodejs 自己写后台接口发现是可以优化的，而且对于接口比较多的项目，效率可以大大的提高，对于前后台都是。那就是用httpcode替换自定义的code。
+先来说说httpcode相对于自定义code的好处
+规范，httpcode的规范有国际的规范，百度搜一下就有。而使用自定义code规范都是自己定的，而且每个项目的定义code的字段，每个值的规范也不一样容易混乱。如果每个项目都用httpcode 都用国际的规范这样是不是会好很多？
+对于后端开发来说使用httpcode可以大大增加效率，例如：
+
+
+使用自动code时输出数据
+//成功时
+this.body={
+  data:{
+      userList:[{id:1}]
+  },
+  rcode:300,
+  msg:&#39;成功&#39;
+}
+//失败时
+this.body={
+  rcode:400,
+  msg:&#39;失败&#39;
+}
+
+使用httpcode是，因为默认输出都是200，只有错误的的是否才需要去定义错误码：
+//成功时
+this.body={
+    userList:[{id:1}]
+}
+//失败时
+this.status=400;
+this.body={
+    msg:&#39;失败&#39;
+}你可能以为也就简单了那么点事，可是当有100个接口时呢？效率就是从这里来的啊
+
+
+  对于前端开发来说使用httpcode也可以大大增加效率，例如：
+  拦截器就不用去判断自定义code 而直接判断httpcode：
+  response.use(
+    (response) =&gt; {
+      if(response.data.rcode===405){
+        //统一处理某个自定义错误code
+      }else{
+        return response.data;//返回我们要用的数据
+        promise.resolve();
+      }
+    },
+    (err) =&gt; {
+      //httpcode 错误 默认返回200，所以只要处理500以上的服务器问题即可
+      //发生网络错误后会走到这里
+      if(err.status===400){
+        //统一处理某个httpcode 错误
+      }else if(err.status&gt;=500){
+         //统一处理某个httpcode 500以上错误
+      }
+    }
+  );
+然后再来对比下使用httpcode和使用自定义code的数据个操作：
+//自定义code时返回数据
+{
+        data:{
+            userList:[
+                {id:1}
+            ]
+        },
+        rcode: 300,
+        message: &quot;操作成功&quot;
+}
+
+//httpcode时返回数据
+{
+        userList:[
+                {id:1}
+            ]
+},
+
+
+//自定义code时操作
+let res=await this.api.getUserList();
+if(res.data.rcode==300){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.data.userList;
+}
+
+
+//httpcode时操作
+let res=await this.api.getUserList();
+if(res){//要先判断是否成功,否则失败下面语句会报错找不到&#39;userList&#39;，接口失败是没有返回userList的    
+    this.userList=res.userList;
+}
+虽然感觉就优化了那么点，但真正写起来，那么多个接口，你就会感觉显明方便多，效率也快乐。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 21, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="坑吭记录" alt="坑吭记录" href="/posts/12004/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="坑吭记录" alt="坑吭记录"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 坑吭记录 &gt;</div>
+                            <div class="content flex1">
+                                
+  
+苹果IOS系统分享配置失败，签名错误
+
+原因：苹果IOS系统下，页面跳转时，路由跳转但地址并没有变，还是进入程序的第一个地址，所以签名的地址！=当前页面地址 所以错误了。
+解决:就是手动把url改了，先建一个mixins插件，然后以后那个页面需要分享就引入这个插件就可以了。
+// assign.js
+
+//ios端 histiry 模式兼容问题
+
+const location = global.location
+const u = navigator.userAgent 
+let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+let baseUrl=process.env.BASE_URL.substring(0,process.env.BASE_URL.length-1); // 兼容自定义 BASE_URL
+
+export default {
+  beforeRouteEnter(to, from, next) {
+    if (isiOS &amp;&amp; baseUrl+to.path !== location.pathname) {//只要ios需要处理，其他跳过
+      // 此处不能使用location.replace
+        location.assign(baseUrl+to.fullPath)
+      //location.replace (baseUrl+to.fullPath) 
+      //重定向时用location.replace 其他用location.assign
+    } else {
+      next()
+    }
+  }
+}
+
+IOS 滚动穿透问题：就是非body滚动时，其他其他浮层滚动，会穿透，时body滚动。
+
+原因：我也不知道啊，为什么这么设计，我也不敢问，也不敢说。
+解决：
+// 打开浮层时调用closeTouch阻止body事件，关闭时调用openTouch 恢复
+{
+    data:{
+        //...
+        handler: function (e) {
+          e.preventDefault()
+        }
+    },
+    methods:{
+        /* 解决iphone页面层级相互影响滑动的问题 */
+      closeTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].addEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 阻止默认事件
+      },
+      openTouch: function () {
+        document.getElementsByTagName(&#39;body&#39;)[0].removeEventListener(&#39;touchmove&#39;,
+          this.handler, { passive: false })// 打开默认事件
+      },
+    }
+}
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 21, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="Flex 布局问题汇总" alt="Flex 布局问题汇总" href="/posts/794/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="Flex 布局问题汇总" alt="Flex 布局问题汇总"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; Flex 布局问题汇总 &gt;</div>
+                            <div class="content flex1">
+                                
+  flex布局使用起来很方便\n而且现在的浏览器也基本支持了大家可放心用起来。但用了flex总会有一些小问题这里总结下再使用flex时遇到的问题：
+flex下 input 宽度无法自适应：   &lt;div class=&#39;flex&#39;&gt;        
+    &lt;input class=&#39;flex1&#39;&gt;
+    &lt;button&gt;提交&lt;/button&gt;
+  &lt;/div&gt;
+以上代码在有写浏览器上input宽度不能自适应，导致了input和button宽度固定，如果button的自多点就会超出了父div的宽度了。
+解决方法：
+添加min-width:0;网上说的，但试了下并不行
+
+添加div包裹即可（推荐）
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;div class=&#39;flex1&#39;&gt;&lt;input style=&#39;width:100%&#39;&gt;&lt;/div&gt;
+
+                &lt;button&gt;提交&lt;/button&gt;
+                    &lt;/div&gt;
+                      ```
+### flex 下`text-overflow: ellipsis;`不生效
+```javascript
+  &lt;div class=&#39;flex&#39;&gt;
+          &lt;label&gt;标题&lt;/label&gt;
+                  &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n    &lt;/div&gt;\n    ```\n    以上的div还是不能让`text-overflow: ellipsis`生效\n    \n    #### 解决方法\n    \n    - 父flex加`min-width:0;`\n      ```javascript\n        &lt;div class=&#39;flex&#39; style=&#39;min-width:0;&#39;&gt;\n            &lt;label&gt;标题&lt;/label&gt;\n            &lt;div class=&#39;flex1&#39; style=&#39;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;&#39;&gt;奥术大师多按时发斯蒂芬斯蒂芬斯蒂芬斯蒂芬是否水电费水电费水电费水电费水电费水电费水电费水电费&lt;/div&gt;\n        &lt;/div&gt;\n      ```
+
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 14, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="H5、微信开发video填坑" alt="H5、微信开发video填坑" href="/posts/13681/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="H5、微信开发video填坑" alt="H5、微信开发video填坑"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; H5、微信开发video填坑 &gt;</div>
+                            <div class="content flex1">
+                                
+  “
+ios系统下，视频播放默认全屏播放
+解决方法：加上x5-playsinline=&quot;&quot; playsinline=&quot;&quot; webkit-playsinline=&quot;&quot;
+
+"
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 14, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="REM自适应" alt="REM自适应" href="/posts/52063/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="REM自适应" alt="REM自适应"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; REM自适应 &gt;</div>
+                            <div class="content flex1">
+                                
+  designSize=640 为设计稿大小
+htmlFontSize=100为当设计稿为640px时html font-size为100px
+(建议默认100，因为好换算,10也可以，但pc有些浏览器会不支持12px以下字体，所用100最安全)
+此时1px=0.01rem;
+ (function(doc, win, designSize,htmlFontSize) {
+        var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        docEl.dataset.dpr = dpr;
+        var recalc = function() {
+          var width = docEl.clientWidth;
+          if (width / dpr &gt; designSize) {
+            width = designSize * dpr;
+          }
+          docEl.dataset.width = width;
+          docEl.dataset.percent = htmlFontSize * (width / designSize);
+          docEl.style.fontSize = htmlFontSize * (width / designSize) + 'px';
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window,640,100);
+      ```
+"
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                                    <span href="" class="">
+                      # frontend
+                    </span>
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 14, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="小程序开发-使用editor组件替换第三方富文本组件" alt="小程序开发-使用editor组件替换第三方富文本组件" href="/posts/43892/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="小程序开发-使用editor组件替换第三方富文本组件" alt="小程序开发-使用editor组件替换第三方富文本组件" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 小程序开发-使用editor组件替换第三方富文本组件 &gt;</div>
+                            <div class="content flex1">
+                                
+  小程序富文本问题因为小程序用的不是html标签，，所以市面上的富文本编辑器都不适用，自己改起来也麻烦，大多都是小程序嵌入webview方式解决的富文本编辑框来实现，局限比较大。
+还有个问题就是渲染富文本内容也就是html，前期哟很多第三方组件解决了这个问题  ，例如：htmlparse  等，但大多这些第三方组件也只是解决富文本的的渲染问题，而且性能也较大问题，编辑富文本一直是一个硬伤。最近期小程序推出了editor组件，就能基本解决以上问题，代替市面上第三方的关于小程序富文本插件。
+本文就主要讲解下怎么用editor组件，封装一个自定义的富文本组件，既可以渲染html富文本，又可以变成富文本编辑框。
+editor关于editor组件的使用可以直接看 官方的文档
+editor组件 
+自定义富文本组件 其实 还是比较简单的，editor组件文档里有示例代码，我们把示例带啊跑起来，就是一个富文本编辑框了：
+
+然后我们主要就新建一个组定义组件，把示例带啊复制过去，
+把编辑框内容(html)，是否只读（read-only），placeholder（空提示）作为参数传入即可。
+
+read-only
+ture 时即为渲染html模式，把编辑相关的隐藏即可。
+false 即为编辑框，显示编辑框相关内容，大家自行控制即可
+
+
+需要 注意的是 在组件内获取editor wxml时要加.in(this)表示是组件内的wxml
+wx.createSelectorQuery().in(this)
+        .select(&#39;#editor&#39;)
+        .context(function(res) {
+
+        })
+        .exec()
+剩下的都比较简单了，我直接贴代码,大家可以根据自己需求diy
+  &lt;config&gt;
+{
+  &quot;component&quot;: true
+}
+&lt;/config&gt;
+
+&lt;template&gt;
+  &lt;view class=&quot;wrapper {{readOnly?'readOnly':''}}&quot;&gt;
+    &lt;view class=&quot;toolbar&quot; bindtap=&quot;format&quot; wx:if=&quot;{{!readOnly}}&quot;&gt;
+      &lt;i class=&quot;editicon icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}&quot; data-name=&quot;bold&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-zitixieti {{formats.italic ? 'ql-active' : ''}}&quot; data-name=&quot;italic&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}&quot;
+        data-name=&quot;underline&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}&quot;
+        data-name=&quot;strike&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zuoduiqi {{formats.align === 'left' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;left&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-juzhongduiqi {{formats.align === 'center' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;center&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-youduiqi {{formats.align === 'right' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;right&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zuoyouduiqi {{formats.align === 'justify' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;align&quot;
+        data-value=&quot;justify&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-line-height {{formats.lineHeight ? 'ql-active' : ''}}&quot;
+        data-name=&quot;lineHeight&quot;
+        data-value=&quot;2&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-Character-Spacing {{formats.letterSpacing ? 'ql-active' : ''}}&quot;
+        data-name=&quot;letterSpacing&quot;
+        data-value=&quot;2em&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-722bianjiqi_duanqianju {{formats.marginTop ? 'ql-active' : ''}}&quot;
+        data-name=&quot;marginTop&quot;
+        data-value=&quot;20px&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-723bianjiqi_duanhouju {{formats.micon-previewarginBottom ? 'ql-active' : ''}}&quot;
+        data-name=&quot;marginBottom&quot;
+        data-value=&quot;20px&quot;
+      &gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-clearedformat&quot; bindtap=&quot;removeFormat&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-font {{formats.fontFamily ? 'ql-active' : ''}}&quot;
+        data-name=&quot;fontFamily&quot;
+        data-value=&quot;Pacifico&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-fontsize {{formats.fontSize === '24px' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;fontSize&quot;
+        data-value=&quot;24px&quot;
+      &gt;&lt;/i&gt;
+
+      &lt;i
+        class=&quot;editicon icon-text_color {{formats.color === '#0000ff' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;color&quot;
+        data-value=&quot;#0000ff&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-fontbgcolor {{formats.backgroundColor === '#00ff00' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;backgroundColor&quot;
+        data-value=&quot;#00ff00&quot;
+      &gt;&lt;/i&gt;
+
+      &lt;i class=&quot;editicon icon-date&quot; bindtap=&quot;insertDate&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon--checklist&quot; data-name=&quot;list&quot; data-value=&quot;check&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;list&quot;
+        data-value=&quot;ordered&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;list&quot;
+        data-value=&quot;bullet&quot;
+      &gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-undo&quot; bindtap=&quot;undo&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-redo&quot; bindtap=&quot;redo&quot;&gt;&lt;/i&gt;
+
+      &lt;i class=&quot;editicon icon-outdent&quot; data-name=&quot;indent&quot; data-value=&quot;-1&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-indent&quot; data-name=&quot;indent&quot; data-value=&quot;+1&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-fengexian&quot; bindtap=&quot;insertDivider&quot;&gt;&lt;/i&gt;
+      &lt;i class=&quot;editicon icon-charutupian&quot; bindtap=&quot;insertImage&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}&quot;
+        data-name=&quot;header&quot;
+        data-value=&quot;{{1}}&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitixiabiao {{formats.script === 'sub' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;script&quot;
+        data-value=&quot;sub&quot;
+      &gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-zitishangbiao {{formats.script === 'super' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;script&quot;
+        data-value=&quot;super&quot;
+      &gt;&lt;/i&gt;
+      &lt;!-- &lt;i class=&quot;editicon icon-quanping&quot;&gt;&lt;/i&gt; --&gt;
+      &lt;i class=&quot;editicon icon-shanchu&quot; bindtap=&quot;clear&quot;&gt;&lt;/i&gt;
+      &lt;i
+        class=&quot;editicon icon-direction-rtl {{formats.direction === 'rtl' ? 'ql-active' : ''}}&quot;
+        data-name=&quot;direction&quot;
+        data-value=&quot;rtl&quot;
+      &gt;&lt;/i&gt;
+    &lt;/view&gt;
+
+    &lt;editor
+      id=&quot;editor&quot;
+      class=&quot;readOnly?&#39;readOnly-container&#39;:&#39;ql-container&#39;&quot;
+      placeholder=&quot;{{placeholder}}&quot;
+      showImgSize
+      showImgToolbar
+      showImgResize
+      bindstatuschange=&quot;onStatusChange&quot;
+      read-only=&quot;{{readOnly}}&quot;
+      bindready=&quot;onEditorReady&quot;
+    &gt;&lt;/editor&gt;
+
+    &lt;!-- &lt;view&gt;
+        &lt;button bindtap=&quot;readOnlyChange&quot;&gt;{{readOnly ? '可写':'只读'}}&lt;/button&gt;
+    &lt;/view&gt;--&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+Component({
+  properties: {
+    readOnly: {
+      type: Boolean,
+      value: false
+    },
+      placeholder:{
+      type: String,
+      value: &#39;开始输入...&#39;
+    },
+    html:{
+      type: String,
+      value: &#39;&#39;
+    }
+  },
+  data: {
+    formats: {},
+    bottom: 0,
+    _focus: false,
+    editorCtx:&#39;&#39;
+  },
+  observers: {
+    &#39;html&#39;: function (html) {
+      // 在 numberA 或者 numberB 被设置时，执行这个函数
+      if(this.editorCtx){
+        this.editorCtx.setContents({
+        html: html
+      })
+      }
+    }
+  },
+  attached: function() {},
+  ready: function() {},
+  methods: {
+    onEditorReady() {
+      const that = this
+      wx.createSelectorQuery().in(this)
+        .select(&#39;#editor&#39;)
+        .context(function(res) {
+          that.editorCtx = res.context
+          that.editorCtx.setContents({
+            html: that.data.html
+          })
+        })
+        .exec()
+    },
+
+    undo() {
+      this.editorCtx.undo()
+    },
+    redo() {
+      this.editorCtx.redo()
+    },
+    format(e) {
+      let { name, value } = e.target.dataset
+      if (!name) return
+      // console.log(&#39;format&#39;, name, value)
+      this.editorCtx.format(name, value)
+    },
+    onStatusChange(e) {
+      const formats = e.detail
+      this.setData({ formats })
+    },
+    insertDivider() {
+      this.editorCtx.insertDivider({
+        success: function() {
+          console.log(&#39;insert divider success&#39;)
+        },
+      })
+    },
+    clear() {
+      this.editorCtx.clear({
+        success: function(res) {
+          console.log(&#39;clear success&#39;)
+        },
+      })
+    },
+    removeFormat() {
+      this.editorCtx.removeFormat()
+    },
+    insertDate() {
+      const date = new Date()
+      const formatDate = `${date.getFullYear()}/${date.getMonth() +
+        1}/${date.getDate()}`
+      this.editorCtx.insertText({
+        text: formatDate,
+      })
+    },
+    insertImage() {
+      const that = this
+      wx.chooseImage({
+        count: 1,
+        success: function() {
+          that.editorCtx.insertImage({
+            src:
+              &#39;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1543767268337&amp;di=5a3bbfaeb30149b2afd33a3c7aaa4ead&amp;imgtype=0&amp;src=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20151031%2Ftooopen_sy_147004931368.jpg&#39;,
+            data: {
+              id: &#39;abcd&#39;,
+              role: &#39;god&#39;,
+            },
+            success: function() {
+              console.log(&#39;insert image success&#39;)
+            },
+          })
+        },
+      })
+    },
+  },
+})
+&lt;/script&gt;
+&lt;style lang=&quot;scss&quot; src=&quot;./rich-text.scss&quot;&gt;&lt;/style&gt;
+
+大家赶紧把第三方的富文本组件换过来吧~
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 9, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="产品经理使用git发布/部署Axure原型" alt="产品经理使用git发布/部署Axure原型" href="/posts/45115/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="产品经理使用git发布/部署Axure原型" alt="产品经理使用git发布/部署Axure原型" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BD%BF%E7%94%A8git%E5%8F%91%E5%B8%83%E9%83%A8%E7%BD%B2Axure%E5%8E%9F%E5%9E%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 产品经理使用git发布/部署Axure原型 &gt;</div>
+                            <div class="content flex1">
+                                
+  前言工作了几年了，也和不少产品打过交道发现了和产品交流上的一些问题，就是axure原型分享。
+产品做完原型就要发给老板，设计师，开发看，每人发一份。然后后面原型有修改或添加之类的，又要重新每人发一份，别人又要经常接受一份。
+看似很正常的传统工作流程，但效率有点低，而且接受的人，接受了多个版本以后会经常弄混乱，没有整理的人还要每次去找产品经理发的 原型放在了哪里？哪个才是最新的版本。
+下面就介绍下git来解决以上问题。
+Axureaxure是一原型开发工具，做产品都都应该很熟悉。
+其实前言说到的问题，一些新的做原型产品其实很好解决了，例如墨刀之类的，做完只需要发个预览链接到群里就行了，然后每次更新了，预览的链接也会跟着更新。但墨刀是收费，而且功能也相对Axure有点限制，axure的生态更完善，比如UI框架都有开源自己的Axure组件，所以大多产品还是比较喜欢Axure做原型多。
+Gitgit 是一版本控制系统，一般用来管理开发代码居多，开发人员必会的了，产品经理可能少接触写。
+windows 安装：https://www.cnblogs.com/wj-1314/p/7993819.html
+mac 安装：https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
+安装完打开命令行初始化
+windows : win键 + R键 –&gt; 输入cmd 回车 
+git config --global user.name &quot;你的名字&quot;
+git config --global user.email &quot;你的邮箱&quot;Gitee,Github可以理解为使用git的文件托管平台
+这里推荐gitee，国内快。
+网址：https://gitee.com/
+先去注册个账号，免费的放心。
+开始使用gitee 部署 axure项目 github等其他托管平台相似
+登陆后创建个仓库
+
+
+
+
+创建一个index.html文件
+
+
+
+开始仓库pages服务
+
+
+   
+   
+   点启动
+   
+   需要等一会时间
+   
+   部署完后就可以访问下地址 https://你的用户名.gitee.io
+   
+   其实就是我们刚创建的index.html内容
+
+把gitee项目拉下来
+复制gitee项目地址
+
+
+
+   打开你要放置项目的目录右键，右键打开命令行
+   windows用户可以右键选择Git Bash here
+   输入 git clone 刚复制的项目地址
+   
+   完成后就会多个你的项目名的文件夹
+
+设置 Axure 项目导出 到本地的 gitee 项目文件夹地址
+打来Axure, 选择 发布 -&gt; 生成html
+
+然后输出目标文件夹我们就选刚创建的gitte本地文件夹，然后考虑我我们后面会有多个项目，于是乎我们就在里面新建一个文件夹去当前项目，下次有新项目了就只需在里面再创建个心文件夹放就可以了
+
+弄完此时就可以看到可以访问打方才输出的html axure原型了
+
+
+
+   但此时只是本地或局域网可以问题，你发给别人，别人看不到的。
+   而且要一直开着机。
+   下面我们就要把gitee本地文件夹中里面我们刚才新加的内容同步上gitee仓库里，这样就可以通过上面的域名访问了。
+
+把本地的gitee文件夹同步到gittee仓库
+回到本地gitee文件夹的命令行
+输入
+git add *意思就是添加所有文件
+再输入
+git commit -m 备注信息 就是提交修改的意思 ，后面的备注信息是备注你每次提交修改了什么内容一个提示（自定义）
+最后输入
+git push意思就是推送到线上对应仓库，
+第一次推送时会需要填写gitee的账号密码，因为要知道那你仓库是属于你的才可以推送，不然每个人都可以往你仓库推送那就麻烦了。
+
+
+
+   然后回到gittee仓库的pages服务页面更新下就可以访问了
+   然后就可以试下访问线上的域名了。
+   
+   还记得域名么？
+   https://你的用户名.gitee.io/
+   你直接访问这个是没变的，因为我们的文件放在了一个目录下了。所有要加上目录名，然后Axure的导航页是start.html
+   于是你要访问的域名就是
+   https://你的用户名.gitee.io/项目文件夹名/start.html
+   
+   最后大功告成，可以把url发给各位老板，开发者，设计师了。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 10, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="小程序开发-PC网页端扫小程序码登陆解决方案" alt="小程序开发-PC网页端扫小程序码登陆解决方案" href="/posts/22147/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="小程序开发-PC网页端扫小程序码登陆解决方案" alt="小程序开发-PC网页端扫小程序码登陆解决方案" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 小程序开发-PC网页端扫小程序码登陆解决方案 &gt;</div>
+                            <div class="content flex1">
+                                
+  最近做了一个小程序我爱阅读,是一款针对小学生阅读习惯培养的一个小程序工具，有兴趣的可以了解下。
+小程序在学校反映不错，于是有了老师提出需要PC网页端的需求。因为老师平时办公一般在电脑上，在电脑上给学生布置阅读作业，会更方便得多，而移动小程序端对于老师来说更像一个辅助工具，平时用不到电脑时可以通过小程序操作。而且学生的阅读数据再网页展示也方便老师在课堂上给学生投影展示。
+于是乎就有了网页端的需求。
+登陆这是要做网页端最开始要解决的问题。
+一开始有一下解决方案
+
+初始化账号密码，网页通过账号密码登陆
+微信开发平台，公众号和小程序绑定，通过公众平台的网页二维码授权登陆。
+
+但以上两种方法都不能很好地解决需求：
+
+第一种，初始化账号密码，秘密好办可以统一初始密码，但用什么作为账号呢？微信用户名，openid不可能，用户手机又不是全都用。就算解决了初始化账号密码问题，安全度也不高。
+第二种，有个缺陷就是用户必须关注了绑定的公众号后再进入小程序，才可以实现。我们现在主打的是小程序，公众号只是运行的一个中间平台。而且很多新用户是通过小程序分享的链接进入，完全没法先去关注公众号。所以这种方法也不适合。
+
+转转游戏以上两种方法行不通，于是网上找各种方法。最终找到了转转游戏，就是通过扫描小程序码登陆的，体验了一下，大概也了解了方法。
+扫小程序码登陆逻辑
+首先在小程序添加一个网页登陆的页面，页面接收一个登陆id（loginId）
+网页端展示小程序网页登陆页的小程序码，附带登陆id（loginId）
+用户通过扫描网页上的小程序码，手机微信进入相应小程序的网页登陆页，设置确认登陆和取消登陆按钮，同时网页端扫面后应开启socket或者定时去请求后台，当前登陆id(loginId)的使用状态。
+如果loginId使用后且确认登陆，应一起返回用户的token，网页就可以使用该token去当前单用户去请求接口了
+如果用户取消登陆或超时则网页提示相应信息，且重新获取新的小程序码。
+
+
+
+总结这样可以完美地使用小程序当前用户信息去登陆网页端，用户不用输入账号密码，也不用计账号密码，直接用微信扫一扫就可以登陆，真实方便简洁。完美~~
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 10, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目" alt="小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目" href="/posts/36621/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目" alt="小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 小程序静态资源无缝转移到腾讯云COS 使用wepy mpvue 等webpack打包的小程序项目 &gt;</div>
+                            <div class="content flex1">
+                                
+  今天介绍的工具是wecos
+原生小程序
+
+原生的小程序直接根据wecos的文章操作即可，wecos提供了上传本地资源文件到cos、替换小程序的引用本地路径为上传路径等。
+这里不作详细说明，主要介绍webpack打包的小程序项目。
+因为原生写起来很不方便。
+
+webpack小程序打包项目最好是开发完再来进行这一步，前期专心开发。
+我前期开发时，引用静态资源用的是相对路径，用的绝对路径应该也可以的。
+项目开发完后
+
+webpack设置打包后的cdn地址, webpack rules选项：
+{
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        use: {
+          loader: &#39;file-loader&#39;,
+          options: {
+            name: &#39;/[path][name].[ext]&#39;,
+            publicPath: function (file) {
+              if(isProduction){//判断是否生产环境，自己判断咯。
+                if(file.indexOf(&#39;tabbar&#39;)&gt;=0){//如果有tabbar的，tabbar用一个tabbar的文件夹装起来，因为tabbar图片只支持本地。
+                  return file;
+                }
+                else{
+                  return &#39;https://xxx-1234567.cos.ap-guangzhou.myqcloud.com/&#39;+file;//你的腾讯云cos bucket的域名。
+                }
+              }else{
+                return file;
+              }
+            }
+          }
+        },
+      },
+
+安装wecos
+npm install -g wecos
+
+跟目录创建wecos.config.json文件
+
+填写wecos.config.json 配置
+{
+  &quot;appDir&quot;: &quot;./dist/assets&quot;,
+  &quot;cos&quot;: {
+    &quot;secret_id&quot;: &quot;xxxxx&quot;,
+    &quot;secret_key&quot;: &quot;xxxxx&quot;,
+    &quot;bucket&quot;: &quot;xxx-1234567&quot;,//bucker-appid
+    &quot;region&quot;: &quot;ap-guangzhou&quot;, //创建 bucket 时选择的地域简称
+    &quot;folder&quot;: &quot;/assets&quot; //资源存放在 bucket 的哪个目录下
+  },
+  &quot;uploadFileSuffix&quot;: [&quot;.jpg&quot;,&quot;.png&quot;,&quot;.gif&quot;,&quot;.webp&quot;,&quot;.svg&quot;],
+  &quot;uploadFileBlackList&quot;: [//不上传的图片，填tabbar的目录
+    &quot;./dist/assets/images/tabbar&quot;,
+  ]
+}
+
+在根目录运行wecos即可。
+
+
+
+
+
+总结
+为什么不用webpack的 publicPath 而用file-loader的publicPath ？
+因为webpack的 publicPath只支持字符串，一但改成线上域名，所有静态资源的前缀都会变成cdn域名。而小城的tabbar并不支持网络图片，base64也不支持，只支持本地图片。
+这时我们就用file-loader的publicPath ，支持函数且返回文件名，可以写条件去过滤掉tabbar的文件。
+使tabbar文件使用本地的，而其他使用线上cdn域名的文件。
+
+为什么要用wecos？
+当然你也可以不用自己，本地打包后自己手动上传到cos后台。
+然后删除了本地的图片文件（除了tabbar的图片）。
+然后开发者工具再上传代码。
+你会发现这步骤很累赘。
+使用wecos后，我们打包后只需要跑一下cos就可以自动上传本地的上cdn，且自动删除本地的（tabbar图片除外）。
+是不是方便多了？
+赶紧在你项目用上把！
+
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>2月 10, 2019</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="石墨文档 Vs 腾讯文档" alt="石墨文档 Vs 腾讯文档" href="/posts/4649/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="石墨文档 Vs 腾讯文档" alt="石墨文档 Vs 腾讯文档"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 石墨文档 Vs 腾讯文档 &gt;</div>
+                            <div class="content flex1">
+                                
+  最近腾讯大力再推一个新产品—腾讯文档。
+朋友圈也纷纷转发感觉是一个不错的产品。
+但其实早在四年前左右吧，大概忘记了，就有了石墨文档了。
+没用过石墨文档的，直接用腾讯文档可能觉得腾讯文档很6，下面就来对比两款产品。
+大家都主打的功能
+在线文档
+在线编辑，word，excel文档。即时保存，不用手动保存，即使电脑死机奔溃，记录都在。大家应该都试过谢了一篇很长的文章就突然死机等原因就需要重写了吧。在这两款产品都可以很好的解决这问题。
+
+多人协助
+这也是我最开始用石墨文档的原因。我是做开发，经常有一些开发需求，或bug需要修复。产品就会把需要做的东西用word文档列好发给我。
+然后我做着做着发现有一些问题出现
+· 不是我的问题  —我发文档给源问题人。
+· 多人同时处理   —-需要分工，然后把问题的文档也得发他一份。
+· 做完要给回人复验 — 又要把文档发给别人，因为我再文档做了标注哪些问题之类的。
+· 最重要的是进度没有一个全局的把控。 — 一份文档多人再分工。进度需要查看多人的文档处理的和
+· 等等等~~  项目大，人越多就会有越多的问题出题在沟通成本上。
+
+
+但用了这两个产品后。多人同时编辑一个文档，有新的内容需求，直接加，所有都可以看到。不用再另外再给没人发一份新添加的需求文档这样。
+用石墨文档首页的介绍，很好地介绍了多人协作文档的强大！
+
+这里的动画是gif比较不顺畅。可以看石墨官网的原展示介绍(https://shimo.im/)[https://shimo.im/]
+界面对比没用石墨文档的人可能没感觉，但用过石墨文档的人在用腾讯文档。就会感觉的怎么就一个翻本石墨文档呢？可能我想多了吧。但企鹅的抄袭却是不是盖的。
+腾讯文档word界面
+石墨文档word界面
+石墨word vs 腾讯word可以看书界面布局几乎差不多，但是可以看出石墨的设计更细致写，有一种沉浸式写作的感觉，毕竟上线一段时间了，有一定的优化。相对腾讯刚上线，页面相对比粗糙简单。
+可看到功能基本差不多
+腾讯文档word多了 水印和翻译功能。 试了下翻译功能好像挺不错。
+
+而石墨文档word功能会多了一个特殊格式的片段，如代码片段，引用片段等。不同的内容有不同的段落样式，可读性会高很多。
+markdown功能是两个文档的缺陷。两个产品都支持一些很简单的写法不能很好的兼容markdown。
+还有以下几点：
+
+石墨文档有修改记录，也有手动保存的版本记录两种。而腾讯只有修改记录。
+
+石墨文档多个评论的功能。使文档变得可交互交流。
+
+石墨文档的每个小功能都有一个简单的视频操作介绍，点右下角的问号可找到
+
+
+石墨文档支持快捷键，也有快捷列表可以看，同样右下角问号
+
+
+
+
+多人协助的文档，石墨可看到每一个部分的的编写者，这个还是很强大的。
+石墨贴心的的免打扰，不过网页的消息一般会比较少。
+
+石墨 excel Vs  腾讯excel和word文档对比差不多。
+布局风格，功能都差不多。
+石墨多了些高级点的功能如：根据表格信息生产图表。也可以创建表单收集信息等。
+
+
+总结以上可以出，石墨是个很用心的产品，无论从设计还是功能的研发还是一些交互。而且石墨也有了一段时间的沉淀优化，所以石墨总体还是比腾讯文档更细致一些。感觉腾讯文档就如早其版本的石墨吧。
+但是后面也难说，腾讯有这么大的流量各种优势，后面会变怎样很难说。替石墨抓鸡了…
+题外话有现场的比较完善的石墨文档腾讯为何还要自研发一款呢？
+其实原因的显而易见的。QQ脱离了日常沟通，变成了工作交流的主流功能，每天不知道都有多少工作文件在qq传来传去。
+再从qq到TIM的转变都可以看出qq在日常娱乐社交工具慢慢转向一个专注工作交流的工具。
+而在线文档这么核心的功能是不太可能接入第三家的，第一费用大。长期的这么多分享。第二资源外泄。
+其实我会更看好腾讯收购石墨文档，然后用石墨文档。这样就双赢了。
+以上只针对web端的简单评测。
+##你还在用word，excel？？？欧特曼啦！！
+##快来用用在线文档吧。
+*不过一些非常私隐性，安全要求比较高的文档还是线下吧
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 10, 2018</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="歧江吹风随便拍拍" alt="歧江吹风随便拍拍" href="/posts/41651/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="歧江吹风随便拍拍" alt="歧江吹风随便拍拍"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 歧江吹风随便拍拍 &gt;</div>
+                            <div class="content flex1">
+                                
+  
+拍照时间：2018-04-04
+拍照设备手机（坚果Pro2）
+地点在歧江河边的末端，较兴中更安静，人会少点，没有市区人多的吵杂，更清静。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>9月 10, 2018</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="使用**gitalk** 代替其他第三方评论插件" alt="使用**gitalk** 代替其他第三方评论插件" href="/posts/47402/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="使用**gitalk** 代替其他第三方评论插件" alt="使用**gitalk** 代替其他第三方评论插件"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 使用**gitalk** 代替其他第三方评论插件 &gt;</div>
+                            <div class="content flex1">
+                                
+  前言第三方评论插件已经死得差不多了，从一开始多说到后来的网易云跟帖，最后剩下了畅言。最近畅言为了活下去，也退出了广告，让用户体验更差了。本来用户体验就不咋地。可惜碍于找不到其他更好的代替者就只好将就一下了。
+知道今天找到gitalk，坚定不移地把畅言给换了。
+关于gitalkGitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。 
+
+使用 GitHub 登录
+支持多语言 [en, zh-CN, zh-TW, es-ES, fr, ru]
+支持个人或组织
+无干扰模式（设置 distractionFreeMode 为 true 开启）
+快捷键提交评论 （cmd|ctrl + enter）
+
+Readme 在线示例
+使用
+在需要插入评论的地方给个占位&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+
+接着在占位下方引入插件
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;也可以js文件和css文件下载下来自己引入
+
+创建 GitHub Application，如果没有 点击这里申请 
+
+
+
+
+在自己的GitHub账号创建一个库来放评论，库名称填上一步的应用名称
+
+在博客的引用插件下方填写配置
+var gitalk = new Gitalk({
+                clientID: &#39;9f89xxxxxxde0f46&#39;, ///步骤3创建后得到的
+                clientSecret: &#39;22fc21a22xxxxxxf599fd41746ff54f&#39;,///步骤3创建后得到的
+                repo: &#39;myblog_comment&#39;,///步骤4创建的库名
+                owner: &#39;callmesoul&#39;,//自己的GitHub用户名
+                admin: [&#39;callmesoul&#39;],//自己的GitHub用户名
+                id: &#39;{{id}}&#39;, // 唯一标示，一般是文章id也可以是文章url
+                distractionFreeMode: false  // Facebook-like distraction free mode
+            })
+            gitalk.render(&#39;gitalk-container&#39;)
+
+以上完成后就可以上传上自己的博客了。
+上传完，第一次进入相应页面会出现一个初始化提示。
+根据操作登录自己的GitHub授权就可以了。
+
+
+值得一说的就一有评论就相当于项目有issue，gitthub就自动会有邮件提示。
+比畅言好多了，畅言你不登录它后台看都不知道有新的评论。
+以上就完成了，有什么问题不懂得可以在评论处提问。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>6月 10, 2018</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="装机日志" alt="装机日志" href="/posts/30696/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="装机日志" alt="装机日志"
+                                     src="/images/default.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 装机日志 &gt;</div>
+                            <div class="content flex1">
+                                
+  
+前言
+
+​     只从从家里搬出来后，自己带着台小mac air。因为太小了，用惯了台式。这段是时间每天下班都很少开电脑，也就少做事了。
+最近有空想着不能这么闲下去，于是就像买回台台式回来干些事。
+首先自己逛了下组装机市场，感觉低端市场，较少了。好多品牌都主打高端组装机，水冷之类，动不动上万。个人虽也玩玩游戏，但也不是什么游戏骨灰级或发烧级玩家，一般配置也就玩得起我玩得游戏了。没必要那么高。而做稍微低端点市场的品牌都较杂，质量难保证。尤其淘宝，你可以搜下组装电脑，有些一整套才两千多，但跟着他的配置自己去京东捡，远超两千多好不。哪有那么好的事的，硬件的来源渠道和质量可想而知。而且个人对审美较高要求啊，想自己组装个小机箱，不想那么大，占位置，所有最后还是确定自己组装咯。
+
+预算价格：4000左右
+作用：玩玩lol啊，吃吃鸡啊（虽然我不吃鸡），开发，ps简单设计等。算是正常的娱乐+工作级别的机器吧。
+
+
+
+硬件
+机箱：乔思伯（JONSBO）UMX1-PLUS侧透版本 银色 MINI-ITX机箱（支持ITX主板/全铝外（这机箱合适我这种，没多少预算又追求颜值的，价格刚刚好，能接受，颜值算同价格数一数二了。没颜值追求的可以在机箱省些钱。而且买普通大机箱，其他硬件随便挑）
+主板：华擎（ASRock）H310M-ITX/ac主板（Intel H310/LGA 1151）（如果选了小机箱，选主板一定要注意，只能选ITX小主板，不然就装不了翻车了。）
+CPU：英特尔（Intel） 酷睿i3 8100/8350K CPU八代 台式机电脑处理器盒装 板U套装 中文盒装 （为了最求稳定，稳定至上，最后还是选了I系列，为什么选i3，不选i5，i7。有钱我能不选？）
+内存：金士顿(Kingston)骇客神条 Fury系列 DDR4 2400 8G 台式机内存*2（开发都是知道了，内存必须16g起步，不然很烦心的，开个PS，开个webStrom，开个chrome都去了不少了。）
+固态硬盘：金士顿(Kingston)A400系列 240G SATA3 固态硬盘（这年头没固态不行啊，120能装个系统和一些其他东西，但是我的一些开发工具啊，工作相关的工具都想放在固态上，保证速度，于是乎选个240，应该差不多了。）
+机械硬盘：希捷(SEAGATE)酷鱼系列 2TB 7200转64M SATA3 台式机机械硬盘(ST2000DM006)（建议1Tb起步啦，2Tb应该一般用户都足够用，不用愁了。而且机械硬盘便宜到烂了现在。）
+电源：安钛克(Antec)VP500台式机电脑主机机箱电源500W（40万好评VP系列/台系电容/静音风（小机箱对电源的大小也有要求，要看好咯。这电源好评多，品牌也行，也就这个。）
+键盘：雷柏（Rapoo） V500PRO 104键混光机械键盘 游戏键盘 吃鸡键盘 背光键盘 电脑键盘（较便宜的机械键盘了，有的话可以买更好的。不过也够用了。）
+鼠标：华擎（ASRock）ASR-M01 幻影之舞 光电游戏鼠标 电竞鼠标（这是是买华擎主板送的，还不错）
+散热器：乔思伯（JONSBO）CR-701七彩流光版 CPU散热器 （多平台/5热管/下吹CPU散热器/12CM（买这个主要为了颜值啊，加点氛围，不然的话完全不用买，cpu自带散热风扇的了。一开始买回来只为了颜值，买回来后发现，乔思伯真的很不错，颜值做工用料设计都很用心很有保证，说是追求完美的厂家一点不过分，以后买东西乔思伯有的都可以考虑买乔思伯的。）
+显卡：显卡一开始没买的。因为集显先可以先用着，前期还是开发为主，后面买了条影驰的GTX 760 发现不兼容 win10 因为760最高支持dix11，而win10的dix是 12；后面换了条微星（MSI）GeForce GTX 1050 Ti GAMING X 4G 1290-1493MHZ 128BIT GDDR5 PCI-E 
+
+
+
+用760显卡的话总费用是4500左右，算在预算中，后面不兼容换了1050就5000多点，超了点，也还行。个人感觉整体配置旗鼓相当，都是统一等级的硬件，不会说那个硬件买贵了，浪费看了，用不了这么高。但要说唯一的话那就是显卡吧，但是显卡可以长期用，以后升级其他都不用升级显卡。
+有什么好建议，也可以留言，给其他人一些参考。
+
+装机京东就是快啊，全部京东送货，隔天就全到了，服务赞赞赞！下面就开始紧张的装机咯！
+
+
+
+
+
+
+拆机箱
+机箱做工设计都完美
+
+
+
+
+
+
+装电源
+500w大电源，不怕不够啦。
+
+
+
+
+
+拆主版
+主版还行，小身板，麻雀虽小五脏俱全啊。
+
+
+
+
+拆CPU
+八代I3，基本够用也稳定。
+
+
+
+
+把cpu装主版上
+这部最好小心点，毕竟cpu你懂的~
+那封盖是要拿掉的哦。
+
+
+
+
+装Cpu风扇
+自带的风扇没有，用了乔思伯的风扇，做工设计颜值都一流。
+
+
+
+
+
+把装好Cpu和风扇的主版装进机箱
+装好主版就连机箱线，电源线等，不懂的百度可以找到教程，跟着教程走没什么难度。
+
+原来这主版自带无限网卡，自带两天线，赞！
+
+
+
+
+连好机箱线跟电源线就可以开机了，这里用的是主版的集显。开机试试
+注意的是有些主版cpu要独立供电，我这款就是。
+
+
+能进到主版的bios就证明成功了。
+
+
+
+成功，就可以把剩下的机械和固态硬盘装上去了
+机械不用说了，有了固定座。固态硬盘是有些水绵圈，装上后再卡位向下推卡进去的，挺不错的设计。
+显卡最后装，因为比较大。
+装完就可以开机装系统了。
+
+
+
+
+结尾好了，装机到此结束了。好久没装机了。一开始卡在了cpu独立供电哪里。因为之前的都是主版供电给Cpu的啊，坑。折腾了很久，主版通电，风扇也转，就是进不去主版的bois。后来发现cpu附近有6口的电源位，后来插上就行了。
+感觉自己组装会更适合自己，配置啊，机箱啊颜值啊。也实惠。也可以增强自己的动手能力。好了，大家也去装机把。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>5月 10, 2018</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="小程序开发之-使用GraphQl" alt="小程序开发之-使用GraphQl" href="/posts/20484/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="小程序开发之-使用GraphQl" alt="小程序开发之-使用GraphQl" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 小程序开发之-使用GraphQl &gt;</div>
+                            <div class="content flex1">
+                                
+  之前文章有介绍到graphql的好处，而且很大可能就是未来Restful api的代替者,不过以后的事谁也不好说啊。反正就是好的东西，我们就想折腾下用起来。最近自己写了小程序，想顺便学习graphql，实践。于事有了本篇教程
+ApolloApollo是一整套的关于GraphQl的工具套件吧，各种后台语言java、php、nodej的都有，关于前端框架封装GraphQl，让GraphQl使用更简单，更优化的库类也都有。vue、react等。
+小程序但小程序不同传统的网页。小程序是无浏览器环境的，而且也没ajax用的是自己的api。很显然apollo这么好的社区出的这么好的工具在小程序上根本没法用啊。
+毕竟小程序比较小众，想用的话就只能自己折腾了。
+原理其实GraphQl请求跟Restfel api的请求一样，都是一个http请求。只是GraphQl的请求入口有且只有一个，一般是graphql服务端的入口，一般是/graphql 而且是post放，所有。
+所以GraphQl请求无非就是post方法的http://xxxx.com/graphql的请求后台再传这graphql的参数来使graphql服务端根据参数不同来执行不同的方法，从而实现不同的接口效果。
+搞清这原理就可以慢慢折腾了。
+开始var Fly=require(&quot;../lib/wx.js&quot;) //wx.js is your downloaded code
+var fly=new Fly(); //Create an instance of Fly
+import message from &#39;./message&#39;
+import { create_client } from &#39;tiny-graphql-client&#39;
+
+const client =create_client( async( body)=&gt;{
+  const res_data = await fly.post(&quot;/graphql&quot;,body)
+  const {data ,errors}=res_data;
+  if(errors){
+    message.error(errors[0].message);
+    throw errors;
+  }
+  return res_data.data;
+})
+
+export default client;
+fly是一个兼容小程序的http组件，你可以使用原生的request来替换。
+tiny-graphql-client 是一别人封装好的graphql工具类，详情：https://github.com/xialvjun/tiny-graphql-client
+graphql返回的字段，一定会有data，无论成功后失败。只是有错误失败时才会有errors字段。所以我们在全局处理graphql返回时先判断有没有errors字段的存在，有就是有错误。没有就是成功了。
+
+使用queryuser=await this.$parent.client.run(`query getUser{getUser{id nickName avatarUrl space nowSpace album}}`);mutationlet bucket=await this.$parent.client.run(`mutation createBucket($name:String!){createBucket(name:$name){id name createdAt}}`,this.album);使用前记得先引入上面封装好的client哦。
+好了，大家快来试试吧。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 10, 2017</span>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <a title="小程序开发-路由拦截设计" alt="小程序开发-路由拦截设计" href="/posts/38984/"
+                       class="post-item swiper-slide flex flex-v">
+                        <div class="image">
+                            
+                                <img title="小程序开发-路由拦截设计" alt="小程序开发-路由拦截设计" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B.jpg"></img>
+                            
+                        </div>
+                        <div class="content-warp flex1 flex flex-v">
+                            <div class="title">&lt; 小程序开发-路由拦截设计 &gt;</div>
+                            <div class="content flex1">
+                                
+  首先说下小程序的简单运行：1.app onLaunch
+2.如果有app onLaunch 的 path参数有值则跳到 path对应页面否则为app的json第一个路由
+onLaunch 的path怎么来的？1.通过分享给朋友的接口传的path
+暂时只发现这个
+app onLaunch 里拦截路由？以后可得知小程序统一入口就是app的onLaunch，所以在onLaunch 拦截是最理想的。但是onLaunch里并没有提供拦截的接口或方法，当你在onLaunch有异步处理时，还没处理完，onLaunch就直接跳到了下一个页面了。
+例如：你想获得用户信息在进入页面。
+你在app onLaunch去请求用户信息，但onLaunch不会等你请求完再跳到页面。
+所以在app没办法实现。
+app.json第一个路由里拦截！！！既然app里面实现不了只能退居求次在第一个页面处理了，因为当没有path（onLaunch(option)）也就是正常打开小程序都会进入第一个页面，我们可以在第一个页面统一处理好逻辑再选择去跳其他页面。
+分享的页面带path会直接跳到path页面不跳到第一个页面？其实很简单分享的时候分享页面的path填写第一个页面路由例如/pages/login,在把你当前页面的路由作为一个参数一起传过去：
+onShareAppMessage(res) {
+      let fromPath=&#39;/pages/activity&#39;
+      return {
+        title: &#39;xxxxx！&#39;,
+        path: &#39;/pages/login?fromPath=&#39;+fromPath,
+        imageUrl:xxxxx,
+        success: (res) =&gt; {
+          xxxxxx
+        }
+      }
+    }这样分享出去的页面就会跳到一个页面而且是带你分享的页面路径作为参数的。
+在第一个页面获得分享的路径做跳转就好，还可以加些逻辑之类方便多。
+上面的写法有个问题，如果分享的页面也要参数，分享的path就会有两个??
+/pages/login?fromPath=/pages/activity?activityId=1
+如果这样直接传过去第一个页面，activityId会被拦截掉，所以我们需要一个把问号转码的函数转码了再传过去，第一个页面获得页面后解码再跳转即可:
+onShareAppMessage(res) {
+      let fromPath=&#39;/pages/activity?activityId=2&#39;
+      fromPath=encodeURIComponent(fromPath);
+      return {
+        title: xxxxxx！&#39;,
+        path: &#39;/pages/login?fromPath=&#39;+fromPath,
+        imageUrl:xxxx,
+        success: (res) =&gt; {
+          xxxx
+        }
+      }
+    }然后在第一个页面使用对应函数解码即可：
+onLoad(params){
+    if(params.fromPath){
+            let fromPath=decodeURIComponent(params.fromPath);
+            ///do somethings...
+   }
+}大概流程就这样。
+
+
+
+                            </div>
+                            <div class="post-tags">
+                                
+                            </div>
+                            <div class="other">
+                                <!--<a><i class="iconfont icon-iconfontordinaryliulan"></i>52</a>-->
+                                <!--<a><i class="iconfont icon-icon27"></i>52</a>-->
+                                <span><i class="iconfont icon-shijian"></i>10月 10, 2017</span>
+                            </div>
+                        </div>
+                    </a>
+                
+
+
+            </div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function getSwiperPrams() {
+        var windowsWidth = $(document).width()
+        var slidesPerView
+        var direction;
+        if(windowsWidth > 1500){
+            direction = 'horizontal'
+            slidesPerView = 4
+        }else if(windowsWidth > 1100){
+            direction = 'horizontal'
+            slidesPerView = 3
+        }else if(windowsWidth > 1000){
+            direction = 'horizontal'
+            slidesPerView = 2
+        }else{
+            slidesPerView = 1
+            direction = 'vertical'
+        }
+        return {
+            direction: direction,
+            slidesPerView: slidesPerView
+        }
+    }
+    var params = getSwiperPrams()
+
+  var mySwiper = new Swiper('.swiper-container', {
+    direction: params.direction, // 垂直切换选项
+    mousewheel: true,
+    slidesPerView: params.slidesPerView,
+    spaceBetween: 30,
+    scrollbar: {
+      el: '.swiper-scrollbar'
+    },
+    on: {
+        resize: function(){
+
+        },
+    },
+
+    // 如果需要滚动条
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+  })
+</script>
+
+  </div>
+  <div class="main-bottom">
+    <div class="music flex flex-pack-justify flex-align-center">
+      <div class="control">
+        <a onclick="preSong()"><span class="iconfont icon-shangyishou"></span></a>
+        <a onclick="playControl()"><span class="iconfont play-icon icon-kaishi1"></span></a>
+        <a onclick="nextSong()"><span class="iconfont icon-xiayishou-copy"></span></a>
+      </div>
+      <div class="msg">
+        <span class="time"></span>
+        <div class="line" ref="progress-line-warp">
+          <div class="song-msg">周杰伦 - 说好不哭</div>
+          <!--<div class="current-line" ref="progress-line">
+            <a tag="a" class="target" v-on:mousedown.prevent="mousedown"></a>
+          </div>-->
+        </div>
+        <span class="all-time"></span>
+      </div>
+      <div class="right-control">
+        <a class="order-btn flex flex-align-center" onclick="toogleShowMusicList()">
+          <span class="iconfont icon-ttpodicon"></span>
+          <span class="number flex1">3</span>
+        </a>
+      </div>
+      <audio id="audio" class="mian-audio" src="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+  <div class="music-list">
+    <div id="musiclist">
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 说好不哭" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E8%AF%B4%E5%A5%BD%E4%B8%8D%E5%93%AD.mp3" onclick="changePlayIndex(0)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">说好不哭 - 周杰伦</span>
+        </a>
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 爱在西元前" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E7%88%B1%E5%9C%A8%E8%A5%BF%E5%85%83%E5%89%8D%20%5Bmqms2%5D.mp3" onclick="changePlayIndex(1)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">爱在西元前 - 周杰伦</span>
+        </a>
+      
+        <a class="music-item flex flex-align-center" data-name="周杰伦 - 龙拳" data-url="https://callmesoul-blog.oss-cn-shenzhen.aliyuncs.com/music/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E9%BE%99%E6%8B%B3%20%5Bmqms2%5D.mp3" onclick="changePlayIndex(2)" >
+          <span class="iconfont" class="icon-kaishi"></span>
+          <span class="title flex1">龙拳 - 周杰伦</span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  var playIndex = localStorage.getItem('playIndex') ? parseInt(localStorage.getItem('playIndex')) : 0
+  let musics = $('.music-item')
+  musics.eq(playIndex).addClass('active')
+  var audio = document.getElementById("audio");
+
+  $('.song-msg').html(musics[playIndex].dataset.name)
+  audio.src = musics[playIndex].dataset.url
+
+
+  var playbtn = document.getElementsByClassName("play-icon")[0];
+  var playing = false;
+  audio.loop = false;
+  audio.addEventListener('ended', function () {
+    playbtn.classList.remove("icon-kaishi")
+    playbtn.classList.add("icon-kaishi1")
+    playing = false
+  }, false);
+  audio.addEventListener('play', function () {
+    playbtn.classList.remove("icon-kaishi1")
+    playbtn.classList.add("icon-kaishi")
+    playing= true
+  }, false);
+  audio.addEventListener('pause', function () {
+    playbtn.classList.remove("icon-kaishi")
+    playbtn.classList.add("icon-kaishi1")
+    playing = false
+  }, false);
+  function toogleShowMusicList() {
+    var musiclist = document.getElementsByClassName("music-list")[0];
+    if(musiclist.className.indexOf("active") === -1){
+      musiclist.classList.add("active")
+    }else{
+      musiclist.classList.remove("active");
+    }
+  }
+
+  function playControl() {
+    if(playing){
+      audio.pause()
+    }else{
+      audio.play()
+    }
+  }
+
+  function changePlayIndex(index) {
+    if(playIndex !== index){
+      localStorage.setItem('playIndex',index)
+      playIndex = index
+      musics.removeClass('active')
+      musics.eq(playIndex).addClass('active')
+      $('.song-msg').html(musics[playIndex].dataset.name)
+      audio.src = musics[playIndex].dataset.url
+      audio.play()
+    }else{
+      playControl()
+    }
+  }
+
+  function preSong() {
+    var index
+    if(playIndex === 0){
+      index = musics.length - 1
+    }else{
+      index = playIndex - 1
+    }
+    changePlayIndex(index)
+  }
+
+  function nextSong() {
+    var index
+    if(playIndex === musics.length - 1){
+      index = 0
+    }else{
+      index = playIndex + 1
+    }
+    changePlayIndex(index)
+  }
+
+  function toggleMenu() {
+    var mainLeft = $('.main-left')
+    if(mainLeft.hasClass('active')){
+      mainLeft.removeClass('active')
+      $('.menu').removeClass('icon-close')
+      $('.menu').addClass('icon-menu')
+    }else{
+      mainLeft.addClass('active')
+      $('.menu').removeClass('icon-menu')
+      $('.menu').addClass('icon-close')
+    }
+  }
+</script>
