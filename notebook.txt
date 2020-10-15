@@ -1,0 +1,6 @@
+安装包：
+npm install --save hexo-renderer-pug
+npm install --save hexo-tag-aplayer
+npm install --save hexo-renderer-sass
+
+npm install valine --save
