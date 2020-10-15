@@ -12,7 +12,7 @@
 <p>成功创建完 <em><strong>.ssh 文件夹</strong></em> 之后，再执行 <strong>第2步</strong> 操作。</p>
 <p>3、创建本例的第二个rsa密钥对，<strong>rsa_gitlab</strong>。</p>
 <p>1<br>2  </p>
-<p>$ cd .ssh<br>$ ssh-keygen -t rsa -C “<a href="mailto:&#97;&#64;&#x69;&#116;&#112;&#111;&#x65;&#x74;&#x2e;&#x63;&#x6e;">&#97;&#64;&#x69;&#116;&#112;&#111;&#x65;&#x74;&#x2e;&#x63;&#x6e;</a>“  </p>
+<p>$ cd .ssh<br>$ ssh-keygen -t rsa -C “<a href="mailto:&#x61;&#64;&#105;&#x74;&#x70;&#x6f;&#101;&#116;&#46;&#x63;&#x6e;">&#x61;&#64;&#105;&#x74;&#x70;&#x6f;&#101;&#116;&#46;&#x63;&#x6e;</a>“  </p>
 <p>如图：<br><img src="https://user-images.githubusercontent.com/24516169/43447615-6a959e4a-94de-11e8-8f23-8fd2128ba6a7.png" alt="生成rsa_github"><br><img src="https://user-images.githubusercontent.com/24516169/43447619-6b104b72-94de-11e8-9a4b-4febc6458e4c.png" alt="rsa_github和rsa_github.pub密钥对"></p>
 <p>4、为ssh添加config配置文件，在 <em><strong>.ssh文件夹</strong></em> 下，新建config文件。</p>
 <p>1<br>2  </p>
@@ -23,13 +23,13 @@
 <p>Host gitlab.com<br> User itPoet_gitlab<br> IdentityFile ~/.ssh/rsa_gitlab  </p>
 <p>5、配置 <strong>.gitconfig</strong> 文件。使用如下命令将会在用户目录下自动创建 <strong>.gitconfig</strong> 文件。</p>
 <p>1<br>2<br>3  </p>
-<p>$ cd ~<br>$ git config –global user.name “itPoet_github”<br>$ git config –global user.email “<a href="mailto:&#x69;&#64;&#x69;&#x74;&#112;&#111;&#x65;&#116;&#46;&#99;&#x6e;">&#x69;&#64;&#x69;&#x74;&#112;&#111;&#x65;&#116;&#46;&#99;&#x6e;</a>“  </p>
+<p>$ cd ~<br>$ git config –global user.name “itPoet_github”<br>$ git config –global user.email “<a href="mailto:&#105;&#64;&#105;&#x74;&#x70;&#x6f;&#101;&#116;&#46;&#99;&#x6e;">&#105;&#64;&#105;&#x74;&#x70;&#x6f;&#101;&#116;&#46;&#99;&#x6e;</a>“  </p>
 <p><strong>注意</strong>：在 <strong>第4步</strong> 执行完后，如果用户目录下没有生成 <em><strong>.gitconfig</strong></em> 文件 ，那我们需要手动创建。</p>
 <p>1<br>2  </p>
 <p>$ cd ~<br>$ touch .gitconfig  </p>
 <p>最后将.gitconfig文件的内容修改为：</p>
 <p>1<br>2<br>3<br>4<br>5<br>6  </p>
-<p>[user]<br> name = itPoet_github<br> email = <a href="mailto:&#x69;&#64;&#x69;&#x74;&#112;&#111;&#101;&#116;&#46;&#x63;&#110;">&#x69;&#64;&#x69;&#x74;&#112;&#111;&#101;&#116;&#46;&#x63;&#110;</a><br>[user]<br> name = itPoet_gitlab<br> email = <a href="mailto:&#97;&#x40;&#x69;&#x74;&#x70;&#111;&#101;&#x74;&#x2e;&#99;&#110;">&#97;&#x40;&#x69;&#x74;&#x70;&#111;&#101;&#x74;&#x2e;&#99;&#110;</a>  </p>
+<p>[user]<br> name = itPoet_github<br> email = <a href="mailto:&#x69;&#64;&#x69;&#x74;&#112;&#x6f;&#101;&#x74;&#46;&#x63;&#110;">&#x69;&#64;&#x69;&#x74;&#112;&#x6f;&#101;&#x74;&#46;&#x63;&#110;</a><br>[user]<br> name = itPoet_gitlab<br> email = <a href="mailto:&#x61;&#64;&#105;&#116;&#112;&#x6f;&#101;&#x74;&#46;&#99;&#x6e;">&#x61;&#64;&#105;&#116;&#112;&#x6f;&#101;&#x74;&#46;&#99;&#x6e;</a>  </p>
 <h5 id="在对应的Git网站添加SSH密钥设置"><a href="#在对应的Git网站添加SSH密钥设置" class="headerlink" title="在对应的Git网站添加SSH密钥设置"></a><a href="#%E5%9C%A8%E5%AF%B9%E5%BA%94%E7%9A%84Git%E7%BD%91%E7%AB%99%E6%B7%BB%E5%8A%A0SSH%E5%AF%86%E9%92%A5%E8%AE%BE%E7%BD%AE" title="在对应的Git网站添加SSH密钥设置"></a>在对应的Git网站添加SSH密钥设置</h5><p>1、 <strong>GitHub</strong><br>settings –&gt; SSH and GPG keys –&gt; New SSH Key<br>打开 <strong>rsa_github.pub</strong>，将里面的内容复制到 <strong>Key</strong> 输入框中，如图：<br>如图：<br><img src="https://user-images.githubusercontent.com/24516169/43447624-6c25549e-94de-11e8-9584-527e2100964c.png" alt="github.com-add-new-ssh-key-1"><br><img src="https://user-images.githubusercontent.com/24516169/43447626-6c56a026-94de-11e8-9530-3ba0accc6a86.png" alt="github.com-add-new-ssh-key-2"></p>
 <p>2、 <strong>GitLab</strong><br>Profile –&gt; SSH keys<br>打开 <strong>rsa_gitlab.pub</strong>，将里面的内容复制到 <strong>Key</strong> 输入框中，如图：<br>如图：<br><img src="https://user-images.githubusercontent.com/24516169/43447628-6ca0b468-94de-11e8-95e5-377c7b85b97c.png" alt="gitlab.com-add-new-ssh-key-1"><br><img src="https://user-images.githubusercontent.com/24516169/43447626-6c56a026-94de-11e8-9530-3ba0accc6a86.png" alt="gitlab.com-add-new-ssh-key-2"></p>
 <p><strong>至此，在Mac下配置多个Git账户的SSH-Key参考教程也完成，同理，我们还可以配置Coding、码云等。现在让我们来体验使用SSH提交代码吧~~</strong></p>

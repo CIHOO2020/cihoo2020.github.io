@@ -108,8 +108,7 @@ a:hover, a:active {
   .page-top .nav {
     list-style: none;
     padding: 18px 30px;
-    float: left;
-    font-size: 12px; }
+    font-size: 14px; }
     .page-top .nav li {
       position: relative;
       display: initial;
@@ -546,7 +545,17 @@ a.btn {
       .sidebar .logo-title .title h3 {
         font-size: 20px; }
   .page-top {
-    width: 100%; }
+    width: 100%;
+    height: 50px; }
+  .page-top .nav {
+    list-style: none;
+    padding: 18px 30px;
+    font-size: 18px;
+    text-align: center; }
+    .page-top .nav a.current {
+      color: #5A5A5A;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #808080; }
   .post-title h3 {
     line-height: 1.6; }
   .content {
